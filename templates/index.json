@@ -4,7 +4,6 @@
     "proof": { "type": "proof-bar" },
     "dolor": { "type": "el-problema" },
     "hvco": { "type": "hvco" },
-    "metodo": { "type": "metodo-voltrix" },
     "complexes": { "type": "ingredient-complexes" },
     "guia": { "type": "guia" },
     "autoridad": { "type": "autoridad" },
@@ -13,5 +12,5 @@
     "pricing": { "type": "pricing" },
     "faq": { "type": "faq" }
   },
-  "order": ["hero", "proof", "dolor", "hvco", "metodo", "complexes", "guia", "autoridad", "why", "testimonials", "pricing", "faq"]
+  "order": ["hero", "proof", "dolor", "hvco", "complexes", "guia", "autoridad", "why", "testimonials", "pricing", "faq"]
 }
