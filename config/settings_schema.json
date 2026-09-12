@@ -3,17 +3,8 @@
     "name": "theme_info",
     "theme_name": "Voltrix",
     "theme_version": "1.0.0",
-    "theme_author": "Voltrix"
-  },
-  {
-    "name": "Ajustes globales",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "favicon_placeholder",
-        "label": "Placeholder",
-        "default": true
-      }
-    ]
+    "theme_author": "Voltrix",
+    "theme_documentation_url": "https://getvoltrix.es",
+    "theme_support_url": "https://getvoltrix.es/pages/contacto"
   }
 ]
