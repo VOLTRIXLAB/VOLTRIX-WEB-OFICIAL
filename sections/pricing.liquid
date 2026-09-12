@@ -220,34 +220,52 @@
   .vx-sub-detail p { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-top: 10px; padding-left: 25px; }
   .vx-sub-detail p strong { color: var(--color-white); }
 
-  /* ── Reskin del widget de suscripción de Appstle ── */
-  .appstle_subscription_wrapper_option {
+  /* ── Reskin del widget de suscripción de Appstle ──
+     Especificidad alta a propósito: Appstle inyecta su propio <style>
+     con selectores encadenados (.wrapper.compact .option) que ganan
+     a reglas de una sola clase incluso con !important. */
+  html body .appstle_subscription_wrapper .appstle_subscription_wrapper_option {
     background: rgba(255,255,255,.03) !important;
     border: 1px solid #1E1E38 !important;
     border-radius: 12px !important;
     margin-bottom: 10px !important;
     padding: 14px 16px !important;
   }
-  .appstle_subscription_wrapper_option.appstle-active-option,
-  .appstle_subscription_wrapper_option.appstle_selected_background {
-    background: rgba(200,241,53,.06) !important;
+  html body .appstle_subscription_wrapper .appstle_subscription_wrapper_option.appstle-active-option,
+  html body .appstle_subscription_wrapper .appstle_subscription_wrapper_option.appstle_selected_background {
+    background: rgba(200,241,53,.07) !important;
     border-color: var(--color-volt) !important;
   }
-  .appstle_radio_label,
-  .appstle_subscription_description_text {
+  html body .appstle_radio_label,
+  html body .appstle_one_time_text,
+  html body .appstle_subscription_description_text,
+  html body .appstle_one_time_description_text {
     color: var(--color-white) !important;
     font-family: var(--font-body) !important;
   }
-  .appstle_subscription_amount_wrapper,
-  .appstle_subscription_amount_wrapper span {
+  html body .appstle_subscription_amount,
+  html body .appstle_one_time_price_wrapper .appstle_subscription_amount {
     color: var(--color-volt) !important;
     font-weight: 800 !important;
   }
-  .appstle_bundle_discount_amount {
-    background: rgba(200,241,53,.12) !important;
+  html body .appstle_subscription_amount_compare_at_price {
+    color: rgba(255,255,255,.35) !important;
+  }
+  html body .appstle_bundle_discount_amount {
+    background: rgba(200,241,53,.14) !important;
     color: var(--color-volt) !important;
     border-radius: 999px !important;
     font-weight: 800 !important;
+  }
+  html body .appstle_circle {
+    border-color: rgba(255,255,255,.3) !important;
+  }
+  html body .appstle-active-option .appstle_circle,
+  html body .appstle_selected_background .appstle_circle {
+    border-color: var(--color-volt) !important;
+  }
+  html body .appstle_dot {
+    background: var(--color-volt) !important;
   }
   .appstle_subscription_radio_wrapper input[type="radio"] {
     accent-color: var(--color-volt) !important;
