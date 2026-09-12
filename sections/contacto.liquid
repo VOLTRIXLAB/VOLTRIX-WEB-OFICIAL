@@ -1,0 +1,120 @@
+<div class="ct">
+<style>
+.ct { font-family: 'Inter', sans-serif; background: #0A0A1A; color: #fff; line-height: 1.6; -webkit-font-smoothing: antialiased; padding: 64px 24px 96px; }
+.ct *, .ct *::before, .ct *::after { box-sizing: border-box; }
+.ct { --cv: #C8F135; --cb: #2563EB; --cw70: rgba(255,255,255,.7); --cw50: rgba(255,255,255,.5); --cw35: rgba(255,255,255,.35); --cborder: #1E1E38; --cpanel: rgba(255,255,255,.03); }
+
+.ct .ct-wrap { max-width: 640px; margin: 0 auto; }
+
+.ct .ct-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--cv); text-align: center; margin-bottom: 12px; }
+.ct h1 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4.5vw, 40px); font-weight: 400; text-align: center; margin-bottom: 14px; }
+.ct .ct-sub { font-size: 15px; color: var(--cw70); text-align: center; max-width: 460px; margin: 0 auto 44px; }
+
+.ct .ct-info { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 44px; }
+.ct .ct-info-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--cw70); }
+.ct .ct-info-item svg { color: var(--cv); flex-shrink: 0; }
+.ct .ct-info-item a { color: inherit; }
+.ct .ct-info-item a:hover { color: var(--cv); }
+
+.ct .ct-card { background: var(--cpanel); border: 1px solid var(--cborder); border-radius: 18px; padding: 32px 30px; }
+
+.ct .ct-form { display: flex; flex-direction: column; gap: 16px; }
+.ct .ct-row { display: flex; flex-direction: column; gap: 6px; }
+.ct .ct-row-double { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ct label { font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--cw50); }
+.ct input, .ct textarea {
+  width: 100%; background: rgba(255,255,255,.05); border: 1px solid var(--cborder); border-radius: 10px;
+  padding: 13px 14px; font-family: 'Inter', sans-serif; font-size: 15px; color: #fff; outline: none;
+  transition: border-color .15s ease, background .15s ease;
+}
+.ct textarea { resize: vertical; min-height: 120px; }
+.ct input::placeholder, .ct textarea::placeholder { color: var(--cw35); }
+.ct input:focus, .ct textarea:focus { border-color: var(--cv); background: rgba(255,255,255,.08); }
+
+.ct .ct-submit {
+  margin-top: 4px; width: 100%; background: var(--cv); color: #0A0A1A; border: none; border-radius: 10px;
+  padding: 15px 20px; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer;
+  transition: background .15s ease, transform .1s ease;
+}
+.ct .ct-submit:hover { background: #A8CC2A; }
+.ct .ct-submit:active { transform: scale(.985); }
+
+.ct .ct-success { text-align: center; padding: 20px 0; }
+.ct .ct-success-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(200,241,53,.12); color: var(--cv); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+.ct .ct-success h2 { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; }
+.ct .ct-success p { font-size: 14px; color: var(--cw70); }
+
+.ct .ct-error { font-size: 12px; color: #F87171; margin-top: 4px; }
+
+@media (max-width: 500px) {
+  .ct { padding: 48px 16px 72px; }
+  .ct-card { padding: 24px 20px; }
+  .ct-row-double { grid-template-columns: 1fr; }
+  .ct-info { flex-direction: column; align-items: center; gap: 12px; }
+}
+</style>
+
+<div class="ct-wrap">
+  <div class="ct-eyebrow">Contacto</div>
+  <h1>¿Tienes alguna duda?</h1>
+  <p class="ct-sub">Escríbenos y te respondemos en menos de 24 horas en días laborables.</p>
+
+  <div class="ct-info">
+    <div class="ct-info-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a>
+    </div>
+    <div class="ct-info-item">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Respuesta en &lt;24h laborables
+    </div>
+  </div>
+
+  <div class="ct-card">
+    {% form 'contact', id: 'ct-contact-form' %}
+      {% if form.posted_successfully? %}
+        <div class="ct-success">
+          <div class="ct-success-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>Mensaje enviado</h2>
+          <p>Gracias por escribirnos — te respondemos en menos de 24 horas.</p>
+        </div>
+      {% else %}
+        <div class="ct-form">
+          <div class="ct-row-double">
+            <div class="ct-row">
+              <label for="ct-name">Nombre</label>
+              <input type="text" id="ct-name" name="contact[name]" placeholder="Tu nombre" required>
+            </div>
+            <div class="ct-row">
+              <label for="ct-email">Email</label>
+              <input type="email" id="ct-email" name="contact[email]" placeholder="tucorreo@ejemplo.com" required>
+            </div>
+          </div>
+          <div class="ct-row">
+            <label for="ct-order">Número de pedido (opcional)</label>
+            <input type="text" id="ct-order" name="contact[order_number]" placeholder="#1234">
+          </div>
+          <div class="ct-row">
+            <label for="ct-message">Mensaje</label>
+            <textarea id="ct-message" name="contact[body]" placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+          </div>
+          <button type="submit" class="ct-submit">Enviar mensaje →</button>
+          {% if form.errors %}
+            <p class="ct-error">
+              {% for field in form.errors %}
+                {{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}<br>
+              {% endfor %}
+            </p>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endform %}
+  </div>
+</div>
+</div>
+
+{% schema %}
+{ "name": "Contacto", "settings": [] }
+{% endschema %}

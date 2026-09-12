@@ -1,0 +1,92 @@
+<section class="vx-guia section--dark page-width" id="guia">
+  <div class="vx-guia__layout">
+    <div class="vx-guia__timeline-col">
+      <p class="vx-eyebrow text-volt">Cómo tomarlo</p>
+      <p class="vx-guia__instrucciones">Disuelve 1 cucharada (8,5g) en 200–250ml de agua fría. Agita bien. Tómalo cada mañana, antes o durante el desayuno.</p>
+      <div class="vx-tl">
+        <div class="vx-tl__item">
+          <div class="vx-tl__check">✓</div>
+          <div>
+            <div class="vx-tl__periodo">Días 1–7</div>
+            <div class="vx-tl__titulo">Hidratación y energía más estable</div>
+            <div class="vx-tl__desc">Lo primero que se nota. Menos sed constante, energía sin picos.</div>
+          </div>
+        </div>
+        <div class="vx-tl__item">
+          <div class="vx-tl__check">✓</div>
+          <div>
+            <div class="vx-tl__periodo">Semana 2</div>
+            <div class="vx-tl__titulo">Foco sostenido sin crash</div>
+            <div class="vx-tl__desc">El ratio 2:1 hace efecto. El bajón de tarde empieza a desaparecer.</div>
+          </div>
+        </div>
+        <div class="vx-tl__item">
+          <div class="vx-tl__check">✓</div>
+          <div>
+            <div class="vx-tl__periodo">Semanas 3–4</div>
+            <div class="vx-tl__titulo">Rendimiento y recuperación</div>
+            <div class="vx-tl__desc">La creatina satura los depósitos. Más fuerza, recuperación más rápida.</div>
+          </div>
+        </div>
+        <div class="vx-tl__item">
+          <div class="vx-tl__check">✓</div>
+          <div>
+            <div class="vx-tl__periodo">Semanas 4–6</div>
+            <div class="vx-tl__titulo">Gestión del estrés y cortisol</div>
+            <div class="vx-tl__desc">El KSM-66® actúa de forma acumulativa. Menos agotamiento al final del día.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vx-guia__tabla-col">
+      <table class="vx-tabla">
+        <thead>
+          <tr><th>Ingrediente</th><th>Por porción</th><th>Función</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Citrato sódico</td><td class="vx-tabla__val">600mg Na</td><td>Hidratación celular</td></tr>
+          <tr><td>Citrato potásico</td><td class="vx-tabla__val">300mg K</td><td>Balance electrolítico</td></tr>
+          <tr><td>Mg bisglicinato</td><td class="vx-tabla__val">100mg Mg</td><td>Recuperación muscular</td></tr>
+          <tr><td>L-Teanina Suntheanine®</td><td class="vx-tabla__val">200mg</td><td>Foco sin ansiedad</td></tr>
+          <tr><td>Cafeína natural</td><td class="vx-tabla__val">100mg</td><td>Energía sostenida</td></tr>
+          <tr><td>Creatina monohidrato</td><td class="vx-tabla__val">3.000mg</td><td>Rendimiento físico</td></tr>
+          <tr><td>Taurina</td><td class="vx-tabla__val">500mg</td><td>Reducción oxidativa</td></tr>
+          <tr><td>KSM-66® Ashwagandha</td><td class="vx-tabla__val">300mg</td><td>Estrés y recuperación</td></tr>
+          <tr><td>Ácido cítrico · Aroma limón/lima</td><td class="vx-tabla__val">Q.S.</td><td>Sabor y textura</td></tr>
+          <tr><td>Eritritol · Stevia</td><td class="vx-tabla__val">Q.S.</td><td>Sin azúcar</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-guia { padding: 88px 24px; }
+  .vx-guia__layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: start; }
+  .vx-guia__instrucciones { font-size: 15px; color: rgba(255,255,255,.55); line-height: 1.7; margin: 10px 0 32px; max-width: 420px; }
+  .vx-tl { position: relative; padding-left: 6px; }
+  .vx-tl__item { display: flex; gap: 16px; position: relative; padding-bottom: 30px; }
+  .vx-tl__item:not(:last-child)::before {
+    content: ''; position: absolute; left: 11px; top: 26px; bottom: 0; width: 1px; background: #28284A;
+  }
+  .vx-tl__check {
+    width: 24px; height: 24px; border-radius: 50%; background: rgba(200,241,53,.1);
+    border: 1px solid rgba(200,241,53,.3); color: var(--color-volt); font-size: 12px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; z-index: 1;
+  }
+  .vx-tl__periodo { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-volt); margin-bottom: 4px; }
+  .vx-tl__titulo { font-size: 15px; font-weight: 800; color: var(--color-white); margin-bottom: 5px; }
+  .vx-tl__desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.6; }
+  .vx-tabla { width: 100%; border-collapse: collapse; border: 1px solid #1E1E38; border-radius: 14px; overflow: hidden; }
+  .vx-tabla th { text-align: left; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.3); padding: 14px 16px; border-bottom: 1px solid #1E1E38; background: rgba(255,255,255,.02); }
+  .vx-tabla td { padding: 14px 16px; font-size: 13px; color: rgba(255,255,255,.7); border-bottom: 1px solid #1E1E38; font-weight: 600; }
+  .vx-tabla tr:last-child td { border-bottom: none; }
+  .vx-tabla__val { color: var(--color-volt); font-weight: 800; }
+  @media (max-width: 800px) {
+    .vx-guia__layout { grid-template-columns: 1fr; }
+    .vx-tabla { font-size: 12px; }
+  }
+</style>
+{% schema %}
+{ "name": "Cómo tomarlo", "settings": [] }
+{% endschema %}

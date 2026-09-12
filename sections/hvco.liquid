@@ -1,0 +1,45 @@
+<section class="vx-hvco section--dark page-width">
+  <div class="vx-hvco__box">
+    <div class="vx-hvco__text">
+      <p class="vx-eyebrow text-volt">Antes de comprar</p>
+      <h2 class="font-display">¿Por qué llegas al mediodía sin energía aunque hagas todo bien?</h2>
+      <p class="vx-hvco__desc">Descarga la guía gratuita de rendimiento diario: los 4 errores más comunes de hidratación, energía y recuperación — y cómo corregirlos hoy mismo.</p>
+
+      {% form 'customer', id: 'vx-hvco-form' %}
+        {% if form.posted_successfully? %}
+          <p class="vx-hvco__success">¡Listo! Revisa tu email — te hemos enviado la guía.</p>
+        {% else %}
+          <div class="vx-hvco__form-row">
+            <input type="hidden" name="contact[tags]" value="hvco-guia-rendimiento">
+            <input type="email" name="contact[email]" placeholder="tu@email.com" required class="vx-hvco__input">
+            <button type="submit" class="vx-hvco__btn">Quiero la guía →</button>
+          </div>
+          {% if form.errors %}
+            <p class="vx-hvco__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+      <p class="vx-hvco__note">Sin spam. Puedes darte de baja cuando quieras.</p>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-hvco { padding: 60px 24px 88px; }
+  .vx-hvco__box { background: #141430; border: 1px solid #28284A; border-radius: 20px; padding: 44px; max-width: 640px; margin: 0 auto; text-align: center; }
+  .vx-hvco__text h2 { font-size: clamp(22px, 3.2vw, 30px); line-height: 1.25; margin: 10px 0 14px; }
+  .vx-hvco__desc { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.65; margin-bottom: 26px; }
+  .vx-hvco__form-row { display: flex; gap: 8px; max-width: 420px; margin: 0 auto; }
+  .vx-hvco__input { flex: 1; padding: 13px 16px; border-radius: 10px; border: 1px solid #28284A; background: rgba(255,255,255,.04); color: var(--color-white); font-size: 14px; }
+  .vx-hvco__input::placeholder { color: rgba(255,255,255,.3); }
+  .vx-hvco__btn { padding: 13px 20px; border-radius: 10px; background: var(--color-volt); color: var(--color-ink); font-weight: 800; font-size: 13px; white-space: nowrap; border: none; cursor: pointer; }
+  .vx-hvco__note { font-size: 11px; color: rgba(255,255,255,.3); margin-top: 14px; }
+  .vx-hvco__success { color: var(--color-volt); font-weight: 700; font-size: 15px; }
+  .vx-hvco__error { color: #F87171; font-size: 12px; margin-top: 8px; }
+  @media (max-width: 500px) {
+    .vx-hvco__box { padding: 30px 22px; }
+    .vx-hvco__form-row { flex-direction: column; }
+  }
+</style>
+{% schema %}
+{ "name": "HVCO Guía", "settings": [] }
+{% endschema %}

@@ -1,0 +1,48 @@
+<section class="vx-test section--dark page-width">
+  <p class="vx-eyebrow text-volt">Lo que dicen</p>
+  <h2 class="font-display">30 días para notarlo.</h2>
+  <p class="vx-test__sub">Lo que nos cuentan las primeras personas en probar Voltrix — en sus palabras, no en las nuestras.</p>
+  <div class="vx-test__grid">
+    <div class="vx-test__card">
+      <div class="vx-test__stars">★★★★★</div>
+      <div class="vx-test__body">"Lo que más me sorprendió fue lo rápido que desapareció el bajón de las 3. Llevaba años pensando que era normal. Con Voltrix simplemente ya no pasa."</div>
+      <div class="vx-test__foot">
+        <div class="vx-test__av">C</div>
+        <div><div class="vx-test__name">Carlos M.</div><div class="vx-test__role">Diseñador UX · 34 años</div></div>
+      </div>
+    </div>
+    <div class="vx-test__card">
+      <div class="vx-test__stars">★★★★★</div>
+      <div class="vx-test__body">"Era muy escéptica. Pero lo he notado sobre todo en la hidratación — ya no tengo esa sed constante aunque beba agua. El foco por la mañana es real, no es placebo."</div>
+      <div class="vx-test__foot">
+        <div class="vx-test__av">A</div>
+        <div><div class="vx-test__name">Ana R.</div><div class="vx-test__role">Directora de marketing · 31 años</div></div>
+      </div>
+    </div>
+    <div class="vx-test__card">
+      <div class="vx-test__stars">★★★★★</div>
+      <div class="vx-test__body">"Lo que me convenció fue la creatina en dosis real. La disuelves, no sabe mal y en 3 semanas notas la recuperación claramente mejor. Sin más vueltas."</div>
+      <div class="vx-test__foot">
+        <div class="vx-test__av">M</div>
+        <div><div class="vx-test__name">Miguel T.</div><div class="vx-test__role">Entrenador personal · 38 años</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-test { padding: 88px 24px; }
+  .vx-test h2 { font-size: clamp(28px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.4px; margin-bottom: 12px; }
+  .vx-test__sub { font-size: 16px; color: rgba(255,255,255,.5); max-width: 500px; line-height: 1.72; margin-bottom: 44px; }
+  .vx-test__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .vx-test__card { background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 18px; padding: 24px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .vx-test__stars { color: var(--color-volt); font-size: 13px; letter-spacing: 2px; }
+  .vx-test__body { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; flex: 1; font-style: italic; }
+  .vx-test__foot { display: flex; align-items: center; gap: 11px; border-top: 1px solid #1E1E38; padding-top: 12px; }
+  .vx-test__av { width: 32px; height: 32px; border-radius: 50%; background: rgba(200,241,53,.1); border: 1px solid #28284A; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--color-volt); flex-shrink: 0; }
+  .vx-test__name { font-size: 13px; font-weight: 700; color: var(--color-white); }
+  .vx-test__role { font-size: 11px; color: rgba(255,255,255,.3); }
+  @media (max-width: 700px) { .vx-test__grid { grid-template-columns: 1fr; } }
+</style>
+{% schema %}
+{ "name": "Testimonios", "settings": [] }
+{% endschema %}

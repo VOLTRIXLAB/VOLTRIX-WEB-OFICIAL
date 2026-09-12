@@ -1,0 +1,44 @@
+<section class="vx-metodo section--dark page-width" id="metodo">
+  <p class="vx-eyebrow text-volt">El método</p>
+  <h2 class="font-display">El Método <em>Voltrix</em></h2>
+  <p class="vx-metodo__sub">No es un ingrediente más. Es el criterio con el que se construyó toda la fórmula.</p>
+  <p class="vx-metodo__body">Cada ingrediente en su dosis clínica completa, en el ratio exacto que respalda la evidencia — nunca la cantidad simbólica que usan otros para que quepa en la etiqueta.</p>
+
+  <div class="vx-metodo__grid">
+    <div class="vx-metodo__item">
+      <div class="vx-metodo__num">01</div>
+      <div class="vx-metodo__titulo">Dosis completa, no simbólica</div>
+      <div class="vx-metodo__desc">3g de creatina, no 1g. 200mg de teanina + 100mg de cafeína en ratio 2:1 real.</div>
+    </div>
+    <div class="vx-metodo__item">
+      <div class="vx-metodo__num">02</div>
+      <div class="vx-metodo__titulo">Una sola toma, cero relleno</div>
+      <div class="vx-metodo__desc">Si un ingrediente no tiene dosis clínica relevante, no entra en la fórmula.</div>
+    </div>
+    <div class="vx-metodo__item">
+      <div class="vx-metodo__num">03</div>
+      <div class="vx-metodo__titulo">Evidencia antes que marketing</div>
+      <div class="vx-metodo__desc">Cada complejo existe porque hay estudio detrás, no porque suene bien en un anuncio.</div>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-metodo { padding: 88px 24px; }
+  .vx-metodo h2 { font-size: clamp(28px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.4px; margin-bottom: 14px; }
+  .vx-metodo h2 em { font-style: italic; color: var(--color-volt); }
+  .vx-metodo__sub { font-size: 17px; font-weight: 600; color: var(--color-white); max-width: 560px; line-height: 1.5; margin-bottom: 12px; }
+  .vx-metodo__body { font-size: 15px; color: rgba(255,255,255,.5); max-width: 620px; line-height: 1.7; margin-bottom: 44px; }
+
+  .vx-metodo__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .vx-metodo__item { background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 16px; padding: 28px 24px; }
+  .vx-metodo__num { font-family: var(--font-display); font-size: 34px; color: var(--color-volt); line-height: 1; margin-bottom: 14px; opacity: .85; }
+  .vx-metodo__titulo { font-size: 15px; font-weight: 800; color: var(--color-white); margin-bottom: 10px; line-height: 1.3; }
+  .vx-metodo__desc { font-size: 13.5px; color: rgba(255,255,255,.45); line-height: 1.65; }
+
+  @media (max-width: 700px) {
+    .vx-metodo__grid { grid-template-columns: 1fr; }
+  }
+</style>
+{% schema %}
+{ "name": "Método Voltrix", "settings": [] }
+{% endschema %}

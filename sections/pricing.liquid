@@ -1,0 +1,325 @@
+{% assign vx_product = all_products['voltrix-daily-performance-formula-30-porciones'] %}
+
+<section class="vx-prod section--dark page-width" id="producto">
+  <p class="vx-eyebrow text-volt">El producto</p>
+  <h2 class="font-display">Voltrix Daily<br>Performance Formula</h2>
+
+  <div class="vx-cafe">
+    <div>
+      <div class="vx-cafe__num">1,50€</div>
+      <div class="vx-cafe__lbl">Al día</div>
+    </div>
+    <div class="vx-cafe__div"></div>
+    <div>
+      <div class="vx-cafe__titulo">Menos que tu café de las 9.<br>Con mucho más impacto en tu día.</div>
+      <div class="vx-cafe__desc">44,99€ al mes son 1,50€ al día. <strong>Menos que el café que tomas cada mañana.</strong> Si lo compraras todo por separado pagarías entre 60 y 90€ al mes — y tendrías cuatro botes que olvidarías tomar.</div>
+    </div>
+  </div>
+
+  <div class="vx-prod__layout">
+    <div class="vx-prod__visual">
+      {% if vx_product and vx_product.images.size > 0 %}
+        <div class="vx-gallery" data-vx-gallery>
+          <div class="vx-gallery__main">
+            {% if vx_product.images.size > 1 %}
+              <button type="button" class="vx-gallery__arrow vx-gallery__arrow--prev" data-vx-prev aria-label="Foto anterior">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+            {% endif %}
+
+            {% for image in vx_product.images %}
+              <img
+                src="{{ image | image_url: width: 1400 }}"
+                alt="{{ image.alt | default: vx_product.title }}"
+                class="vx-gallery__img{% if forloop.first %} is-active{% endif %}"
+                data-vx-slide="{{ forloop.index0 }}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              >
+            {% endfor %}
+
+            {% if vx_product.images.size > 1 %}
+              <button type="button" class="vx-gallery__arrow vx-gallery__arrow--next" data-vx-next aria-label="Foto siguiente">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            {% endif %}
+          </div>
+
+          {% if vx_product.images.size > 1 %}
+            <div class="vx-gallery__thumbs">
+              {% for image in vx_product.images %}
+                <button
+                  type="button"
+                  class="vx-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-vx-thumb="{{ forloop.index0 }}"
+                  aria-label="Ver foto {{ forloop.index }}"
+                >
+                  <img src="{{ image | image_url: width: 240 }}" alt="{{ image.alt | default: vx_product.title }}" loading="lazy">
+                </button>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% elsif section.settings.imagen_producto %}
+        {{ section.settings.imagen_producto | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'vx-prod__img' }}
+      {% else %}
+        <div class="vx-prod__placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p>Foto del bote pendiente — sustituir aquí</p>
+        </div>
+      {% endif %}
+    </div>
+    <div>
+      <div class="vx-price-row">
+        <div class="vx-price-big">
+          {% if vx_product %}{{ vx_product.price | money }}{% else %}44,99€{% endif %}
+        </div>
+        <div class="vx-price-unit">/ 30 porciones</div>
+      </div>
+      <div class="vx-price-tag">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        1,50€/día — menos que tu café de las 9
+      </div>
+      <div class="vx-bullets">
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> Hidratación real con electrolitos en dosis efectiva</div>
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> Energía sin crash — ratio 2:1 teanina:cafeína</div>
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> 3g de creatina Creapure® — pureza certificada 99,9%</div>
+        <div class="vx-bullet"><span class="vx-bcheck">✓</span> KSM-66® para regular el estrés y el cortisol</div>
+      </div>
+
+      <div class="vx-subscription-slot">
+        {% content_for 'blocks' %}
+      </div>
+
+      {% if vx_product %}
+        <span class='appstle_stand_alone_selector' data-product-handle='{{ vx_product.handle }}' style="display:none;"></span>
+        {% form 'product', vx_product %}
+          <input type="hidden" name="id" value="{{ vx_product.selected_or_first_available_variant.id }}">
+          <button type="submit" class="vx-btn-add" data-vx-buy-btn {% unless vx_product.available %}disabled{% endunless %}>
+            {% if vx_product.available %}
+              <span data-vx-btn-label>Empezar con Voltrix</span> —
+              <span data-vx-btn-compare class="vx-btn-add__compare" style="display:none;"></span>
+              <span data-vx-btn-price>{{ vx_product.price | money }}</span> →
+            {% else %}
+              Próximamente
+            {% endif %}
+          </button>
+        {% endform %}
+      {% else %}
+        <button class="vx-btn-add" disabled>Próximamente</button>
+      {% endif %}
+
+      <details class="vx-sub-detail">
+        <summary>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+          Detalles de la suscripción
+        </summary>
+        <p><strong>Control total sobre tu suscripción.</strong> Pausa, reprograma, edita o cancela tus envíos cuando quieras, sin compromiso ni permanencia.</p>
+      </details>
+
+      <div class="vx-garantia">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Envío incluido · Suscripción cancelable cuando quieras
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .vx-prod { padding: 88px 24px; }
+  .vx-prod h2 { font-size: clamp(28px, 3.8vw, 48px); line-height: 1.1; letter-spacing: -.4px; margin-bottom: 32px; }
+  .vx-cafe { background: #141430; border: 1px solid #28284A; border-left: 3px solid var(--color-volt); border-radius: 14px; padding: 26px 30px; display: flex; align-items: center; gap: 26px; margin-bottom: 56px; flex-wrap: wrap; }
+  .vx-cafe__num { font-family: var(--font-display); font-size: 50px; color: var(--color-volt); line-height: 1; }
+  .vx-cafe__lbl { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-top: 3px; }
+  .vx-cafe__div { width: 1px; height: 56px; background: #28284A; flex-shrink: 0; }
+  .vx-cafe__titulo { font-size: 17px; font-weight: 800; color: var(--color-white); margin-bottom: 5px; line-height: 1.3; }
+  .vx-cafe__desc { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.65; }
+  .vx-cafe__desc strong { color: var(--color-white); font-weight: 700; }
+  .vx-prod__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .vx-prod__visual { display: flex; align-items: center; justify-content: center; }
+  .vx-prod__img { border-radius: 16px; width: 100%; }
+  .vx-prod__placeholder {
+    width: 100%; aspect-ratio: 1; border: 2px dashed #28284A; border-radius: 16px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    color: rgba(255,255,255,.25); background: rgba(255,255,255,.02);
+  }
+  .vx-prod__placeholder p { font-size: 12px; text-align: center; max-width: 180px; }
+
+  /* ── Galería ── */
+  .vx-gallery { width: 100%; }
+  .vx-gallery__main { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: #0F0F24; }
+  .vx-gallery__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .3s ease; pointer-events: none; }
+  .vx-gallery__img.is-active { opacity: 1; pointer-events: auto; }
+  .vx-gallery__arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+    width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+    background: rgba(10,10,26,.6); color: #fff; display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(4px); transition: background .15s ease;
+  }
+  .vx-gallery__arrow:hover { background: rgba(200,241,53,.85); color: #0A0A1A; }
+  .vx-gallery__arrow--prev { left: 12px; }
+  .vx-gallery__arrow--next { right: 12px; }
+  .vx-gallery__thumbs { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+  .vx-gallery__thumb {
+    width: 56px; height: 56px; border-radius: 8px; overflow: hidden; padding: 0; cursor: pointer;
+    border: 2px solid transparent; opacity: .5; transition: opacity .15s ease, border-color .15s ease; flex-shrink: 0;
+  }
+  .vx-gallery__thumb img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .vx-gallery__thumb.is-active { opacity: 1; border-color: var(--color-volt); }
+  .vx-gallery__thumb:hover { opacity: .85; }
+
+  .vx-price-row { display: flex; align-items: baseline; gap: 9px; margin-bottom: 5px; }
+  .vx-price-big { font-family: var(--font-display); font-size: 50px; color: var(--color-white); line-height: 1; }
+  .vx-price-unit { font-size: 14px; color: rgba(255,255,255,.3); }
+  .vx-price-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); border-radius: 8px; padding: 6px 13px; margin: 12px 0 22px; font-size: 12px; font-weight: 700; color: var(--color-volt); }
+  .vx-bullets { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
+  .vx-subscription-slot:empty { display: none; }
+  .vx-subscription-slot:not(:empty) { margin-bottom: 20px; }
+  .vx-bullet { display: flex; align-items: center; gap: 11px; font-size: 14px; color: rgba(255,255,255,.55); font-weight: 500; }
+  .vx-bcheck { width: 19px; height: 19px; border-radius: 5px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--color-volt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+  .vx-btn-add { display: block; text-align: center; width: 100%; max-width: 420px; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; }
+  .vx-btn-add:disabled { opacity: .5; cursor: not-allowed; }
+  .vx-btn-add__compare { text-decoration: line-through; opacity: .55; font-weight: 700; margin-right: 4px; }
+  .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); }
+  .vx-garantia svg { color: var(--color-volt); }
+
+  .vx-sub-detail { border: 1px solid #28284A; border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; }
+  .vx-sub-detail summary {
+    display: flex; align-items: center; gap: 9px; cursor: pointer;
+    font-size: 13px; font-weight: 700; color: rgba(255,255,255,.75); list-style: none;
+  }
+  .vx-sub-detail summary::-webkit-details-marker { display: none; }
+  .vx-sub-detail summary svg { color: var(--color-volt); flex-shrink: 0; }
+  .vx-sub-detail p { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-top: 10px; padding-left: 25px; }
+  .vx-sub-detail p strong { color: var(--color-white); }
+  @media (max-width: 700px) { .vx-prod__layout { grid-template-columns: 1fr; } }
+</style>
+<script>
+  (function () {
+    var galleries = document.querySelectorAll('[data-vx-gallery]');
+    galleries.forEach(function (gallery) {
+      var slides = gallery.querySelectorAll('[data-vx-slide]');
+      var thumbs = gallery.querySelectorAll('[data-vx-thumb]');
+      var prevBtn = gallery.querySelector('[data-vx-prev]');
+      var nextBtn = gallery.querySelector('[data-vx-next]');
+      var total = slides.length;
+      var current = 0;
+
+      function goTo(index) {
+        current = (index + total) % total;
+        slides.forEach(function (s) { s.classList.remove('is-active'); });
+        thumbs.forEach(function (t) { t.classList.remove('is-active'); });
+        slides[current].classList.add('is-active');
+        if (thumbs[current]) thumbs[current].classList.add('is-active');
+      }
+
+      thumbs.forEach(function (thumb, i) {
+        thumb.addEventListener('click', function () { goTo(i); });
+      });
+      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    });
+  })();
+</script>
+{% if vx_product %}
+<script>
+  (function () {
+    var btn = document.querySelector('[data-vx-buy-btn]');
+    if (!btn) return;
+
+    var labelEl = btn.querySelector('[data-vx-btn-label]');
+    var priceEl = btn.querySelector('[data-vx-btn-price]');
+    var compareEl = btn.querySelector('[data-vx-btn-compare]');
+    var form = btn.closest('form');
+    var productHandle = {{ vx_product.handle | json }};
+    var productData = null;
+
+    function formatMoney(cents) {
+      return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
+    }
+
+    function updateButton(sellingPlanId) {
+      if (!productData) return;
+
+      if (!sellingPlanId) {
+        // Compra única
+        var variant = productData.variants[0];
+        labelEl.textContent = 'Empezar con Voltrix';
+        priceEl.textContent = formatMoney(variant.price);
+        if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+          compareEl.textContent = formatMoney(variant.compare_at_price);
+          compareEl.style.display = '';
+        } else {
+          compareEl.style.display = 'none';
+        }
+        return;
+      }
+
+      // Suscripción: busca el plan seleccionado en los grupos de venta
+      var plan = null;
+      (productData.selling_plan_groups || []).forEach(function (group) {
+        group.selling_plans.forEach(function (p) {
+          if (String(p.id) === String(sellingPlanId)) plan = p;
+        });
+      });
+
+      if (plan) {
+        var variant = productData.variants[0];
+        var allocation = (variant.selling_plan_allocations || []).find(function (a) {
+          return String(a.selling_plan_id) === String(sellingPlanId);
+        });
+        labelEl.textContent = 'Suscribirme a Voltrix';
+        if (allocation) {
+          priceEl.textContent = formatMoney(allocation.price);
+          if (allocation.compare_at_price && allocation.compare_at_price > allocation.price) {
+            compareEl.textContent = formatMoney(allocation.compare_at_price);
+            compareEl.style.display = '';
+          } else {
+            compareEl.style.display = 'none';
+          }
+        }
+      }
+    }
+
+    fetch('/products/' + productHandle + '.js')
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        productData = data;
+      })
+      .catch(function () {});
+
+    function syncFormSellingPlan(sellingPlanId) {
+      if (!form) return;
+      var hidden = form.querySelector('input[name="selling_plan"]');
+      if (!hidden) {
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'selling_plan';
+        form.appendChild(hidden);
+      }
+      hidden.value = sellingPlanId || '';
+    }
+
+    document.addEventListener('change', function (e) {
+      var target = e.target;
+      if (!target || target.name !== 'selling_plan') return;
+      syncFormSellingPlan(target.value);
+      updateButton(target.value);
+    });
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Producto y Precio",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "imagen_producto",
+      "label": "Foto del bote (solo si el producto no tiene fotos propias)"
+    }
+  ],
+  "blocks": [
+    { "type": "@app" }
+  ]
+}
+{% endschema %}

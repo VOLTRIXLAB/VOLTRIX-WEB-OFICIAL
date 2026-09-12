@@ -1,0 +1,269 @@
+<div class="pol">
+<style>
+.pol { font-family: 'Inter', sans-serif; background: #0A0A1A; color: #fff; line-height: 1.7; -webkit-font-smoothing: antialiased; padding: 64px 24px 96px; }
+.pol *, .pol *::before, .pol *::after { box-sizing: border-box; }
+.pol { --pv: #C8F135; --pb: #2563EB; --pw70: rgba(255,255,255,.7); --pw50: rgba(255,255,255,.5); --pw35: rgba(255,255,255,.35); --pw25: rgba(255,255,255,.25); --pborder: #1E1E38; --ppanel: rgba(255,255,255,.03); }
+
+.pol .pol-wrap { max-width: 860px; margin: 0 auto; }
+
+.pol .pol-header { border-bottom: 1px solid var(--pborder); padding-bottom: 32px; margin-bottom: 40px; }
+.pol .pol-logo-link { display: inline-block; margin-bottom: 40px; }
+.pol .pol-logo-img { height: 24px; width: auto; }
+.pol .pol-eyebrow-top { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--pv); margin-bottom: 10px; }
+.pol .pol-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4.5vw, 40px); font-weight: 400; color: #fff; margin-bottom: 8px; }
+.pol .pol-header-sub { font-size: 13px; color: var(--pw35); }
+
+.pol .pol-indice { background: var(--ppanel); border: 1px solid var(--pborder); border-radius: 14px; padding: 24px 28px; margin-bottom: 48px; }
+.pol .pol-indice-titulo { font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--pv); margin-bottom: 14px; }
+.pol .pol-indice-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pol .pol-indice-list a { font-size: 14px; color: var(--pw70); text-decoration: none; font-weight: 500; }
+.pol .pol-indice-list a:hover { color: var(--pv); }
+
+.pol .politica { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--pborder); }
+.pol .politica:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.pol .pol-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--pv); margin-bottom: 8px; }
+.pol .pol-titulo { font-family: 'DM Serif Display', serif; font-size: clamp(22px, 3.5vw, 32px); font-weight: 400; color: #fff; margin-bottom: 18px; line-height: 1.25; }
+.pol .pol-actualizado { font-size: 12px; color: var(--pw25); margin-bottom: 24px; }
+
+.pol .pol-content h3 { font-size: 15px; font-weight: 800; color: #fff; margin: 24px 0 10px; }
+.pol .pol-content h3:first-child { margin-top: 0; }
+.pol .pol-content p { font-size: 14px; color: var(--pw70); margin-bottom: 14px; }
+.pol .pol-content ul { margin: 0 0 14px 20px; display: flex; flex-direction: column; gap: 6px; }
+.pol .pol-content ul li { font-size: 14px; color: var(--pw70); line-height: 1.65; }
+.pol .pol-content strong { color: #fff; font-weight: 700; }
+.pol .pol-content a { color: var(--pv); }
+
+.pol .highlight { background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.22); border-radius: 10px; padding: 16px 18px; margin: 16px 0; }
+.pol .highlight p { margin: 0; color: var(--pv); font-weight: 600; }
+
+.pol .pol-footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--pborder); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+.pol .pol-footer-brand { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--pw50); }
+.pol .pol-footer-logo-img { height: 16px; width: auto; }
+.pol .pol-footer-note { font-size: 11px; color: var(--pw25); text-align: right; }
+
+@media (max-width: 600px) {
+  .pol { padding: 48px 16px 72px; }
+  .pol-footer { flex-direction: column; align-items: flex-start; }
+  .pol-footer-note { text-align: left; }
+}
+</style>
+
+<div class="pol-wrap">
+
+  <a href="{{ routes.root_url }}" class="pol-logo-link">
+    <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" class="pol-logo-img">
+  </a>
+
+  <div class="pol-header">
+    <div class="pol-eyebrow-top">Voltrix — Políticas legales</div>
+    <h1>Políticas de getvoltrix.es</h1>
+    <div class="pol-header-sub">Última actualización: Agosto 2026</div>
+  </div>
+
+  <div class="pol-indice">
+    <div class="pol-indice-titulo">Contenido</div>
+    <ul class="pol-indice-list">
+      <li><a href="#envios">1. Política de envíos</a></li>
+      <li><a href="#devoluciones">2. Política de devoluciones y reembolsos</a></li>
+      <li><a href="#privacidad">3. Política de privacidad</a></li>
+      <li><a href="#cookies">4. Política de cookies</a></li>
+      <li><a href="#terminos">5. Términos y condiciones</a></li>
+      <li><a href="#contacto">6. Contacto</a></li>
+    </ul>
+  </div>
+
+  <!-- 1. ENVÍOS -->
+  <div class="politica" id="envios">
+    <div class="pol-eyebrow">Política 01</div>
+    <h2 class="pol-titulo">Política de envíos</h2>
+    <div class="pol-actualizado">Actualizada: Agosto 2026</div>
+    <div class="pol-content">
+      <div class="highlight"><p>✓ Envío gratuito en todos los pedidos a la Península Ibérica y Baleares. Sin mínimo de compra.</p></div>
+
+      <h3>Zonas de envío</h3>
+      <p>Actualmente realizamos envíos a <strong>España Peninsular y Baleares</strong>. Por el momento no realizamos envíos a Canarias, Ceuta, Melilla ni fuera de España. Esperamos ampliar las zonas de envío próximamente.</p>
+
+      <h3>Plazos de entrega</h3>
+      <ul>
+        <li><strong>España Peninsular:</strong> 2–4 días laborables desde la confirmación del pedido.</li>
+        <li><strong>Baleares:</strong> 3–5 días laborables desde la confirmación del pedido.</li>
+      </ul>
+      <p>Los plazos indicados son estimaciones y pueden variar en períodos de alta demanda, festivos nacionales o circunstancias ajenas a Voltrix.</p>
+
+      <h3>Procesamiento del pedido</h3>
+      <p>Los pedidos realizados de lunes a viernes antes de las 14:00h se procesan el mismo día. Los pedidos realizados después de las 14:00h, en fin de semana o festivo se procesan el siguiente día laborable.</p>
+
+      <h3>Seguimiento del envío</h3>
+      <p>Una vez expedido tu pedido recibirás un email de confirmación con el número de seguimiento para localizar tu paquete en tiempo real.</p>
+
+      <h3>Problemas con el envío</h3>
+      <p>Si tu pedido no llega en el plazo indicado o llegas a casa con el paquete dañado, escríbenos a <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a> y lo resolvemos en menos de 24 horas.</p>
+    </div>
+  </div>
+
+  <!-- 2. DEVOLUCIONES -->
+  <div class="politica" id="devoluciones">
+    <div class="pol-eyebrow">Política 02</div>
+    <h2 class="pol-titulo">Política de devoluciones y reembolsos</h2>
+    <div class="pol-actualizado">Actualizada: Agosto 2026</div>
+    <div class="pol-content">
+      <div class="highlight"><p>✓ 30 días de garantía de satisfacción. Si no lo notas, te devolvemos el dinero. Sin preguntas.</p></div>
+
+      <h3>Garantía de satisfacción de 30 días</h3>
+      <p>Si tras 30 días tomando Voltrix con regularidad no notas ningún resultado, te reembolsamos el importe íntegro del pedido. Sin formularios complicados, sin letra pequeña.</p>
+      <p>Para solicitar el reembolso escríbenos a <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a> con tu número de pedido y el motivo. Procesamos el reembolso en un plazo máximo de 5 días laborables.</p>
+
+      <h3>Derecho de desistimiento (14 días)</h3>
+      <p>Conforme a la normativa europea de comercio electrónico, tienes derecho a desistir de tu compra en un plazo de <strong>14 días naturales</strong> desde la recepción del pedido, sin necesidad de indicar el motivo.</p>
+      <p>Para ejercer este derecho el producto debe estar <strong>sin abrir y en su embalaje original</strong>. Los gastos de devolución corren a cargo del cliente salvo que el producto esté defectuoso.</p>
+
+      <h3>Producto defectuoso o incorrecto</h3>
+      <p>Si recibes un producto defectuoso, dañado durante el transporte o diferente al pedido, te enviamos uno nuevo sin coste adicional o te reembolsamos el importe total, según prefieras. En este caso los gastos de devolución corren a cargo de Voltrix.</p>
+
+      <h3>Cómo solicitar una devolución</h3>
+      <ul>
+        <li>Escribe a <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a> con el asunto "Devolución — Pedido #XXXX".</li>
+        <li>Indícanos el motivo de la devolución.</li>
+        <li>Te respondemos en menos de 24 horas con las instrucciones.</li>
+        <li>El reembolso se procesa en 5 días laborables al método de pago original.</li>
+      </ul>
+
+      <h3>Suscripciones</h3>
+      <p>Puedes cancelar tu suscripción mensual en cualquier momento desde tu cuenta en getvoltrix.es, sin coste ni penalización. La cancelación es efectiva a partir del siguiente ciclo de facturación.</p>
+    </div>
+  </div>
+
+  <!-- 3. PRIVACIDAD -->
+  <div class="politica" id="privacidad">
+    <div class="pol-eyebrow">Política 03</div>
+    <h2 class="pol-titulo">Política de privacidad</h2>
+    <div class="pol-actualizado">Actualizada: Agosto 2026</div>
+    <div class="pol-content">
+      <h3>Responsable del tratamiento</h3>
+      <p><strong>Nombre:</strong> Ayoub Mitxelena<br>
+      <strong>NIF:</strong> 49579072L<br>
+      <strong>Domicilio:</strong> Piedadeko Gaina 5, Yanci, Navarra, España<br>
+      <strong>Email:</strong> <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a></p>
+
+      <h3>Datos que recopilamos</h3>
+      <ul>
+        <li><strong>Datos de compra:</strong> nombre, dirección de envío, email y teléfono para gestionar el pedido.</li>
+        <li><strong>Datos de pago:</strong> gestionados directamente por Shopify Payments o Stripe. Voltrix no almacena datos de tarjeta.</li>
+        <li><strong>Email de suscripción:</strong> si te apuntas a nuestra lista, guardamos tu email para enviarte comunicaciones comerciales con tu consentimiento.</li>
+        <li><strong>Datos de navegación:</strong> cookies de analítica para entender cómo se usa la web.</li>
+      </ul>
+
+      <h3>Finalidad y base legal</h3>
+      <ul>
+        <li>Gestionar y entregar tu pedido — <strong>ejecución de contrato.</strong></li>
+        <li>Enviarte comunicaciones comerciales — <strong>consentimiento expreso.</strong></li>
+        <li>Cumplir obligaciones legales y contables — <strong>obligación legal.</strong></li>
+        <li>Mejorar la web mediante analítica — <strong>interés legítimo.</strong></li>
+      </ul>
+
+      <h3>Conservación de datos</h3>
+      <p>Los datos de pedidos se conservan durante <strong>5 años</strong> por obligaciones fiscales. Los datos de email marketing se eliminan cuando solicitas la baja.</p>
+
+      <h3>Tus derechos</h3>
+      <p>Puedes ejercer en cualquier momento tus derechos de <strong>acceso, rectificación, supresión, limitación, portabilidad y oposición</strong> escribiendo a <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a>. También puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).</p>
+
+      <h3>Transferencias internacionales</h3>
+      <p>Utilizamos Shopify (Canadá/EEUU) y Klaviyo (EEUU) como proveedores de servicios. Ambas empresas cuentan con las garantías adecuadas conforme al RGPD.</p>
+    </div>
+  </div>
+
+  <!-- 4. COOKIES -->
+  <div class="politica" id="cookies">
+    <div class="pol-eyebrow">Política 04</div>
+    <h2 class="pol-titulo">Política de cookies</h2>
+    <div class="pol-actualizado">Actualizada: Agosto 2026</div>
+    <div class="pol-content">
+      <p>Una cookie es un pequeño archivo de texto que se almacena en tu dispositivo cuando visitas una web. getvoltrix.es utiliza cookies para mejorar la experiencia de navegación y analizar el uso de la web.</p>
+
+      <h3>Tipos de cookies que usamos</h3>
+      <ul>
+        <li><strong>Cookies técnicas (necesarias):</strong> imprescindibles para el funcionamiento de la tienda — sesión, carrito de compra, seguridad. No requieren consentimiento.</li>
+        <li><strong>Cookies analíticas:</strong> Google Analytics para entender cómo los usuarios navegan por la web. Datos anonimizados.</li>
+        <li><strong>Cookies de Shopify:</strong> gestión del carrito, checkout y sesión de cliente.</li>
+      </ul>
+
+      <h3>Cómo gestionar las cookies</h3>
+      <p>Puedes configurar tu navegador para bloquear o eliminar las cookies. Ten en cuenta que deshabilitar las cookies técnicas puede afectar al funcionamiento de la tienda.</p>
+      <ul>
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias" target="_blank">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank">Safari</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. TÉRMINOS Y CONDICIONES -->
+  <div class="politica" id="terminos">
+    <div class="pol-eyebrow">Política 05</div>
+    <h2 class="pol-titulo">Términos y condiciones</h2>
+    <div class="pol-actualizado">Actualizada: Agosto 2026</div>
+    <div class="pol-content">
+      <h3>Titular de la web</h3>
+      <p><strong>Marca comercial:</strong> Voltrix<br>
+      <strong>Titular:</strong> Ayoub Mitxelena<br>
+      <strong>NIF:</strong> 49579072L<br>
+      <strong>Domicilio:</strong> Piedadeko Gaina 5, Yanci, Navarra, España<br>
+      <strong>Email:</strong> <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a><br>
+      <strong>Web:</strong> getvoltrix.es</p>
+
+      <h3>Objeto</h3>
+      <p>Las presentes condiciones regulan la relación comercial entre Voltrix y los usuarios que realicen compras a través de getvoltrix.es. La realización de un pedido implica la aceptación de estas condiciones.</p>
+
+      <h3>Productos</h3>
+      <p>Voltrix comercializa complementos alimenticios en polvo para consumo humano. Los productos están notificados ante las autoridades sanitarias competentes. <strong>Los complementos alimenticios no sustituyen una dieta equilibrada y un estilo de vida saludable.</strong></p>
+      <p>Los productos no están indicados para menores de 18 años, mujeres embarazadas o en período de lactancia, ni para personas con condiciones médicas que deban seguir dietas especiales. Consulte con su médico si está tomando medicación.</p>
+
+      <h3>Precios y pagos</h3>
+      <p>Todos los precios incluyen el IVA aplicable. Voltrix se reserva el derecho de modificar los precios en cualquier momento, sin que ello afecte a los pedidos ya confirmados.</p>
+      <p>Los métodos de pago aceptados son tarjeta de crédito/débito y PayPal, gestionados de forma segura a través de Shopify Payments. Voltrix no almacena datos de pago.</p>
+
+      <h3>Proceso de compra</h3>
+      <p>El contrato de compraventa se perfecciona en el momento en que Voltrix envía la confirmación del pedido por email. Hasta ese momento Voltrix se reserva el derecho de rechazar el pedido por causas justificadas.</p>
+
+      <h3>Suscripción mensual</h3>
+      <p>La modalidad de suscripción implica el cobro automático mensual del importe correspondiente hasta que el cliente la cancele. La cancelación puede realizarse en cualquier momento desde la cuenta del cliente, sin penalización, siendo efectiva a partir del siguiente ciclo de facturación.</p>
+
+      <h3>Propiedad intelectual</h3>
+      <p>Todos los contenidos de getvoltrix.es — textos, imágenes, logotipos, diseño — son propiedad de Voltrix o de sus proveedores y están protegidos por la legislación de propiedad intelectual. Queda prohibida su reproducción sin autorización expresa.</p>
+
+      <h3>Legislación aplicable</h3>
+      <p>Las presentes condiciones se rigen por la legislación española. Para cualquier controversia, las partes se someten a los juzgados y tribunales del domicilio del consumidor, conforme a la normativa de protección de consumidores.</p>
+
+      <h3>Resolución de litigios en línea</h3>
+      <p>Conforme al Reglamento UE 524/2013, los consumidores pueden acceder a la plataforma de resolución de litigios en línea de la Comisión Europea: <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a></p>
+    </div>
+  </div>
+
+  <!-- 6. CONTACTO -->
+  <div class="politica" id="contacto">
+    <div class="pol-eyebrow">Contacto</div>
+    <h2 class="pol-titulo">¿Tienes alguna duda?</h2>
+    <div class="pol-content">
+      <p>Para cualquier consulta relacionada con tu pedido, devolución, privacidad o cualquier otro asunto escríbenos a:</p>
+      <div class="highlight">
+        <p><strong>Email:</strong> <a href="mailto:hola@getvoltrix.es">hola@getvoltrix.es</a><br>
+        <strong>Horario:</strong> Respondemos en menos de 24 horas en días laborables.</p>
+      </div>
+      <p>Intentamos resolver todos los problemas de forma rápida y directa. Si hay algo que no ha ido bien, cuéntanoslo — queremos saberlo.</p>
+    </div>
+  </div>
+
+  <div class="pol-footer">
+    <div class="pol-footer-brand">
+      <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" class="pol-footer-logo-img">
+      <span>getvoltrix.es</span>
+    </div>
+    <div class="pol-footer-note">Políticas legales · Agosto 2026<br>Navarra, España</div>
+  </div>
+
+</div>
+</div>
+
+{% schema %}
+{ "name": "Políticas legales", "settings": [] }
+{% endschema %}

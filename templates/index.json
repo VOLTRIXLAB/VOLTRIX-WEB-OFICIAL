@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "hero": { "type": "hero" },
+    "proof": { "type": "proof-bar" },
+    "dolor": { "type": "el-problema" },
+    "hvco": { "type": "hvco" },
+    "metodo": { "type": "metodo-voltrix" },
+    "complexes": { "type": "ingredient-complexes" },
+    "guia": { "type": "guia" },
+    "autoridad": { "type": "autoridad" },
+    "why": { "type": "why-voltrix" },
+    "testimonials": { "type": "testimonials" },
+    "pricing": { "type": "pricing" },
+    "faq": { "type": "faq" }
+  },
+  "order": ["hero", "proof", "dolor", "hvco", "metodo", "complexes", "guia", "autoridad", "why", "testimonials", "pricing", "faq"]
+}

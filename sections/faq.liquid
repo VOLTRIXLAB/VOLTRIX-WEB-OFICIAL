@@ -1,0 +1,37 @@
+<section class="vx-faq section--dark page-width" id="faq">
+  <p class="vx-eyebrow text-center text-volt">Preguntas frecuentes</p>
+  <h2 class="font-display text-center">Antes de que lo preguntes</h2>
+  <div class="vx-faq__list">
+    <details class="vx-faq__item">
+      <summary>¿44,99€ no es caro para un suplemento?</summary>
+      <p>Son 1,50€ al día. Menos que tu café. Y cubre hidratación, energía, foco, creatina y recuperación en una sola toma.</p>
+    </details>
+    <details class="vx-faq__item">
+      <summary>¿La creatina necesita dosis de carga?</summary>
+      <p>No es necesaria. Con 3g diarios consistentes los efectos aparecen entre los días 14-28. La constancia importa más que la carga.</p>
+    </details>
+    <details class="vx-faq__item">
+      <summary>¿Puedo tomarlo si ya tomo café?</summary>
+      <p>Sí, con moderación. Voltrix lleva 100mg de cafeína natural. Si eres sensible, tómalo antes del mediodía.</p>
+    </details>
+    <details class="vx-faq__item">
+      <summary>¿Cuándo noto los resultados?</summary>
+      <p>Energía y foco desde el primer día. Hidratación mejorada en los primeros días. Creatina y KSM-66® a partir de las 2-4 semanas.</p>
+    </details>
+    <details class="vx-faq__item">
+      <summary>¿Tiene azúcar?</summary>
+      <p>No. Lleva eritritol y glucósidos de esteviol — sin impacto en glucosa. Apto para keto y dietas bajas en carbohidratos.</p>
+    </details>
+  </div>
+</section>
+<style>
+  .vx-faq { padding: 80px 24px; }
+  .vx-faq h2 { font-size: clamp(24px, 4vw, 32px); color: var(--color-white); margin: 8px 0 36px; }
+  .vx-faq__list { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+  .vx-faq__item { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius-sm); padding: 16px 20px; }
+  .vx-faq__item summary { font-weight: 700; font-size: 14px; color: var(--color-white); cursor: pointer; }
+  .vx-faq__item p { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 10px; line-height: 1.6; }
+</style>
+{% schema %}
+{ "name": "FAQ", "settings": [] }
+{% endschema %}

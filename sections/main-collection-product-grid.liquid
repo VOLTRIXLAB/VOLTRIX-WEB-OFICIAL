@@ -1,0 +1,15 @@
+<section class="vx-main-collection section--dark page-width">
+  <h1 class="font-display">{{ collection.title }}</h1>
+  <div class="vx-collection-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+    {% for product in collection.products %}
+      <a href="{{ product.url }}">
+        {{ product.featured_image | image_url: width: 400 | image_tag }}
+        <p>{{ product.title }}</p>
+        <p>{{ product.price | money }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+{% schema %}
+{ "name": "Grid de colección", "settings": [] }
+{% endschema %}

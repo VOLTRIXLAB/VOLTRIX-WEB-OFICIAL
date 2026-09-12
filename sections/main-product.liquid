@@ -1,0 +1,10 @@
+<section class="vx-main-product section--dark page-width">
+  <h1 class="font-display">{{ product.title }}</h1>
+  {{ product.description }}
+  {% form 'product', product %}
+    <input type="submit" value="Añadir al carrito" class="btn btn--volt">
+  {% endform %}
+</section>
+{% schema %}
+{ "name": "Producto principal", "settings": [] }
+{% endschema %}

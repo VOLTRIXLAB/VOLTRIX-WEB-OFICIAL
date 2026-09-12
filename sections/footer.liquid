@@ -1,0 +1,30 @@
+<footer class="vx-footer section--dark">
+  <div class="page-width vx-footer__inner">
+    <a href="{{ routes.root_url }}" class="vx-footer__logo">
+      <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="lazy" class="vx-footer__logo-img">
+    </a>
+    <ul class="vx-footer__links">
+      <li><a href="#formula">La fórmula</a></li>
+      <li><a href="#">Cómo tomarlo</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+      <li><a href="{{ pages.contacto.url | default: 'mailto:hola@getvoltrix.es' }}">Contacto</a></li>
+      <li><a href="{{ pages.politicas.url | default: '#' }}">Políticas</a></li>
+    </ul>
+    <div class="vx-footer__legal">
+      © {{ 'now' | date: '%Y' }} Voltrix · Todos los derechos reservados<br>
+      Los complementos alimenticios no sustituyen una dieta equilibrada.
+    </div>
+  </div>
+</footer>
+<style>
+  .vx-footer { padding: 48px 24px 32px; border-top: 1px solid #1E1E38; }
+  .vx-footer__inner { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .vx-footer__logo-img { height: 22px; width: auto; }
+  .vx-footer__links { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+  .vx-footer__links a { font-size: 13px; color: rgba(255,255,255,.5); }
+  .vx-footer__links a:hover { color: var(--color-volt); }
+  .vx-footer__legal { font-size: 11px; color: rgba(255,255,255,.25); line-height: 1.6; }
+</style>
+{% schema %}
+{ "name": "Footer", "settings": [] }
+{% endschema %}

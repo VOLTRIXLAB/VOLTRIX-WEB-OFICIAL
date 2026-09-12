@@ -1,0 +1,19 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Voltrix",
+    "theme_version": "1.0.0",
+    "theme_author": "Voltrix"
+  },
+  {
+    "name": "Ajustes globales",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "favicon_placeholder",
+        "label": "Placeholder",
+        "default": true
+      }
+    ]
+  }
+]

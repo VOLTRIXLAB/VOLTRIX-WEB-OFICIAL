@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "politicas-legales" }
+  },
+  "order": ["main"]
+}
