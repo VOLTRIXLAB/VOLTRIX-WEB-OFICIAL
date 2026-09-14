@@ -68,18 +68,23 @@
         </div>
       {% endif %}
     </div>
-    <div>
-      <div class="vx-price-row vx-reveal">
+
+    <div class="vx-price-card vx-reveal">
+      <div class="vx-price-glow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+
+      <div class="vx-price-row">
         <div class="vx-price-big">
           {% if vx_product %}{{ vx_product.price | money }}{% else %}44,99€{% endif %}
         </div>
         <div class="vx-price-unit">/ 30 porciones</div>
       </div>
-      <div class="vx-price-tag vx-reveal" data-vx-delay="1">
+      <div class="vx-price-tag">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         1,50€/día — menos que tu café de las 9
       </div>
-      <div class="vx-bullets vx-reveal" data-vx-delay="2">
+      <div class="vx-bullets">
         <div class="vx-bullet"><span class="vx-bcheck">✓</span> Hidratación real con electrolitos en dosis efectiva</div>
         <div class="vx-bullet"><span class="vx-bcheck">✓</span> Energía sin crash — teanina Suntheanine® + cafeína en ratio 2:1</div>
         <div class="vx-bullet"><span class="vx-bcheck">✓</span> 3g de creatina Creapure® — pureza certificada 99,9%</div>
@@ -88,7 +93,6 @@
       </div>
 
       <div class="vx-subscription-slot">
-
         {% content_for 'blocks' %}
       </div>
 
@@ -154,7 +158,7 @@
   .vx-cafe__titulo { font-size: 17px; font-weight: 800; color: var(--color-white); margin-bottom: 5px; line-height: 1.3; }
   .vx-cafe__desc { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.65; }
   .vx-cafe__desc strong { color: var(--color-white); font-weight: 700; }
-  .vx-prod__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .vx-prod__layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .vx-prod__visual { display: flex; align-items: center; justify-content: center; }
   .vx-prod__img { border-radius: 16px; width: 100%; }
   .vx-prod__placeholder {
@@ -187,8 +191,21 @@
   .vx-gallery__thumb.is-active { opacity: 1; border-color: var(--color-volt); }
   .vx-gallery__thumb:hover { opacity: .85; }
 
+  /* ── Tarjeta de precio, estilo "web animada" ── */
+  .vx-price-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.12); border-radius: 20px;
+    padding: 34px 32px;
+  }
+  .vx-price-glow {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,241,53,.18), transparent 70%);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 18px;
+  }
+  .vx-price-glow svg { width: 28px; height: 28px; color: var(--color-volt); filter: drop-shadow(0 0 6px rgba(200,241,53,.6)); }
+
   .vx-price-row { display: flex; align-items: baseline; gap: 9px; margin-bottom: 5px; }
-  .vx-price-big { font-family: var(--font-display); font-size: 50px; color: var(--color-white); line-height: 1; }
+  .vx-price-big { font-family: var(--font-display); font-size: 46px; color: var(--color-white); line-height: 1; }
   .vx-price-unit { font-size: 14px; color: rgba(255,255,255,.3); }
   .vx-price-tag { display: inline-flex; align-items: center; gap: 7px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); border-radius: 8px; padding: 6px 13px; margin: 12px 0 22px; font-size: 12px; font-weight: 700; color: var(--color-volt); }
   .vx-bullets { display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; }
@@ -196,7 +213,7 @@
   .vx-subscription-slot:not(:empty) { margin-bottom: 20px; }
   .vx-bullet { display: flex; align-items: center; gap: 11px; font-size: 14px; color: rgba(255,255,255,.55); font-weight: 500; }
   .vx-bcheck { width: 19px; height: 19px; border-radius: 5px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--color-volt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-  .vx-btn-add { display: block; text-align: center; width: 100%; max-width: 420px; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; position: relative; animation: vx-btn-pulse 2.6s ease-in-out infinite; }
+  .vx-btn-add { display: block; text-align: center; width: 100%; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; position: relative; animation: vx-btn-pulse 2.6s ease-in-out infinite; }
   .vx-btn-add:disabled { opacity: .5; cursor: not-allowed; animation: none; }
   @keyframes vx-btn-pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(200,241,53,.45); }
@@ -213,8 +230,8 @@
   }
   .vx-trust__item svg { color: var(--color-volt); flex-shrink: 0; }
   @media (max-width: 480px) { .vx-trust { grid-template-columns: 1fr; } }
-  .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); }
-  .vx-garantia svg { color: var(--color-volt); }
+  .vx-garantia { display: flex; align-items: center; gap: 6px; font-size: 12px; color: rgba(255,255,255,.3); justify-content: center; text-align: center; }
+  .vx-garantia svg { color: var(--color-volt); flex-shrink: 0; }
 
   .vx-sub-detail { border: 1px solid #28284A; border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; }
   .vx-sub-detail summary {
@@ -276,121 +293,122 @@
   .appstle_subscription_radio_wrapper input[type="radio"] {
     accent-color: var(--color-volt) !important;
   }
-  @media (max-width: 700px) { .vx-prod__layout { grid-template-columns: 1fr; } }
+  @media (max-width: 700px) {
+    .vx-prod__layout { grid-template-columns: 1fr; }
+    .vx-price-card { padding: 26px 22px; }
+  }
 </style>
 <script>
-  (function () {
-    var galleries = document.querySelectorAll('[data-vx-gallery]');
-    galleries.forEach(function (gallery) {
-      var slides = gallery.querySelectorAll('[data-vx-slide]');
-      var thumbs = gallery.querySelectorAll('[data-vx-thumb]');
-      var prevBtn = gallery.querySelector('[data-vx-prev]');
-      var nextBtn = gallery.querySelector('[data-vx-next]');
-      var total = slides.length;
-      var current = 0;
+(function () {
+  var galleries = document.querySelectorAll('[data-vx-gallery]');
+  galleries.forEach(function (gallery) {
+    var slides = gallery.querySelectorAll('[data-vx-slide]');
+    var thumbs = gallery.querySelectorAll('[data-vx-thumb]');
+    var prevBtn = gallery.querySelector('[data-vx-prev]');
+    var nextBtn = gallery.querySelector('[data-vx-next]');
+    var total = slides.length;
+    var current = 0;
 
-      function goTo(index) {
-        current = (index + total) % total;
-        slides.forEach(function (s) { s.classList.remove('is-active'); });
-        thumbs.forEach(function (t) { t.classList.remove('is-active'); });
-        slides[current].classList.add('is-active');
-        if (thumbs[current]) thumbs[current].classList.add('is-active');
-      }
+    function goTo(index) {
+      current = (index + total) % total;
+      slides.forEach(function (s) { s.classList.remove('is-active'); });
+      thumbs.forEach(function (t) { t.classList.remove('is-active'); });
+      slides[current].classList.add('is-active');
+      if (thumbs[current]) thumbs[current].classList.add('is-active');
+    }
 
-      thumbs.forEach(function (thumb, i) {
-        thumb.addEventListener('click', function () { goTo(i); });
-      });
-      if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
-      if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    thumbs.forEach(function (thumb, i) {
+      thumb.addEventListener('click', function () { goTo(i); });
     });
-  })();
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(current + 1); });
+  });
+})();
 </script>
 {% if vx_product %}
 <script>
-  (function () {
-    var btn = document.querySelector('[data-vx-buy-btn]');
-    if (!btn) return;
+(function () {
+  var btn = document.querySelector('[data-vx-buy-btn]');
+  if (!btn) return;
 
-    var labelEl = btn.querySelector('[data-vx-btn-label]');
-    var priceEl = btn.querySelector('[data-vx-btn-price]');
-    var compareEl = btn.querySelector('[data-vx-btn-compare]');
-    var form = btn.closest('form');
-    var productHandle = {{ vx_product.handle | json }};
-    var productData = null;
+  var labelEl = btn.querySelector('[data-vx-btn-label]');
+  var priceEl = btn.querySelector('[data-vx-btn-price]');
+  var compareEl = btn.querySelector('[data-vx-btn-compare]');
+  var form = btn.closest('form');
+  var productHandle = {{ vx_product.handle | json }};
+  var productData = null;
 
-    function formatMoney(cents) {
-      return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
+  function formatMoney(cents) {
+    return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
+  }
+
+  function updateButton(sellingPlanId) {
+    if (!productData) return;
+
+    if (!sellingPlanId) {
+      var variant = productData.variants[0];
+      labelEl.textContent = 'Empezar con Voltrix';
+      priceEl.textContent = formatMoney(variant.price);
+      if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+        compareEl.textContent = formatMoney(variant.compare_at_price);
+        compareEl.style.display = '';
+      } else {
+        compareEl.style.display = 'none';
+      }
+      return;
     }
 
-    function updateButton(sellingPlanId) {
-      if (!productData) return;
+    var plan = null;
+    (productData.selling_plan_groups || []).forEach(function (group) {
+      group.selling_plans.forEach(function (p) {
+        if (String(p.id) === String(sellingPlanId)) plan = p;
+      });
+    });
 
-      if (!sellingPlanId) {
-        // Compra única
-        var variant = productData.variants[0];
-        labelEl.textContent = 'Empezar con Voltrix';
-        priceEl.textContent = formatMoney(variant.price);
-        if (variant.compare_at_price && variant.compare_at_price > variant.price) {
-          compareEl.textContent = formatMoney(variant.compare_at_price);
+    if (plan) {
+      var variant = productData.variants[0];
+      var allocation = (variant.selling_plan_allocations || []).find(function (a) {
+        return String(a.selling_plan_id) === String(sellingPlanId);
+      });
+      labelEl.textContent = 'Suscribirme a Voltrix';
+      if (allocation) {
+        priceEl.textContent = formatMoney(allocation.price);
+        if (allocation.compare_at_price && allocation.compare_at_price > allocation.price) {
+          compareEl.textContent = formatMoney(allocation.compare_at_price);
           compareEl.style.display = '';
         } else {
           compareEl.style.display = 'none';
         }
-        return;
-      }
-
-      // Suscripción: busca el plan seleccionado en los grupos de venta
-      var plan = null;
-      (productData.selling_plan_groups || []).forEach(function (group) {
-        group.selling_plans.forEach(function (p) {
-          if (String(p.id) === String(sellingPlanId)) plan = p;
-        });
-      });
-
-      if (plan) {
-        var variant = productData.variants[0];
-        var allocation = (variant.selling_plan_allocations || []).find(function (a) {
-          return String(a.selling_plan_id) === String(sellingPlanId);
-        });
-        labelEl.textContent = 'Suscribirme a Voltrix';
-        if (allocation) {
-          priceEl.textContent = formatMoney(allocation.price);
-          if (allocation.compare_at_price && allocation.compare_at_price > allocation.price) {
-            compareEl.textContent = formatMoney(allocation.compare_at_price);
-            compareEl.style.display = '';
-          } else {
-            compareEl.style.display = 'none';
-          }
-        }
       }
     }
+  }
 
-    fetch('/products/' + productHandle + '.js')
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        productData = data;
-      })
-      .catch(function () {});
+  fetch('/products/' + productHandle + '.js')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      productData = data;
+    })
+    .catch(function () {});
 
-    function syncFormSellingPlan(sellingPlanId) {
-      if (!form) return;
-      var hidden = form.querySelector('input[name="selling_plan"]');
-      if (!hidden) {
-        hidden = document.createElement('input');
-        hidden.type = 'hidden';
-        hidden.name = 'selling_plan';
-        form.appendChild(hidden);
-      }
-      hidden.value = sellingPlanId || '';
+  function syncFormSellingPlan(sellingPlanId) {
+    if (!form) return;
+    var hidden = form.querySelector('input[name="selling_plan"]');
+    if (!hidden) {
+      hidden = document.createElement('input');
+      hidden.type = 'hidden';
+      hidden.name = 'selling_plan';
+      form.appendChild(hidden);
     }
+    hidden.value = sellingPlanId || '';
+  }
 
-    document.addEventListener('change', function (e) {
-      var target = e.target;
-      if (!target || target.name !== 'selling_plan') return;
-      syncFormSellingPlan(target.value);
-      updateButton(target.value);
-    });
-  })();
+  document.addEventListener('change', function (e) {
+    var target = e.target;
+    if (!target || target.name !== 'selling_plan') return;
+    syncFormSellingPlan(target.value);
+    updateButton(target.value);
+  });
+})();
 </script>
 {% endif %}
 
