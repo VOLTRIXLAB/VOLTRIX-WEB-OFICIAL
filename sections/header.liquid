@@ -1,196 +1,268 @@
+{% assign vx_sticky_product = all_products['voltrix-daily-performance-formula-30-porciones'] %}
 <header class="vx-header section--dark">
-  <div class="page-width vx-header__inner">
-    <a href="{{ routes.root_url }}" class="vx-header__logo">
-      <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="eager" class="vx-header__logo-img">
-    </a>
-    <nav class="vx-header__nav">
-      <a href="{{ routes.root_url }}#formula">La fórmula</a>
-      <a href="{{ routes.root_url }}#porqué">Por qué Voltrix</a>
-      <a href="{{ routes.root_url }}#producto">El producto</a>
-      <a href="{{ routes.root_url }}#faq">Preguntas</a>
-      <a href="/apps/subscriptions">Mi suscripción</a>
-    </nav>
-    <div class="vx-header__actions">
-      <a
-        href="{% if cart.item_count > 0 %}{{ routes.cart_url }}{% else %}{{ routes.root_url }}#producto{% endif %}"
-        class="vx-header__cta"
-        data-vx-cart-cta
-      >
-        {% if cart.item_count > 0 %}
-          Carrito — {{ cart.total_price | money }}
-        {% else %}
-          Comprar — 44,99€
-        {% endif %}
-      </a>
+<div class="page-width vx-header__inner">
+<a href="{{ routes.root_url }}" class="vx-header__logo">
+<img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="eager" class="vx-header__logo-img">
+</a>
+<nav class="vx-header__nav">
+<a href="{{ routes.root_url }}#formula">La fórmula</a>
+<a href="{{ routes.root_url }}#porqué">Por qué Voltrix</a>
+<a href="{{ routes.root_url }}#producto">El producto</a>
+<a href="{{ routes.root_url }}#faq">Preguntas</a>
+<a href="/apps/subscriptions">Mi suscripción</a>
+</nav>
+<div class="vx-header__actions">
+<a
+href="{% if cart.item_count > 0 %}{{ routes.cart_url }}{% else %}{{ routes.root_url }}#producto{% endif %}"
+class="vx-header__cta"
+data-vx-cart-cta
+>
+{% if cart.item_count > 0 %}
+Carrito — {{ cart.total_price | money }}
+{% else %}
+Comprar — 44,99€
+{% endif %}
+</a>
 
-      <a href="{{ routes.cart_url }}" class="vx-header__cart-icon" aria-label="Ver carrito">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        <span class="vx-header__cart-badge" data-vx-cart-badge {% if cart.item_count == 0 %}style="display:none;"{% endif %}>{{ cart.item_count }}</span>
-      </a>
+<a href="{{ routes.cart_url }}" class="vx-header__cart-icon" aria-label="Ver carrito">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+<span class="vx-header__cart-badge" data-vx-cart-badge {% if cart.item_count == 0 %}style="display:none;"{% endif %}>{{ cart.item_count }}</span>
+</a>
 
-      <button type="button" class="vx-header__burger" aria-label="Abrir menú" aria-expanded="false" data-vx-menu-toggle>
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
+<button type="button" class="vx-header__burger" aria-label="Abrir menú" aria-expanded="false" data-vx-menu-toggle>
+<span></span><span></span><span></span>
+</button>
+</div>
+</div>
 
-  <div class="vx-header__mobile" data-vx-mobile-menu>
-    <a href="{{ routes.root_url }}#formula" data-vx-menu-link>La fórmula</a>
-    <a href="{{ routes.root_url }}#porqué" data-vx-menu-link>Por qué Voltrix</a>
-    <a href="{{ routes.root_url }}#producto" data-vx-menu-link>El producto</a>
-    <a href="{{ routes.root_url }}#faq" data-vx-menu-link>Preguntas</a>
-    <a href="/apps/subscriptions" data-vx-menu-link>Mi suscripción</a>
-    <a href="{{ routes.root_url }}#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 44,99€</a>
-  </div>
+<div class="vx-header__mobile" data-vx-mobile-menu>
+<a href="{{ routes.root_url }}#formula" data-vx-menu-link>La fórmula</a>
+<a href="{{ routes.root_url }}#porqué" data-vx-menu-link>Por qué Voltrix</a>
+<a href="{{ routes.root_url }}#producto" data-vx-menu-link>El producto</a>
+<a href="{{ routes.root_url }}#faq" data-vx-menu-link>Preguntas</a>
+<a href="/apps/subscriptions" data-vx-menu-link>Mi suscripción</a>
+<a href="{{ routes.root_url }}#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 44,99€</a>
+</div>
 </header>
 
+{% if vx_sticky_product and routes.root_url == request.path %}
+<div class="vx-stickybar" id="vxStickybar" data-vx-stickybar>
+  <img
+    src="{{ vx_sticky_product.featured_image | image_url: width: 120 }}"
+    alt="{{ vx_sticky_product.title }}"
+    class="vx-stickybar__img"
+    loading="lazy"
+  >
+  <div class="vx-stickybar__info">
+    <div class="vx-stickybar__name">Voltrix Daily Performance Formula</div>
+    <div class="vx-stickybar__price">{{ vx_sticky_product.price | money }} <span>/ 30 porciones</span></div>
+  </div>
+  <a href="{{ routes.root_url }}#producto" class="vx-stickybar__cta">Comprar →</a>
+</div>
+{% endif %}
+
 <style>
-  .vx-header__inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    gap: 20px;
-    position: relative;
-    z-index: 20;
-  }
-  .vx-header__logo { display: flex; align-items: center; flex-shrink: 0; }
-  .vx-header__logo-img { height: 26px; width: auto; }
+.vx-header__inner {
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 20px 24px;
+gap: 20px;
+position: relative;
+z-index: 20;
+}
+.vx-header__logo { display: flex; align-items: center; flex-shrink: 0; }
+.vx-header__logo-img { height: 26px; width: auto; }
 
-  .vx-header__nav { display: flex; gap: 28px; }
-  .vx-header__nav a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.55); }
-  .vx-header__nav a:hover { color: var(--color-white); }
+.vx-header__nav { display: flex; gap: 28px; }
+.vx-header__nav a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.55); }
+.vx-header__nav a:hover { color: var(--color-white); }
 
-  .vx-header__actions { display: flex; align-items: center; gap: 14px; }
-  .vx-header__cta {
-    display: inline-flex; align-items: center;
-    background: var(--color-volt); color: var(--color-ink);
-    font-size: 13px; font-weight: 800; padding: 9px 18px;
-    border-radius: 8px; white-space: nowrap;
-  }
+.vx-header__actions { display: flex; align-items: center; gap: 14px; }
+.vx-header__cta {
+display: inline-flex; align-items: center;
+background: var(--color-volt); color: var(--color-ink);
+font-size: 13px; font-weight: 800; padding: 9px 18px;
+border-radius: 8px; white-space: nowrap;
+}
 
-  /* ── Icono de carrito (oculto en desktop, visible en móvil) ── */
-  .vx-header__cart-icon {
-    display: none;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    width: 36px; height: 36px;
-    color: var(--color-white);
-    flex-shrink: 0;
-  }
-  .vx-header__cart-badge {
-    position: absolute; top: -4px; right: -6px;
-    background: var(--color-volt); color: var(--color-ink);
-    font-size: 10px; font-weight: 800; line-height: 1;
-    min-width: 16px; height: 16px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    padding: 0 3px;
-  }
+/* ── Icono de carrito (oculto en desktop, visible en móvil) ── */
+.vx-header__cart-icon {
+display: none;
+position: relative;
+align-items: center;
+justify-content: center;
+width: 36px; height: 36px;
+color: var(--color-white);
+flex-shrink: 0;
+}
+.vx-header__cart-badge {
+position: absolute; top: -4px; right: -6px;
+background: var(--color-volt); color: var(--color-ink);
+font-size: 10px; font-weight: 800; line-height: 1;
+min-width: 16px; height: 16px; border-radius: 8px;
+display: flex; align-items: center; justify-content: center;
+padding: 0 3px;
+}
 
-  /* ── Botón hamburguesa (oculto en desktop) ── */
-  .vx-header__burger {
-    display: none; flex-direction: column; justify-content: center; gap: 5px;
-    width: 32px; height: 32px; background: none; border: none; cursor: pointer; padding: 0;
-  }
-  .vx-header__burger span {
-    display: block; width: 100%; height: 2px; background: var(--color-white);
-    border-radius: 2px; transition: transform .25s ease, opacity .25s ease;
-  }
-  .vx-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .vx-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .vx-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+/* ── Botón hamburguesa (oculto en desktop) ── */
+.vx-header__burger {
+display: none; flex-direction: column; justify-content: center; gap: 5px;
+width: 32px; height: 32px; background: none; border: none; cursor: pointer; padding: 0;
+}
+.vx-header__burger span {
+display: block; width: 100%; height: 2px; background: var(--color-white);
+border-radius: 2px; transition: transform .25s ease, opacity .25s ease;
+}
+.vx-header__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.vx-header__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.vx-header__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  /* ── Panel de menú móvil (oculto por defecto) ── */
-  .vx-header__mobile {
-    display: none;
-    flex-direction: column;
-    gap: 4px;
-    padding: 8px 24px 24px;
-    background: var(--color-ink);
-    border-top: 1px solid #1E1E38;
-  }
-  .vx-header__mobile a {
-    padding: 14px 4px;
-    font-size: 15px;
-    font-weight: 600;
-    color: rgba(255,255,255,.75);
-    border-bottom: 1px solid #1E1E38;
-  }
-  .vx-header__mobile a:last-child { border-bottom: none; }
-  .vx-header__cta--mobile {
-    display: block; text-align: center; margin-top: 12px;
-    background: var(--color-volt); color: var(--color-ink); border-radius: 10px; border-bottom: none;
-  }
+/* ── Panel de menú móvil (oculto por defecto) ── */
+.vx-header__mobile {
+display: none;
+flex-direction: column;
+gap: 4px;
+padding: 8px 24px 24px;
+background: var(--color-ink);
+border-top: 1px solid #1E1E38;
+}
+.vx-header__mobile a {
+padding: 14px 4px;
+font-size: 15px;
+font-weight: 600;
+color: rgba(255,255,255,.75);
+border-bottom: 1px solid #1E1E38;
+}
+.vx-header__mobile a:last-child { border-bottom: none; }
+.vx-header__cta--mobile {
+display: block; text-align: center; margin-top: 12px;
+background: var(--color-volt); color: var(--color-ink); border-radius: 10px; border-bottom: none;
+}
 
-  @media (max-width: 749px) {
-    .vx-header__nav { display: none; }
-    .vx-header__actions .vx-header__cta { display: none; }
-    .vx-header__cart-icon { display: flex; }
-    .vx-header__burger { display: flex; }
-    .vx-header__mobile.is-open { display: flex; }
-  }
+@media (max-width: 749px) {
+.vx-header__nav { display: none; }
+.vx-header__actions .vx-header__cta { display: none; }
+.vx-header__cart-icon { display: flex; }
+.vx-header__burger { display: flex; }
+.vx-header__mobile.is-open { display: flex; }
+}
+
+/* ── Barra fija de producto (hasta llegar a #producto) ── */
+.vx-stickybar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+  display: flex; align-items: center; gap: 14px;
+  background: #0F0F24; border-top: 1px solid #1E1E38;
+  padding: 12px 18px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 -8px 24px rgba(0,0,0,.35);
+}
+.vx-stickybar.is-visible { transform: translateY(0); }
+.vx-stickybar__img { width: 42px; height: 42px; object-fit: contain; border-radius: 8px; background: #0A0A1A; flex-shrink: 0; }
+.vx-stickybar__info { flex: 1; min-width: 0; }
+.vx-stickybar__name { font-size: 12.5px; font-weight: 700; color: var(--color-white); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vx-stickybar__price { font-size: 12px; color: rgba(255,255,255,.5); }
+.vx-stickybar__price span { color: rgba(255,255,255,.3); }
+.vx-stickybar__cta {
+  flex-shrink: 0; background: var(--color-volt); color: var(--color-ink);
+  font-size: 13px; font-weight: 800; padding: 10px 18px; border-radius: 10px; white-space: nowrap;
+}
+@media (min-width: 750px) {
+  .vx-stickybar { max-width: 480px; left: auto; right: 24px; bottom: 24px; border-radius: 16px; border: 1px solid #1E1E38; }
+}
 </style>
 
 <script>
-  (function () {
-    var btn = document.querySelector('[data-vx-menu-toggle]');
-    var menu = document.querySelector('[data-vx-mobile-menu]');
-    if (btn && menu) {
-      function closeMenu() {
-        menu.classList.remove('is-open');
-        btn.setAttribute('aria-expanded', 'false');
-      }
-      function toggleMenu() {
-        var isOpen = menu.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      }
-      btn.addEventListener('click', toggleMenu);
-      menu.querySelectorAll('[data-vx-menu-link]').forEach(function (link) {
-        link.addEventListener('click', closeMenu);
-      });
+(function () {
+var btn = document.querySelector('[data-vx-menu-toggle]');
+var menu = document.querySelector('[data-vx-mobile-menu]');
+if (btn && menu) {
+function closeMenu() {
+menu.classList.remove('is-open');
+btn.setAttribute('aria-expanded', 'false');
+}
+function toggleMenu() {
+var isOpen = menu.classList.toggle('is-open');
+btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+btn.addEventListener('click', toggleMenu);
+menu.querySelectorAll('[data-vx-menu-link]').forEach(function (link) {
+link.addEventListener('click', closeMenu);
+});
+}
+
+// ── Sincroniza el indicador de carrito sin recargar, cuando otras partes
+// de la web (carrito, botón de compra) avisan de un cambio ──
+var cta = document.querySelector('[data-vx-cart-cta]');
+var badge = document.querySelector('[data-vx-cart-badge]');
+var cartUrl = {{ routes.cart_url | json }};
+var productAnchor = {{ routes.root_url | append: '#producto' | json }};
+
+function formatMoney(cents) {
+return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
+}
+
+document.addEventListener('vx:cart:updated', function (e) {
+var cart = e.detail;
+if (!cart) return;
+
+if (badge) {
+if (cart.item_count > 0) {
+badge.textContent = cart.item_count;
+badge.style.display = '';
+} else {
+badge.style.display = 'none';
+}
+}
+
+if (cta) {
+if (cart.item_count > 0) {
+cta.textContent = 'Carrito — ' + formatMoney(cart.total_price);
+cta.href = cartUrl;
+} else {
+cta.textContent = 'Comprar — 44,99€';
+cta.href = productAnchor;
+}
+}
+});
+
+// ── Barra fija: aparece al pasar el hero, desaparece al llegar al producto ──
+var stickybar = document.getElementById('vxStickybar');
+if (stickybar) {
+  var hero = document.querySelector('.vx-hero');
+  var producto = document.getElementById('producto');
+  var pastHero = false;
+  var atProducto = false;
+
+  function refreshBar() {
+    if (pastHero && !atProducto) {
+      stickybar.classList.add('is-visible');
+    } else {
+      stickybar.classList.remove('is-visible');
     }
+  }
 
-    // ── Sincroniza el indicador de carrito sin recargar, cuando otras partes
-    // de la web (carrito, botón de compra) avisan de un cambio ──
-    var cta = document.querySelector('[data-vx-cart-cta]');
-    var badge = document.querySelector('[data-vx-cart-badge]');
-    var cartUrl = {{ routes.cart_url | json }};
-    var productAnchor = {{ routes.root_url | append: '#producto' | json }};
+  if (hero) {
+    new IntersectionObserver(function (entries) {
+      pastHero = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+      refreshBar();
+    }, { threshold: 0 }).observe(hero);
+  }
 
-    function formatMoney(cents) {
-      return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
-    }
-
-    document.addEventListener('vx:cart:updated', function (e) {
-      var cart = e.detail;
-      if (!cart) return;
-
-      if (badge) {
-        if (cart.item_count > 0) {
-          badge.textContent = cart.item_count;
-          badge.style.display = '';
-        } else {
-          badge.style.display = 'none';
-        }
-      }
-
-      if (cta) {
-        if (cart.item_count > 0) {
-          cta.textContent = 'Carrito — ' + formatMoney(cart.total_price);
-          cta.href = cartUrl;
-        } else {
-          cta.textContent = 'Comprar — 44,99€';
-          cta.href = productAnchor;
-        }
-      }
-    });
-  })();
+  if (producto) {
+    new IntersectionObserver(function (entries) {
+      atProducto = entries[0].isIntersecting;
+      refreshBar();
+    }, { threshold: 0.15 }).observe(producto);
+  }
+}
+})();
 </script>
 
 {% schema %}
 {
-  "name": "Header",
-  "settings": []
+"name": "Header",
+"settings": []
 }
 {% endschema %}
