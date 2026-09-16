@@ -228,8 +228,13 @@ cta.href = productAnchor;
 });
 
 // ── Barra fija: aparece al pasar el hero, desaparece al llegar al producto ──
-var stickybar = document.getElementById('vxStickybar');
-if (stickybar) {
+// (en DOMContentLoaded porque el header se renderiza antes que el resto
+// de la página, así que .vx-hero y #producto aún no existirían si
+// lo ejecutáramos de forma síncrona aquí arriba)
+document.addEventListener('DOMContentLoaded', function () {
+  var stickybar = document.getElementById('vxStickybar');
+  if (!stickybar) return;
+
   var hero = document.querySelector('.vx-hero');
   var producto = document.getElementById('producto');
   var pastHero = false;
@@ -256,7 +261,7 @@ if (stickybar) {
       refreshBar();
     }, { threshold: 0.15 }).observe(producto);
   }
-}
+});
 })();
 </script>
 
