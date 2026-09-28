@@ -1,33 +1,75 @@
 <section class="vx-hero section--dark">
-  <div class="page-width vx-hero__inner">
-    <div class="vx-hero__badge vx-reveal">VOLTRIX DAILY PERFORMANCE FORMULA</div>
-    <h1 class="font-display">
-      <span class="vx-rise-line"><span>No es falta de disciplina.</span></span>
-      <span class="vx-rise-line"><span>Es <em>química mal resuelta.</em></span></span>
-    </h1>
-    <p class="vx-hero__sub vx-reveal" data-vx-delay="2">Haces todo bien y aun así rindes por debajo de lo que puedes. El Método Voltrix resuelve la química: hidratación, foco, rendimiento y recuperación en una sola toma.</p>
-    <p class="vx-hero__meta vx-reveal" data-vx-delay="3">255g · 30 tomas · 44,99€ · Menos de 1,50€ al día</p>
-    <a href="#producto" class="vx-hero__cta vx-reveal" data-vx-delay="4">Empieza con Voltrix →</a>
-  </div>
+<div class="page-width vx-hero__inner">
+<div class="vx-hero__badge vx-reveal">VOLTRIX DAILY PERFORMANCE FORMULA</div>
+<h1 class="font-display">
+<span class="vx-rise-line"><span>No es falta de disciplina.</span></span>
+<span class="vx-rise-line"><span>Es <em>química mal resuelta.</em></span></span>
+</h1>
+<p class="vx-hero__sub vx-reveal" data-vx-delay="2">Haces todo bien y aun así rindes por debajo de lo que puedes. El Método Voltrix resuelve la química: hidratación, foco, rendimiento y recuperación en una sola toma.</p>
+<p class="vx-hero__meta vx-reveal" data-vx-delay="3">255g · 30 tomas · 44,99€ · Menos de 1,50€ al día</p>
+<a href="#producto" class="vx-hero__cta vx-reveal" data-vx-delay="4">Empieza con Voltrix →</a>
+</div>
 </section>
 <style>
-  .vx-hero { padding: 80px 24px 64px; text-align: center; }
-  .vx-hero__inner { max-width: 720px; margin: 0 auto; }
-  .vx-hero__badge {
-    display: inline-block; background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.25);
-    border-radius: 999px; padding: 7px 18px; font-size: 11px; font-weight: 800; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--color-volt); margin-bottom: 28px;
-  }
-  .vx-hero h1 { font-size: clamp(32px, 5.5vw, 54px); line-height: 1.15; color: var(--color-white); margin-bottom: 22px; }
-  .vx-hero h1 em { font-style: italic; color: var(--color-volt); }
-  .vx-hero__sub { font-size: 17px; color: rgba(255,255,255,.6); line-height: 1.6; max-width: 560px; margin: 0 auto 20px; }
-  .vx-hero__meta { font-size: 13px; color: rgba(255,255,255,.35); margin-bottom: 32px; }
-  .vx-hero__cta {
-    display: inline-flex; align-items: center; justify-content: center;
-    background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body);
-    font-size: 15px; font-weight: 800; padding: 16px 32px; border-radius: 12px;
-  }
+.vx-hero { padding: 80px 24px 64px; text-align: center; }
+.vx-hero__inner { max-width: 720px; margin: 0 auto; }
+.vx-hero__badge {
+display: inline-block; background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.25);
+border-radius: 999px; padding: 7px 18px; font-size: 11px; font-weight: 800; letter-spacing: 2px;
+text-transform: uppercase; color: var(--color-volt); margin-bottom: 28px;
+}
+.vx-hero h1 { font-size: clamp(32px, 5.5vw, 54px); line-height: 1.15; color: var(--color-white); margin-bottom: 22px; }
+.vx-hero h1 em { font-style: italic; color: var(--color-volt); }
+.vx-hero__sub { font-size: 17px; color: rgba(255,255,255,.6); line-height: 1.6; max-width: 560px; margin: 0 auto 20px; }
+.vx-hero__meta { font-size: 13px; color: rgba(255,255,255,.35); margin-bottom: 32px; }
+.vx-hero__cta {
+display: inline-flex; align-items: center; justify-content: center;
+background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body);
+font-size: 15px; font-weight: 800; padding: 16px 32px; border-radius: 12px;
+}
 </style>
+<script>
+(function () {
+  // Variantes de titular según el ángulo del anuncio: getvoltrix.es/?a=cafe
+  var A = {
+    cafe: {
+      l1: 'El bajón de las 3 no es tu ritmo.',
+      pre: 'Es ', em: 'química.',
+      sub: 'Cafeína sola, sin nada que sostenga la curva, y la tarde se cae. Voltrix la combina con L-teanina Suntheanine® en ratio 2:1: energía sostenida, sin el bajón.'
+    },
+    gym: {
+      l1: 'Llevas semanas con los mismos pesos.',
+      pre: 'No es ', em: 'la rutina.',
+      sub: 'Sin la dosis de creatina que funciona, cada sesión rinde por debajo de tu potencial. Voltrix lleva 3g de Creapure®: la dosis real, no la simbólica.'
+    },
+    sed: {
+      l1: 'Bebes 2 litros al día y sigues con sed.',
+      pre: 'Esto es ', em: 'lo que pasa.',
+      sub: 'El agua sola no entra en tus células sin electrolitos. Sodio, potasio y magnesio bisglicinato, en dosis efectiva.'
+    },
+    botes: {
+      l1: '4 botes en el armario que no tomas.',
+      pre: 'Uno que ', em: 'sí tomarías.',
+      sub: 'Electrolitos, creatina, energía sostenida y adaptógeno en una sola toma al día. El mejor suplemento es el que realmente tomas.'
+    }
+  };
+
+  var key = new URLSearchParams(location.search).get('a');
+  var v = key && Object.prototype.hasOwnProperty.call(A, key) ? A[key] : null;
+  if (!v) return;
+
+  var lines = document.querySelectorAll('.vx-hero h1 .vx-rise-line span');
+  var sub = document.querySelector('.vx-hero__sub');
+  if (lines.length < 2) return; // si la estructura cambia, se queda el titular original
+
+  lines[0].textContent = v.l1;
+  lines[1].textContent = v.pre;
+  var em = document.createElement('em');
+  em.textContent = v.em;
+  lines[1].appendChild(em);
+  if (sub) sub.textContent = v.sub;
+})();
+</script>
 {% schema %}
 { "name": "Hero", "settings": [] }
 {% endschema %}
