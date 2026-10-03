@@ -47,17 +47,44 @@ Comprar — 44,99€
 
 {% if vx_sticky_product and routes.root_url == request.path %}
 <div class="vx-stickybar" id="vxStickybar" data-vx-stickybar>
-  <img
-    src="{{ vx_sticky_product.featured_image | image_url: width: 120 }}"
-    alt="{{ vx_sticky_product.title }}"
-    class="vx-stickybar__img"
-    loading="lazy"
-  >
-  <div class="vx-stickybar__info">
-    <div class="vx-stickybar__name">Voltrix Daily Performance Formula</div>
-    <div class="vx-stickybar__price">{{ vx_sticky_product.price | money }} <span>/ 30 porciones</span></div>
+<img
+src="{{ vx_sticky_product.featured_image | image_url: width: 120 }}"
+alt="{{ vx_sticky_product.title }}"
+class="vx-stickybar__img"
+loading="lazy"
+>
+<div class="vx-stickybar__info">
+<div class="vx-stickybar__name">Voltrix Daily Performance Formula</div>
+<div class="vx-stickybar__price">{{ vx_sticky_product.price | money }} <span>/ 30 porciones</span></div>
+</div>
+<a href="{{ routes.root_url }}#producto" class="vx-stickybar__cta">Comprar →</a>
+</div>
+{% endif %}
+
+{% if routes.root_url == request.path %}
+<div class="vx-popup" id="vxPopup" data-vx-popup aria-hidden="true">
+  <div class="vx-popup__overlay" data-vx-popup-close></div>
+  <div class="vx-popup__box" role="dialog" aria-modal="true" aria-labelledby="vxPopupTitle">
+    <button type="button" class="vx-popup__x" data-vx-popup-close aria-label="Cerrar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="vx-popup__badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      Antes de irte
+    </div>
+    <h3 id="vxPopupTitle" class="font-display">Llévate un 10% en tu primer pedido</h3>
+    <p class="vx-popup__sub">Déjanos tu email y te lo mandamos ahora mismo. Sin spam, cancela cuando quieras.</p>
+
+    <form data-vx-popup-form class="vx-popup__form">
+      <input type="email" name="email" placeholder="tu@email.com" required data-vx-popup-email class="vx-popup__input">
+      <button type="submit" class="vx-popup__submit" data-vx-popup-submit>Quiero mi 10%</button>
+    </form>
+    <p class="vx-popup__error" data-vx-popup-error style="display:none;">Ha ocurrido un error. Inténtalo de nuevo.</p>
+    <p class="vx-popup__success" data-vx-popup-success style="display:none;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      Listo — revisa tu email para el código.
+    </p>
   </div>
-  <a href="{{ routes.root_url }}#producto" class="vx-stickybar__cta">Comprar →</a>
 </div>
 {% endif %}
 
@@ -150,13 +177,13 @@ background: var(--color-volt); color: var(--color-ink); border-radius: 10px; bor
 
 /* ── Barra fija de producto (hasta llegar a #producto) ── */
 .vx-stickybar {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-  display: flex; align-items: center; gap: 14px;
-  background: #0F0F24; border-top: 1px solid #1E1E38;
-  padding: 12px 18px;
-  transform: translateY(calc(100% + 40px));
-  transition: transform 0.3s ease;
-  box-shadow: 0 -8px 24px rgba(0,0,0,.35);
+position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+display: flex; align-items: center; gap: 14px;
+background: #0F0F24; border-top: 1px solid #1E1E38;
+padding: 12px 18px;
+transform: translateY(calc(100% + 40px));
+transition: transform 0.3s ease;
+box-shadow: 0 -8px 24px rgba(0,0,0,.35);
 }
 .vx-stickybar.is-visible { transform: translateY(0); }
 .vx-stickybar__img { width: 42px; height: 42px; object-fit: contain; border-radius: 8px; background: #0A0A1A; flex-shrink: 0; }
@@ -165,12 +192,67 @@ background: var(--color-volt); color: var(--color-ink); border-radius: 10px; bor
 .vx-stickybar__price { font-size: 12px; color: rgba(255,255,255,.5); }
 .vx-stickybar__price span { color: rgba(255,255,255,.3); }
 .vx-stickybar__cta {
-  flex-shrink: 0; background: var(--color-volt); color: var(--color-ink);
-  font-size: 13px; font-weight: 800; padding: 10px 18px; border-radius: 10px; white-space: nowrap;
+flex-shrink: 0; background: var(--color-volt); color: var(--color-ink);
+font-size: 13px; font-weight: 800; padding: 10px 18px; border-radius: 10px; white-space: nowrap;
 }
 @media (min-width: 750px) {
-  .vx-stickybar { max-width: 480px; left: auto; right: 24px; bottom: 24px; border-radius: 16px; border: 1px solid #1E1E38; }
+.vx-stickybar { max-width: 480px; left: auto; right: 24px; bottom: 24px; border-radius: 16px; border: 1px solid #1E1E38; }
 }
+
+/* ── Popup de email (conectado a Klaviyo) ── */
+.vx-popup {
+position: fixed; inset: 0; z-index: 90;
+display: flex; align-items: center; justify-content: center;
+padding: 20px;
+opacity: 0; pointer-events: none;
+transition: opacity 0.25s ease;
+}
+.vx-popup.is-visible { opacity: 1; pointer-events: auto; }
+.vx-popup__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(2px); }
+.vx-popup__box {
+position: relative; z-index: 1;
+width: 100%; max-width: 420px;
+background: #0F0F24; border: 1px solid #1E1E38; border-radius: 20px;
+padding: 36px 32px 30px;
+transform: translateY(16px) scale(.98);
+transition: transform 0.25s ease;
+}
+.vx-popup.is-visible .vx-popup__box { transform: translateY(0) scale(1); }
+.vx-popup__x {
+position: absolute; top: 16px; right: 16px;
+width: 30px; height: 30px; border-radius: 50%; border: none;
+background: rgba(255,255,255,.06); color: rgba(255,255,255,.5);
+display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.vx-popup__x:hover { background: rgba(255,255,255,.12); color: #fff; }
+.vx-popup__badge {
+display: inline-flex; align-items: center; gap: 6px;
+background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.25);
+border-radius: 999px; padding: 5px 13px; margin-bottom: 18px;
+font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-volt);
+}
+.vx-popup__box h3 { font-size: 24px; color: var(--color-white); line-height: 1.25; margin-bottom: 10px; }
+.vx-popup__sub { font-size: 13.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 22px; }
+.vx-popup__form { display: flex; flex-direction: column; gap: 10px; }
+.vx-popup__input {
+width: 100%; padding: 13px 16px; border-radius: 10px;
+background: rgba(255,255,255,.04); border: 1px solid #28284A; color: var(--color-white);
+font-family: var(--font-body); font-size: 14px;
+}
+.vx-popup__input::placeholder { color: rgba(255,255,255,.3); }
+.vx-popup__input:focus { outline: none; border-color: var(--color-volt); }
+.vx-popup__submit {
+width: 100%; padding: 13px; border: none; border-radius: 10px; cursor: pointer;
+background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body);
+font-size: 14px; font-weight: 800;
+}
+.vx-popup__submit:disabled { opacity: .6; cursor: not-allowed; }
+.vx-popup__error, .vx-popup__success {
+margin-top: 14px; font-size: 13px; text-align: center;
+display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.vx-popup__error { color: #F87171; }
+.vx-popup__success { color: var(--color-volt); }
 </style>
 
 <script>
@@ -232,35 +314,135 @@ cta.href = productAnchor;
 // de la página, así que .vx-hero y #producto aún no existirían si
 // lo ejecutáramos de forma síncrona aquí arriba)
 document.addEventListener('DOMContentLoaded', function () {
-  var stickybar = document.getElementById('vxStickybar');
-  if (!stickybar) return;
+var stickybar = document.getElementById('vxStickybar');
+if (!stickybar) return;
 
-  var hero = document.querySelector('.vx-hero');
-  var producto = document.getElementById('producto');
-  var pastHero = false;
-  var atProducto = false;
+var hero = document.querySelector('.vx-hero');
+var producto = document.getElementById('producto');
+var pastHero = false;
+var atProducto = false;
 
-  function refreshBar() {
-    if (pastHero && !atProducto) {
-      stickybar.classList.add('is-visible');
-    } else {
-      stickybar.classList.remove('is-visible');
-    }
+function refreshBar() {
+if (pastHero && !atProducto) {
+stickybar.classList.add('is-visible');
+} else {
+stickybar.classList.remove('is-visible');
+}
+}
+
+if (hero) {
+new IntersectionObserver(function (entries) {
+pastHero = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
+refreshBar();
+}, { threshold: 0 }).observe(hero);
+}
+
+if (producto) {
+new IntersectionObserver(function (entries) {
+atProducto = entries[0].isIntersecting;
+refreshBar();
+}, { threshold: 0.15 }).observe(producto);
+}
+});
+
+// ── Popup de email, conectado a Klaviyo ──
+// Exit-intent en escritorio, scroll pasado el 50% en móvil. Una vez por sesión.
+document.addEventListener('DOMContentLoaded', function () {
+  var popup = document.getElementById('vxPopup');
+  if (!popup) return;
+
+  var KLAVIYO_COMPANY_ID = 'UzyR6k';
+  var KLAVIYO_LIST_ID = 'WqWYNB';
+  var STORAGE_KEY = 'vx_popup_shown';
+
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+
+  function openPopup() {
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
+    popup.classList.add('is-visible');
+    popup.setAttribute('aria-hidden', 'false');
+    sessionStorage.setItem(STORAGE_KEY, '1');
+    document.removeEventListener('mouseleave', onMouseLeave);
+    window.removeEventListener('scroll', onScroll);
   }
 
-  if (hero) {
-    new IntersectionObserver(function (entries) {
-      pastHero = !entries[0].isIntersecting && entries[0].boundingClientRect.top < 0;
-      refreshBar();
-    }, { threshold: 0 }).observe(hero);
+  function closePopup() {
+    popup.classList.remove('is-visible');
+    popup.setAttribute('aria-hidden', 'true');
   }
 
-  if (producto) {
-    new IntersectionObserver(function (entries) {
-      atProducto = entries[0].isIntersecting;
-      refreshBar();
-    }, { threshold: 0.15 }).observe(producto);
+  popup.querySelectorAll('[data-vx-popup-close]').forEach(function (el) {
+    el.addEventListener('click', closePopup);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closePopup();
+  });
+
+  function onMouseLeave(e) {
+    if (e.clientY <= 0) openPopup();
   }
+
+  function onScroll() {
+    var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    if (scrollPct > 0.5) openPopup();
+  }
+
+  if (window.matchMedia('(min-width: 750px)').matches) {
+    document.addEventListener('mouseleave', onMouseLeave);
+  } else {
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  var form = popup.querySelector('[data-vx-popup-form]');
+  var emailInput = popup.querySelector('[data-vx-popup-email]');
+  var submitBtn = popup.querySelector('[data-vx-popup-submit]');
+  var errorEl = popup.querySelector('[data-vx-popup-error]');
+  var successEl = popup.querySelector('[data-vx-popup-success]');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorEl.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+
+    fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + KLAVIYO_COMPANY_ID, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'revision': '2026-07-15'
+      },
+      body: JSON.stringify({
+        data: {
+          type: 'subscription',
+          attributes: {
+            profile: {
+              data: {
+                type: 'profile',
+                attributes: {
+                  email: emailInput.value
+                }
+              }
+            }
+          },
+          relationships: {
+            list: {
+              data: { type: 'list', id: KLAVIYO_LIST_ID }
+            }
+          }
+        }
+      })
+    })
+      .then(function (res) {
+        if (!res.ok && res.status !== 202) throw new Error('Klaviyo error');
+        form.style.display = 'none';
+        successEl.style.display = 'flex';
+      })
+      .catch(function () {
+        errorEl.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Quiero mi 10%';
+      });
+  });
 });
 })();
 </script>
