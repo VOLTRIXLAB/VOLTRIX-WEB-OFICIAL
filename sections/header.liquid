@@ -72,13 +72,25 @@ loading="lazy"
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       Antes de irte
     </div>
-    <h3 id="vxPopupTitle" class="font-display">Llévate un 10% en tu primer pedido</h3>
-    <p class="vx-popup__sub">Déjanos tu email y te lo mandamos ahora mismo. Sin spam, cancela cuando quieras.</p>
+    <h3 id="vxPopupTitle" class="font-display">Guía gratis + 10% de descuento</h3>
+    <p class="vx-popup__sub">Déjanos tu email y te mandamos las dos cosas ahora mismo.</p>
+
+    <div class="vx-popup__perks">
+      <div class="vx-popup__perk">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <span>La Guía de Rendimiento Diario — 8 capítulos, gratis</span>
+      </div>
+      <div class="vx-popup__perk">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>10% de descuento en tu primer pedido</span>
+      </div>
+    </div>
 
     <form data-vx-popup-form class="vx-popup__form">
       <input type="email" name="email" placeholder="tu@email.com" required data-vx-popup-email class="vx-popup__input">
-      <button type="submit" class="vx-popup__submit" data-vx-popup-submit>Quiero mi 10%</button>
+      <button type="submit" class="vx-popup__submit" data-vx-popup-submit>Quiero la guía y mi 10%</button>
     </form>
+    <p class="vx-popup__fine">Sin spam. Un email, cancela cuando quieras.</p>
     <p class="vx-popup__error" data-vx-popup-error style="display:none;">Ha ocurrido un error. Inténtalo de nuevo.</p>
     <p class="vx-popup__success" data-vx-popup-success style="display:none;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -232,7 +244,11 @@ border-radius: 999px; padding: 5px 13px; margin-bottom: 18px;
 font-size: 10.5px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--color-volt);
 }
 .vx-popup__box h3 { font-size: 24px; color: var(--color-white); line-height: 1.25; margin-bottom: 10px; }
-.vx-popup__sub { font-size: 13.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 22px; }
+.vx-popup__sub { font-size: 13.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-bottom: 18px; }
+.vx-popup__perks { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
+.vx-popup__perk { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.75); }
+.vx-popup__perk svg { color: var(--color-volt); flex-shrink: 0; }
+.vx-popup__fine { font-size: 11px; color: rgba(255,255,255,.3); text-align: center; margin-top: 12px; }
 .vx-popup__form { display: flex; flex-direction: column; gap: 10px; }
 .vx-popup__input {
 width: 100%; padding: 13px 16px; border-radius: 10px;
