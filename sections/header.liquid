@@ -20,7 +20,7 @@ data-vx-cart-cta
 {% if cart.item_count > 0 %}
 Carrito — {{ cart.total_price | money }}
 {% else %}
-Comprar — 44,99€
+Comprar — 49,99€
 {% endif %}
 </a>
 
@@ -41,7 +41,7 @@ Comprar — 44,99€
 <a href="{{ routes.root_url }}#producto" data-vx-menu-link>El producto</a>
 <a href="{{ routes.root_url }}#faq" data-vx-menu-link>Preguntas</a>
 <a href="/apps/subscriptions" data-vx-menu-link>Mi suscripción</a>
-<a href="{{ routes.root_url }}#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 44,99€</a>
+<a href="{{ routes.root_url }}#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 49,99€</a>
 </div>
 </header>
 
@@ -99,6 +99,18 @@ loading="lazy"
   </div>
 </div>
 {% endif %}
+
+<div class="vx-cookies" id="vxCookies" data-vx-cookies role="dialog" aria-modal="false" aria-labelledby="vxCookiesTitle" aria-hidden="true">
+  <div class="vx-cookies__main">
+    <h3 id="vxCookiesTitle" class="vx-cookies__title">Cookies, sin letra pequeña</h3>
+    <p class="vx-cookies__text">Usamos cookies técnicas para que la tienda funcione y, si nos dejas, de analítica para saber qué mejorar. Tú decides. <a href="/pages/politicas#cookies" class="vx-cookies__link">Política de cookies</a></p>
+    <div class="vx-cookies__actions">
+      <button type="button" class="vx-cookies__btn vx-cookies__btn--accept" data-vx-cookies-accept>Aceptar todas</button>
+      <button type="button" class="vx-cookies__btn vx-cookies__btn--reject" data-vx-cookies-reject>Rechazar todas</button>
+    </div>
+  </div>
+
+</div>
 
 <style>
 .vx-header__inner {
@@ -269,6 +281,34 @@ display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 .vx-popup__error { color: #F87171; }
 .vx-popup__success { color: var(--color-volt); }
+
+.vx-cookies, .vx-cookies *, .vx-cookies *::before, .vx-cookies *::after { box-sizing: border-box; }
+.vx-cookies {
+font-family: var(--font-body, 'Inter', sans-serif);
+position: fixed; z-index: 100;
+left: 16px; bottom: 16px; width: calc(100% - 32px); max-width: 420px;
+background: #0F0F24; border: 1px solid #1E1E38; border-radius: 18px;
+padding: 18px 20px;
+box-shadow: 0 20px 60px rgba(0,0,0,.55);
+transform: translateY(24px); opacity: 0; visibility: hidden;
+transition: transform .3s ease, opacity .3s ease, visibility .3s;
+}
+.vx-cookies.is-visible { transform: translateY(0); opacity: 1; visibility: visible; }
+.vx-cookies__title { font-family: var(--font-display, 'DM Serif Display', serif); font-weight: 400; font-size: 20px; color: #FFFFFF; margin: 0 0 8px; line-height: 1.25; }
+.vx-cookies__text { font-size: 12.5px; line-height: 1.55; color: rgba(255,255,255,.6); margin: 0 0 14px; }
+.vx-cookies__link { color: #C8F135; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
+.vx-cookies__actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.vx-cookies__btn {
+padding: 11px 10px; border: none; border-radius: 10px; cursor: pointer;
+font-family: var(--font-body, 'Inter', sans-serif); font-size: 13.5px; font-weight: 800; line-height: 1.2;
+}
+.vx-cookies__btn--accept { background: #C8F135; color: #0A0A1A; }
+.vx-cookies__btn--reject { background: #FFFFFF; color: #0A0A1A; }
+.vx-cookies__btn:hover { opacity: .9; }
+.vx-cookies__btn:focus-visible { outline: 2px solid #C8F135; outline-offset: 2px; }
+@media (max-width: 749px) {
+.vx-cookies { left: 0; bottom: 0; width: 100%; max-width: none; border-radius: 18px 18px 0 0; border-left: none; border-right: none; border-bottom: none; padding: 16px 18px calc(14px + env(safe-area-inset-bottom)); }
+}
 </style>
 
 <script>
@@ -319,7 +359,7 @@ if (cart.item_count > 0) {
 cta.textContent = 'Carrito — ' + formatMoney(cart.total_price);
 cta.href = cartUrl;
 } else {
-cta.textContent = 'Comprar — 44,99€';
+cta.textContent = 'Comprar — 49,99€';
 cta.href = productAnchor;
 }
 }
@@ -375,6 +415,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function openPopup() {
     if (sessionStorage.getItem(STORAGE_KEY)) return;
+    var cb = document.getElementById('vxCookies');
+    if (cb && cb.classList.contains('is-visible')) return;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
     sessionStorage.setItem(STORAGE_KEY, '1');
@@ -460,6 +502,86 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   });
 });
+})();
+</script>
+
+<script>
+// ── Banner de cookies, conectado a la Customer Privacy API de Shopify ──
+// Aceptar y Rechazar tienen el mismo tamaño y peso (criterio AEPD).
+(function () {
+  var STORE_KEY = 'vx_cookie_consent';
+  var banner = document.getElementById('vxCookies');
+  if (!banner) return;
+
+  var apiReady = false;
+
+  function readStored() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch (e) { return null; }
+  }
+  function writeStored(c) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(c)); } catch (e) {}
+  }
+
+  function applyToShopify(c) {
+    function go() {
+      try {
+        window.Shopify.customerPrivacy.setTrackingConsent({
+          analytics: c.analytics,
+          marketing: c.marketing,
+          preferences: c.analytics,
+          sale_of_data: c.marketing
+        }, function () {});
+      } catch (e) {}
+    }
+    if (apiReady) { go(); return; }
+    if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+      try {
+        window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], function (err) {
+          if (!err) { apiReady = true; go(); }
+        });
+      } catch (e) {}
+    }
+  }
+
+  function open() {
+    banner.classList.add('is-visible');
+    banner.setAttribute('aria-hidden', 'false');
+  }
+  function close() {
+    banner.classList.remove('is-visible');
+    banner.setAttribute('aria-hidden', 'true');
+  }
+  function decide(c) {
+    writeStored(c);
+    applyToShopify(c);
+    close();
+    document.dispatchEvent(new CustomEvent('vx:cookies:decided', { detail: c }));
+  }
+
+  banner.querySelector('[data-vx-cookies-accept]').addEventListener('click', function () {
+    decide({ analytics: true, marketing: true });
+  });
+  banner.querySelector('[data-vx-cookies-reject]').addEventListener('click', function () {
+    decide({ analytics: false, marketing: false });
+  });
+
+  // Para reabrir desde el footer: <a href="#" data-vx-cookie-open>Configurar cookies</a>
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-vx-cookie-open]');
+    if (t) { e.preventDefault(); open(); }
+  });
+  window.vxOpenCookies = function () { open(); };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var stored = readStored();
+    if (stored) {
+      // Ya decidió: nos aseguramos de que Shopify tiene la misma decisión
+      applyToShopify(stored);
+      return;
+    }
+    // Pequeño retardo para que no compita con la carga inicial
+    setTimeout(open, 800);
+  });
 })();
 </script>
 
