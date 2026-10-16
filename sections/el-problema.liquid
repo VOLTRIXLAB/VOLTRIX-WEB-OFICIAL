@@ -39,15 +39,60 @@
   .vx-dolor__item { padding: 30px 26px; background: rgba(255,255,255,.02); border-right: 1px solid #1E1E38; border-bottom: 1px solid #1E1E38; }
   .vx-dolor__item:nth-child(2n) { border-right: none; }
   .vx-dolor__item:nth-child(3), .vx-dolor__item:nth-child(4) { border-bottom: none; }
-  .vx-dolor__hora { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.12); margin-bottom: 10px; }
+  .vx-dolor__hora { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.12); margin-bottom: 10px; transition: color .8s ease .3s; }
+  .vx-dolor__item.vx-reveal--in .vx-dolor__hora { color: var(--color-volt); }
+  .vx-dolor__item { transition: background .3s ease, opacity .7s ease, transform .7s ease; }
+  @media (hover: hover) { .vx-dolor__item:hover { background: rgba(200,241,53,.04); } }
   .vx-dolor__titulo { font-size: 16px; font-weight: 800; color: var(--color-white); margin-bottom: 7px; line-height: 1.3; }
   .vx-dolor__desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; margin-bottom: 10px; }
   .vx-dolor__culpable { display: inline-block; font-size: 11px; font-weight: 700; color: var(--color-volt); background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.18); border-radius: 6px; padding: 3px 10px; }
+
+  .vx-car-dots { display: none; justify-content: center; gap: 8px; margin-top: 16px; }
+  .vx-car-dots button { width: 7px; height: 7px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.2); cursor: pointer; transition: width .3s ease, background .3s ease; }
+  .vx-car-dots button.on { width: 22px; background: var(--color-volt); }
   @media (max-width: 700px) {
-    .vx-dolor__grid { grid-template-columns: 1fr; }
-    .vx-dolor__item { border-right: none !important; border-bottom: 1px solid #1E1E38 !important; }
+    .vx-dolor { padding: 64px 0 64px 24px; }
+    .vx-dolor > *:not(.vx-dolor__grid):not(.vx-car-dots) { padding-right: 24px; }
+    .vx-dolor__grid {
+      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; border: 0; border-radius: 0;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-right: 24px; overscroll-behavior-x: contain;
+    }
+    .vx-dolor__grid::-webkit-scrollbar { display: none; }
+    .vx-dolor__item {
+      flex: 0 0 82%; scroll-snap-align: start; border: 1px solid #1E1E38 !important; border-radius: 18px; padding: 26px 22px;
+    }
+    .vx-dolor .vx-car-dots { display: flex; }
   }
 </style>
+<script>
+(function () {
+  function carousel(trackSel, dotsClass) {
+    var track = document.querySelector(trackSel);
+    if (!track || track.getAttribute('data-vx-car')) return;
+    track.setAttribute('data-vx-car', '1');
+    var slides = Array.prototype.slice.call(track.children);
+    var dots = document.createElement('div');
+    dots.className = 'vx-car-dots ' + dotsClass;
+    slides.forEach(function (s, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Ir a ' + (i + 1));
+      b.addEventListener('click', function () { track.scrollTo({ left: s.offsetLeft - track.offsetLeft - 0, behavior: 'smooth' }); });
+      dots.appendChild(b);
+    });
+    track.parentNode.insertBefore(dots, track.nextSibling);
+    function upd() {
+      var w = slides[0].offsetWidth + 12;
+      var i = Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / w)));
+      Array.prototype.forEach.call(dots.children, function (d, k) { d.classList.toggle('on', k === i); });
+    }
+    track.addEventListener('scroll', upd, { passive: true });
+    upd();
+  }
+  window.vxCarousel = window.vxCarousel || carousel;
+})();
+
+document.addEventListener('DOMContentLoaded', function () { window.vxCarousel('.vx-dolor__grid', 'vx-car-dots--dolor'); });
+</script>
 {% schema %}
 { "name": "El Problema", "settings": [] }
 {% endschema %}

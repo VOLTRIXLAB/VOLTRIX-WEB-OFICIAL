@@ -89,8 +89,15 @@
   .vx-spin-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.18); transition: background 0.4s ease, transform 0.4s ease; }
   .vx-spin-dot.active { background: var(--color-volt); transform: scale(1.6); }
 
+  .vx-spin-jar-wrap::before { content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(200,241,53,.16), transparent 70%); animation: vxGlow 4s ease-in-out infinite; z-index: 0; pointer-events: none; top: 50%; left: 50%; margin: -130px 0 0 -130px; }
+  .vx-spin-jar-wrap { position: relative; display: flex; justify-content: center; align-items: center; }
+  .vx-spin-jar { position: relative; z-index: 1; }
+  @keyframes vxGlow { 0%,100% { opacity: .5; transform: scale(.92); } 50% { opacity: 1; transform: scale(1.08); } }
+  @media (prefers-reduced-motion: reduce) { .vx-spin-jar-wrap::before { animation: none; } }
   @media (max-width: 600px) {
+    .vx-spin-stage { height: 220vh; }
     .vx-spin-jar { width: 140px; }
+    .vx-spin-jar-wrap::before { width: 200px; height: 200px; margin: -100px 0 0 -100px; }
     .vx-spin-copy { height: 190px; }
   }
 </style>
