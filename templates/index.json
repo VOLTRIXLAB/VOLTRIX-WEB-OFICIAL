@@ -1,16 +1,54 @@
 {
   "sections": {
-    "hero": { "type": "hero" },
-    "proof": { "type": "proof-bar" },
-    "dolor": { "type": "el-problema" },
-    "hvco": { "type": "hvco" },
-    "complexes": { "type": "ingredient-complexes" },
-    "guia": { "type": "guia" },
-    "autoridad": { "type": "autoridad" },
-    "why": { "type": "why-voltrix" },
-    "testimonials": { "type": "testimonials" },
-    "pricing": { "type": "pricing" },
-    "faq": { "type": "faq" }
+    "hero": {
+      "type": "hero"
+    },
+    "proof": {
+      "type": "proof-bar"
+    },
+    "dolor": {
+      "type": "el-problema"
+    },
+    "hvco": {
+      "type": "hvco"
+    },
+    "complexes": {
+      "type": "ingredient-complexes"
+    },
+    "guia": {
+      "type": "guia"
+    },
+    "autoridad": {
+      "type": "autoridad"
+    },
+    "why": {
+      "type": "why-voltrix"
+    },
+    "testimonials": {
+      "type": "testimonials"
+    },
+    "comparativa": {
+      "type": "comparativa"
+    },
+    "pricing": {
+      "type": "pricing"
+    },
+    "faq": {
+      "type": "faq"
+    }
   },
-  "order": ["hero", "proof", "dolor", "hvco", "complexes", "guia", "autoridad", "why", "testimonials", "pricing", "faq"]
+  "order": [
+    "hero",
+    "proof",
+    "dolor",
+    "hvco",
+    "complexes",
+    "guia",
+    "autoridad",
+    "why",
+    "testimonials",
+    "comparativa",
+    "pricing",
+    "faq"
+  ]
 }
