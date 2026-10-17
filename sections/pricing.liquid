@@ -93,9 +93,14 @@
       </div>
 
       {% if vx_product %}
-        {% assign vx_variant = vx_product.selected_or_first_available_variant %}
+        {% assign vx_variant = vx_product.variants.first %}
+        {% assign vx_once_variant = vx_variant %}
+        {% for v in vx_product.variants %}
+          {% if v.option1 == 'Suscripción' %}{% assign vx_variant = v %}{% endif %}
+          {% if v.option1 == 'Compra única' %}{% assign vx_once_variant = v %}{% endif %}
+        {% endfor %}
         {% form 'product', vx_product, id: 'vx-buy-form' %}
-          <input type="hidden" name="id" value="{{ vx_variant.id }}">
+          <input type="hidden" name="id" value="{{ vx_variant.id }}" data-vx-id data-sub-id="{{ vx_variant.id }}" data-once-id="{{ vx_once_variant.id }}">
           <input type="hidden" name="quantity" value="2" data-vx-qty>
           <input type="hidden" name="selling_plan" value="" data-vx-plan disabled>
 
@@ -120,7 +125,7 @@
             <label class="vx-mode__opt is-on" data-vx-mode-opt="sub">
               <input type="radio" name="vx_mode" value="sub" checked>
               <span class="vx-mode__head">
-                <span class="vx-mode__name">Suscríbete y ahorra <em>Recomendado</em></span>
+                <span class="vx-mode__name">Suscríbete y ahorra <em>Recomendado</em> <em class="vx-mode__extra" data-vx-extra hidden></em></span>
                 <span class="vx-mode__price"><s data-vx-sub-compare></s> <b data-vx-sub-price></b></span>
               </span>
               <span class="vx-mode__detail">
@@ -314,6 +319,8 @@
   .vx-mode__price s { font-size: 12px; color: rgba(255,255,255,.35); margin-right: 4px; }
   .vx-mode__price b { font-weight: 900; }
   .vx-mode__opt.is-on[data-vx-mode-opt="sub"] .vx-mode__price b { color: var(--color-volt); }
+  .vx-mode__name em.vx-mode__extra { background: var(--color-volt); color: var(--color-ink); }
+  .vx-mode__extra[hidden] { display: none; }
   .vx-mode__detail { display: none; flex-direction: column; gap: 5px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.08); font-size: 12.5px; color: rgba(255,255,255,.55); }
   .vx-mode__opt.is-on[data-vx-mode-opt="sub"] .vx-mode__detail { display: flex; animation: vxFade .3s ease; }
   .vx-mode__detail b { color: var(--color-white); }
@@ -406,7 +413,8 @@
 })();
 </script>
 {% if vx_product %}
-{% assign vx_v = vx_product.selected_or_first_available_variant %}
+{% assign vx_v = vx_product.variants.first %}
+{% for v in vx_product.variants %}{% if v.option1 == 'Suscripción' %}{% assign vx_v = v %}{% endif %}{% endfor %}
 <script>
 (function () {
   var form = document.getElementById('vx-buy-form');
@@ -424,6 +432,7 @@
     if (n >= 1 && n <= 3 && !plans[n]) plans[n] = a;
   });
 
+  var idEl = form.querySelector('[data-vx-id]');
   var qtyEl = form.querySelector('[data-vx-qty]');
   var planEl = form.querySelector('[data-vx-plan]');
   var btn = form.querySelector('[data-vx-buy-btn]');
@@ -467,6 +476,12 @@
       q('[data-vx-sub-price]').textContent = 'No disponible';
       q('[data-vx-sub-compare]').textContent = '';
     }
+    var extraEl = q('[data-vx-extra]');
+    if (plans[n]) {
+      var extra = Math.round((1 - sT / full) * 100) - Math.round((1 - oT / full) * 100);
+      extraEl.textContent = '+' + extra + '% extra de descuento';
+      extraEl.hidden = extra <= 0;
+    } else { extraEl.hidden = true; }
     q('[data-vx-once-price]').textContent = fmt(oT);
     q('[data-vx-once-compare]').textContent = oT < full ? fmt(full) : '';
     subOpt.classList.toggle('is-on', state.mode === 'sub');
@@ -477,6 +492,7 @@
 
     // Campos del formulario + botón
     qtyEl.value = n;
+    idEl.value = (state.mode === 'sub' && plans[n]) ? idEl.getAttribute('data-sub-id') : idEl.getAttribute('data-once-id');
     if (state.mode === 'sub' && plans[n]) {
       planEl.value = plans[n].id; planEl.disabled = false;
       labelEl.textContent = 'Suscribirme a Voltrix';

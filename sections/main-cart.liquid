@@ -12,14 +12,17 @@
         <div class="vx-cart__item" data-vx-line-key="{{ item.key }}">
           <div class="vx-cart__item-info">
             <div class="vx-cart__item-title">
-              {{ item.title }}
+              {{ item.product.title }}
               {% if item.selling_plan_allocation %}
-                <span class="vx-cart__sub-badge">Suscripción mensual</span>
+                {% assign vx_plan_opt = item.selling_plan_allocation.selling_plan.options.first.value %}
+                {% assign vx_plan_n = vx_plan_opt | slice: 0, 1 | plus: 0 %}
+                {% if vx_plan_n < 1 or vx_plan_n > 3 %}{% assign vx_plan_n = 1 %}{% endif %}
+                <span class="vx-cart__sub-badge">{% if vx_plan_n == 1 %}Suscripción mensual{% else %}Suscripción cada {{ vx_plan_n }} meses{% endif %}</span>
               {% endif %}
             </div>
-            <div class="vx-cart__item-price-unit">{{ item.price | money }} / unidad</div>
+            <div class="vx-cart__item-price-unit"><span data-vx-unit-price>{{ item.final_price | money }}</span> / unidad</div>
             {% if item.selling_plan_allocation %}
-              <div class="vx-cart__sub-desc">Se renueva cada mes · Cancela cuando quieras</div>
+              <div class="vx-cart__sub-desc">Se renueva {% if vx_plan_n == 1 %}cada mes{% else %}cada {{ vx_plan_n }} meses{% endif %} · Cancela cuando quieras</div>
             {% endif %}
           </div>
           <div class="vx-cart__item-qty">
@@ -31,11 +34,14 @@
             </div>
           </div>
           <div class="vx-cart__item-line-price" data-vx-line-price>{{ item.final_line_price | money }}</div>
+          <button type="button" class="vx-cart__remove" data-vx-remove data-line-key="{{ item.key }}" aria-label="Eliminar {{ item.title | escape }} del carrito" title="Eliminar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </button>
         </div>
       {% endfor %}
     </div>
 
-    <p class="vx-cart__hint">Usa + / − para cambiar la cantidad — llega a 0 para eliminar un producto.</p>
+    <p class="vx-cart__hint">Cambia la cantidad con + / − o quita un producto con la papelera.</p>
     <p class="vx-cart__status" data-vx-cart-status></p>
 
     <div class="vx-cart__total">
@@ -84,7 +90,7 @@
 
   .vx-cart__items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
   .vx-cart__item {
-    display: grid; grid-template-columns: 1fr auto auto; gap: 20px; align-items: center;
+    display: grid; grid-template-columns: 1fr auto auto auto; gap: 20px; align-items: center;
     background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 12px; padding: 16px 20px;
     transition: opacity .2s ease;
   }
@@ -114,6 +120,13 @@
 
   .vx-cart__item-line-price { font-size: 15px; font-weight: 800; color: var(--color-volt); white-space: nowrap; }
 
+  .vx-cart__remove {
+    width: 38px; height: 38px; border-radius: 10px; border: 1px solid #28284A; background: rgba(255,255,255,.04);
+    color: rgba(255,255,255,.5); display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: color .15s ease, border-color .15s ease, background .15s ease; touch-action: manipulation;
+  }
+  .vx-cart__remove:hover, .vx-cart__remove:focus-visible { color: #F87171; border-color: rgba(248,113,113,.5); background: rgba(248,113,113,.08); outline: none; }
+  .vx-cart__item { position: relative; }
   .vx-cart__hint { font-size: 12px; color: rgba(255,255,255,.35); margin-bottom: 6px; }
   .vx-cart__status { font-size: 12px; color: var(--color-volt); min-height: 16px; margin-bottom: 14px; }
 
@@ -133,7 +146,8 @@
   .vx-guarantee__desc { font-size: 11px; color: rgba(255,255,255,.4); line-height: 1.5; }
 
   @media (max-width: 700px) {
-    .vx-cart__item { grid-template-columns: 1fr; gap: 12px; justify-items: start; }
+    .vx-cart__item { grid-template-columns: 1fr; gap: 12px; justify-items: start; padding-right: 64px; }
+    .vx-cart__remove { position: absolute; top: 14px; right: 14px; }
     .vx-cart__item-line-price { justify-self: flex-start; }
     .vx-guarantees { grid-template-columns: repeat(2, 1fr); }
   }
@@ -171,16 +185,20 @@
         .then(function (cart) {
           busy[key] = false;
 
-          if (quantity === 0) {
-            if (itemEl) itemEl.remove();
-          } else {
-            var updatedItem = cart.items.find(function (i) { return i.key === key; });
-            if (updatedItem && itemEl) {
-              itemEl.classList.remove('is-updating');
-              itemEl.querySelector('[data-vx-line-price]').textContent = formatMoney(updatedItem.final_line_price);
-              itemEl.querySelector('[data-vx-qty-value]').textContent = updatedItem.quantity;
-            }
-          }
+          if (quantity === 0 && itemEl) itemEl.remove();
+          if (itemEl) itemEl.classList.remove('is-updating');
+
+          // Refrescar todas las líneas (los descuentos por pack pueden cambiar otras filas)
+          cart.items.forEach(function (it) {
+            var row = container.querySelector('[data-vx-line-key="' + it.key + '"]');
+            if (!row) return;
+            var lp = row.querySelector('[data-vx-line-price]');
+            var up = row.querySelector('[data-vx-unit-price]');
+            var qv = row.querySelector('[data-vx-qty-value]');
+            if (lp) lp.textContent = formatMoney(it.final_line_price);
+            if (up) up.textContent = formatMoney(it.final_price);
+            if (qv) qv.textContent = it.quantity;
+          });
 
           if (totalEl) totalEl.textContent = formatMoney(cart.total_price);
           if (statusEl) {
@@ -203,6 +221,8 @@
     }
 
     container.addEventListener('click', function (e) {
+      var removeBtn = e.target.closest('[data-vx-remove]');
+      if (removeBtn) { updateLine(removeBtn.getAttribute('data-line-key'), 0); return; }
       var minusBtn = e.target.closest('[data-vx-qty-minus]');
       var plusBtn = e.target.closest('[data-vx-qty-plus]');
       if (!minusBtn && !plusBtn) return;
