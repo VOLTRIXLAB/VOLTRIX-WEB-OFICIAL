@@ -118,3 +118,15 @@ img { max-width: 100%; display: block; }
 }
 .vx-spark-pulse { animation: vx-spark-pulse 2.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .vx-spark-pulse { animation: none; } }
+
+/* ── Portal "Mi suscripción" (Appstle): márgenes, título y sin recortes ── */
+.vx-portal #MainContent {
+  max-width: 1100px; margin: 0 auto; padding: 56px 24px 96px; min-height: 60vh;
+  box-sizing: border-box; overflow-x: hidden;
+}
+.vx-portal #MainContent::before {
+  content: 'Mi suscripción'; display: block; margin-bottom: 28px;
+  font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); line-height: 1.1; color: var(--color-ink);
+}
+.vx-portal #MainContent > * { max-width: 100%; box-sizing: border-box; }
+@media (max-width: 749px) { .vx-portal #MainContent { padding: 36px 16px 72px; } }
