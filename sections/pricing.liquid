@@ -137,7 +137,7 @@
             <label class="vx-mode__opt" data-vx-mode-opt="once">
               <input type="radio" name="vx_mode" value="once">
               <span class="vx-mode__head">
-                <span class="vx-mode__name">Compra única</span>
+                <span class="vx-mode__name">Compra única <em class="vx-mode__extra" data-vx-once-tag hidden></em></span>
                 <span class="vx-mode__price"><s data-vx-once-compare></s> <b data-vx-once-price></b></span>
               </span>
             </label>
@@ -478,11 +478,15 @@
     }
     var extraEl = q('[data-vx-extra]');
     if (plans[n]) {
-      var extra = Math.round((1 - sT / full) * 100) - Math.round((1 - oT / full) * 100);
-      extraEl.textContent = '+' + extra + '% extra de descuento';
-      extraEl.hidden = extra <= 0;
+      var subPct = Math.round((1 - sT / full) * 100);
+      extraEl.textContent = subPct + '% de descuento';
+      extraEl.hidden = subPct <= 0;
     } else { extraEl.hidden = true; }
     q('[data-vx-once-price]').textContent = fmt(oT);
+    var onceTag = q('[data-vx-once-tag]');
+    var oncePct = Math.round((1 - oT / full) * 100);
+    onceTag.textContent = oncePct + '% de descuento';
+    onceTag.hidden = oncePct <= 0;
     q('[data-vx-once-compare]').textContent = oT < full ? fmt(full) : '';
     subOpt.classList.toggle('is-on', state.mode === 'sub');
     subOpt.querySelector('input').checked = (state.mode === 'sub');
