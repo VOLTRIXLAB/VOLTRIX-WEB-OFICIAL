@@ -9,7 +9,7 @@
   <div data-vx-cart-full style="{% if cart.item_count == 0 %}display:none;{% endif %}">
     <div class="vx-cart__items" data-vx-cart-items>
       {% for item in cart.items %}
-        <div class="vx-cart__item" data-vx-line-key="{{ item.key }}">
+        <div class="vx-cart__item" data-vx-line-key="{{ item.key }}"{% if item.selling_plan_allocation %} data-vx-sub="1"{% endif %}>
           <div class="vx-cart__item-info">
             <div class="vx-cart__item-title">
               {{ item.product.title }}
@@ -155,6 +155,18 @@
 
 <script>
   (function () {
+    // Plan de suscripción que corresponde a cada nº de botes (1 mes / 2 meses / 3 meses)
+    var SUB_PLANS = {};
+    {% assign vx_pp = all_products['voltrix-daily-performance-formula-30-porciones'] %}
+    {% assign vx_subv = vx_pp.variants.first %}
+    {% for v in vx_pp.variants %}{% if v.option1 == 'Suscripción' %}{% assign vx_subv = v %}{% endif %}{% endfor %}
+    {% for a in vx_subv.selling_plan_allocations %}
+      (function () {
+        var m = /^(\d+)MONTH/.exec({{ a.selling_plan.options.first.value | json }}) || /(\d+)\s*mes/i.exec({{ a.selling_plan.name | json }});
+        var n = m ? parseInt(m[1], 10) : ({{ a.selling_plan.name | json }}.toLowerCase().indexOf('mensual') > -1 ? 1 : 0);
+        if (n >= 1 && n <= 3 && !SUB_PLANS[n]) SUB_PLANS[n] = {{ a.selling_plan.id }};
+      })();
+    {% endfor %}
     var container = document.querySelector('[data-vx-cart-items]');
     if (!container) return;
 
@@ -176,14 +188,22 @@
       if (itemEl) itemEl.classList.add('is-updating');
       if (statusEl) statusEl.textContent = 'Actualizando...';
 
+      var isSub = !!(itemEl && itemEl.hasAttribute('data-vx-sub'));
+      var payload = { id: key, quantity: quantity };
+      // El plan (y su descuento) depende del nº de botes: 1 = mensual, 2 = cada 2 meses, 3 = cada 3 meses
+      if (isSub && quantity > 0 && SUB_PLANS[quantity]) payload.selling_plan = SUB_PLANS[quantity];
+
       fetch('/cart/change.js', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: key, quantity: quantity })
+        body: JSON.stringify(payload)
       })
         .then(function (res) { return res.json(); })
         .then(function (cart) {
           busy[key] = false;
+
+          // En suscripciones cambia el plan, la etiqueta y el precio: recargamos para que todo cuadre
+          if (isSub && quantity > 0) { window.location.reload(); return; }
 
           if (quantity === 0 && itemEl) itemEl.remove();
           if (itemEl) itemEl.classList.remove('is-updating');
@@ -233,6 +253,11 @@
 
       var current = parseInt(valueEl.textContent, 10) || 0;
       var next = minusBtn ? Math.max(0, current - 1) : current + 1;
+      var rowEl = container.querySelector('[data-vx-line-key="' + key + '"]');
+      if (plusBtn && rowEl && rowEl.hasAttribute('data-vx-sub') && next > 3) {
+        if (statusEl) statusEl.textContent = 'Máximo 3 botes por suscripción.';
+        return;
+      }
 
       updateLine(key, next);
     });
