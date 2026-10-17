@@ -289,7 +289,7 @@
   /* ── Selector de packs + modo de compra ── */
   .vx-sel__title { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 10px; }
   .vx-pack { margin-bottom: 20px; }
-  .vx-pack__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .vx-pack__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .vx-pack__opt, .vx-mode__opt { position: relative; cursor: pointer; display: block; }
   .vx-pack__opt input, .vx-mode__opt input { position: absolute; opacity: 0; pointer-events: none; }
   .vx-pack__opt {
@@ -390,6 +390,7 @@
     .vx-pack__grid { gap: 8px; }
     .vx-pack__opt { aspect-ratio: 1 / 1; justify-content: center; padding: 16px 4px 10px; gap: 3px; }
     .vx-pack__u { font-size: 14px; line-height: 1.15; margin-top: 4px; }
+    .vx-pack__save { font-size: 9.5px; padding: 2px 6px; }
     .vx-pack__flag { font-size: 8.5px; padding: 3px 7px; left: auto; right: 0; transform: none; }
   }
 </style>
