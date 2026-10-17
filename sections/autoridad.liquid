@@ -173,13 +173,11 @@
   @media (hover: hover) { .vx-aut__item { transition: opacity .7s ease, transform .35s ease, border-color .3s ease; } .vx-aut__item:hover { transform: translateY(-4px); border-color: rgba(200,241,53,.35); } }
   @media (prefers-reduced-motion: reduce) { .vx-metodo-item__marker { animation: none; } }
   @media (max-width: 900px) {
-    .vx-aut__grid {
-      display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden; touch-action: pan-x pan-y; scroll-snap-type: x mandatory; scrollbar-width: none;
-      margin: 0 -24px 0; padding: 6px 24px; scroll-padding-left: 24px; overscroll-behavior-x: contain;
-    }
-    .vx-aut__grid::-webkit-scrollbar { display: none; }
-    .vx-aut__item { flex: 0 0 80%; scroll-snap-align: start; }
     .vx-ing-section .vx-car-dots { display: flex; margin-bottom: 8px; }
+    /* Volteo: una tarjeta cada vez que se da la vuelta como una carta (lo posiciona el JS) */
+    .vx-aut__grid.is-flip { display: block; position: relative; margin: 0 0 12px; perspective: 1200px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .vx-aut__grid.is-flip .vx-aut__item { position: absolute; left: 0; right: 0; top: 0; background: #10102A; backface-visibility: hidden; -webkit-backface-visibility: hidden; will-change: transform; opacity: 1 !important; transition: none !important; cursor: grab; }
+    .vx-aut__grid.is-flip .vx-aut__item::before { transform: scaleX(1); }
   }
   @media (max-width: 600px) {
     /* Rueda 3D: las tarjetas giran en círculo (lo posiciona el JS) */
@@ -294,6 +292,90 @@
 </script>
 <script>
 (function () {
+  /* Volteo: las tarjetas se dan la vuelta como cartas al deslizar (infinito). Solo <=900px. */
+  function vxFlip(sel, dotsClass) {
+    var grid = document.querySelector(sel);
+    if (!grid || grid.getAttribute('data-vx-flip')) return;
+    grid.setAttribute('data-vx-flip', '1');
+    var items = Array.prototype.slice.call(grid.children), n = items.length;
+    var mq = window.matchMedia('(max-width: 900px)');
+    var pos = 0, W = 0, raf = 0, on = false, drag = false, locked = false, sx = 0, sy = 0, spos = 0, lastX = 0, lastT = 0, vel = 0;
+    var dots = document.createElement('div');
+    dots.className = 'vx-car-dots ' + dotsClass;
+    items.forEach(function (it, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('aria-label', 'Ir a ' + (i + 1));
+      b.addEventListener('click', function () { var d = i - pos; d = ((d + n / 2) % n + n) % n - n / 2; animTo(pos + d); });
+      dots.appendChild(b);
+    });
+    grid.parentNode.insertBefore(dots, grid.nextSibling);
+
+    function wrap(d) { return ((d + n / 2) % n + n) % n - n / 2; }
+    function render() {
+      items.forEach(function (it, i) {
+        var d = wrap(i - pos), a = d * 180;
+        it.style.transform = 'rotateY(' + a.toFixed(1) + 'deg)';
+        var front = Math.abs(d) < 0.5;
+        it.style.zIndex = front ? 2 : 1;
+        it.style.pointerEvents = front ? '' : 'none';
+        it.style.boxShadow = '0 ' + (14 * Math.cos(d * Math.PI)).toFixed(0) + 'px 40px rgba(0,0,0,' + (0.35 * Math.max(0, Math.cos(d * Math.PI))).toFixed(2) + ')';
+      });
+      var idx = ((Math.round(pos) % n) + n) % n;
+      Array.prototype.forEach.call(dots.children, function (b, k) { b.classList.toggle('on', k === idx); });
+    }
+    function measure() {
+      var h = 0;
+      items.forEach(function (it) { it.style.height = 'auto'; });
+      items.forEach(function (it) { h = Math.max(h, it.offsetHeight); });
+      items.forEach(function (it) { it.style.height = h + 'px'; });
+      grid.style.height = (h + 8) + 'px';
+      W = grid.clientWidth; render();
+    }
+    function animTo(target) {
+      cancelAnimationFrame(raf);
+      var from = pos, t0 = null, dur = 520;
+      function step(t) {
+        if (!t0) t0 = t;
+        var k = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - k, 3);
+        pos = from + (target - from) * e; render();
+        if (k < 1) raf = requestAnimationFrame(step); else { pos = ((target % n) + n) % n; render(); }
+      }
+      raf = requestAnimationFrame(step);
+    }
+    function down(e) { if (!on) return; cancelAnimationFrame(raf); drag = true; locked = false; sx = lastX = e.clientX; sy = e.clientY; spos = pos; lastT = performance.now(); vel = 0; }
+    function move(e) {
+      if (!drag) return;
+      var mx = e.clientX - sx, my = e.clientY - sy;
+      if (!locked) { if (Math.abs(mx) > 8 && Math.abs(mx) > Math.abs(my)) { locked = true; try { grid.setPointerCapture(e.pointerId); } catch (_) {} } else return; }
+      var now = performance.now(); vel = (lastX - e.clientX) / (W * 0.9) / Math.max(1, now - lastT) * 1000; lastX = e.clientX; lastT = now;
+      pos = spos - mx / (W * 0.9); render();
+    }
+    function up() {
+      if (!drag) return; drag = false;
+      if (!locked) return;
+      animTo(Math.round(pos + Math.max(-0.9, Math.min(0.9, vel * 0.2))));
+    }
+    grid.addEventListener('pointerdown', down);
+    grid.addEventListener('pointermove', move);
+    grid.addEventListener('pointerup', up);
+    grid.addEventListener('pointercancel', up);
+    function enable() {
+      if (mq.matches === on) { if (on) measure(); return; }
+      on = mq.matches;
+      grid.classList.toggle('is-flip', on);
+      dots.style.display = on ? '' : 'none';
+      if (on) measure();
+      else { items.forEach(function (it) { it.style.cssText = ''; }); grid.style.height = ''; }
+    }
+    window.addEventListener('resize', enable);
+    window.addEventListener('load', function () { if (on) measure(); });
+    enable();
+  }
+  window.vxFlip = vxFlip;
+})();
+</script>
+<script>
+(function () {
   function carousel(trackSel, dotsClass) {
     var track = document.querySelector(trackSel);
     if (!track || track.getAttribute('data-vx-car')) return;
@@ -321,7 +403,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   window.vxRing('.vx-metodo-list', 'vx-car-dots--metodo');
-  window.vxCarousel('.vx-aut__grid', 'vx-car-dots--ing');
+  window.vxFlip('.vx-aut__grid', 'vx-car-dots--ing');
   var els = document.querySelectorAll('[data-vx-count]');
   if (!els.length || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var io = new IntersectionObserver(function (es) {
