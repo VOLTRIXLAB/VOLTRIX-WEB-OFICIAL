@@ -100,7 +100,7 @@
         {% comment %} <span class='appstle_stand_alone_selector' data-product-handle='{{ vx_product.handle }}' style="display:none;"></span> {% endcomment %}
         {% form 'product', vx_product %}
           <input type="hidden" name="id" value="{{ vx_product.selected_or_first_available_variant.id }}">
-          <div class="ab-volume-discount-custom-placement-selector" data-product-id="{{product.id}}" data-product-handle="{{product.handle}}" data-variant-id="{{product.variants[0].id}}" data-product-data=""></div>
+          <div class="ab-volume-discount-custom-placement-selector" data-product-id="{{vx_product.id}}" data-product-handle="{{vx_product.handle}}" data-variant-id="{{vx_product.variants[0].id}}" data-product-data=""></div>
           <button type="submit" class="vx-btn-add" data-vx-buy-btn {% unless vx_product.available %}disabled{% endunless %}>
             {% if vx_product.available %}
               <span data-vx-btn-label>Empezar con Voltrix</span> —
