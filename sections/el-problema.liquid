@@ -54,7 +54,7 @@
     .vx-dolor { padding: 64px 0 64px 24px; }
     .vx-dolor > *:not(.vx-dolor__grid):not(.vx-car-dots) { padding-right: 24px; }
     .vx-dolor__grid {
-      display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; border: 0; border-radius: 0;
+      display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden; touch-action: pan-x pan-y; scroll-snap-type: x mandatory; border: 0; border-radius: 0;
       scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-right: 24px; overscroll-behavior-x: contain;
     }
     .vx-dolor__grid::-webkit-scrollbar { display: none; }
