@@ -47,51 +47,113 @@
   .vx-dolor__desc { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.65; margin-bottom: 10px; }
   .vx-dolor__culpable { display: inline-block; font-size: 11px; font-weight: 700; color: var(--color-volt); background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.18); border-radius: 6px; padding: 3px 10px; }
 
-  .vx-car-dots { display: none; justify-content: center; gap: 8px; margin-top: 16px; }
-  .vx-car-dots button { width: 7px; height: 7px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.2); cursor: pointer; transition: width .3s ease, background .3s ease; }
-  .vx-car-dots button.on { width: 22px; background: var(--color-volt); }
+  .vx-stories-bars { display: none; }
+  @keyframes vxFill { from { width: 0; } to { width: 100%; } }
   @media (max-width: 700px) {
-    .vx-dolor { padding: 64px 0 64px 24px; }
-    .vx-dolor > *:not(.vx-dolor__grid):not(.vx-car-dots) { padding-right: 24px; }
-    .vx-dolor__grid {
-      display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden; touch-action: pan-x pan-y; scroll-snap-type: x mandatory; border: 0; border-radius: 0;
-      scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-right: 24px; overscroll-behavior-x: contain;
-    }
-    .vx-dolor__grid::-webkit-scrollbar { display: none; }
-    .vx-dolor__item {
-      flex: 0 0 82%; scroll-snap-align: start; border: 1px solid #1E1E38 !important; border-radius: 18px; padding: 26px 22px;
-    }
-    .vx-dolor .vx-car-dots { display: flex; }
+    .vx-dolor { padding: 64px 24px; }
+    /* Historias: una tarjeta cada vez, barras de progreso del día y avance automático (lo controla el JS) */
+    .vx-stories-bars { display: flex; gap: 6px; margin-bottom: 14px; }
+    .vx-stories-bars span { flex: 1; height: 3px; border-radius: 99px; background: rgba(255,255,255,.14); overflow: hidden; position: relative; }
+    .vx-stories-bars i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--color-volt); border-radius: 99px; display: block; }
+    .vx-stories-bars span.done i { width: 100%; }
+    .vx-stories-bars span.on i { animation: vxFill 6s linear forwards; }
+    .vx-stories-bars.is-paused span.on i { animation-play-state: paused; }
+    .vx-dolor__grid.is-stories { display: block; border: 0; border-radius: 0; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .vx-stories__track { display: flex; transition: transform .45s cubic-bezier(.2,.8,.2,1); will-change: transform; }
+    .vx-stories__track.is-drag { transition: none; }
+    .vx-dolor__grid.is-stories .vx-dolor__item { flex: 0 0 100%; min-width: 0; box-sizing: border-box; background: #10102A; border: 1px solid #1E1E38 !important; border-radius: 18px; padding: 30px 24px 28px; transform: none !important; opacity: .35 !important; transition: opacity .45s ease; }
+    .vx-dolor__grid.is-stories .vx-dolor__item.is-active { opacity: 1 !important; }
+    .vx-dolor__grid.is-stories .vx-dolor__hora { color: var(--color-volt); font-size: 12px; }
+    .vx-dolor__grid.is-stories .vx-dolor__titulo { font-size: 20px; }
+    .vx-dolor__grid.is-stories .vx-dolor__desc { font-size: 14px; }
   }
+@media (prefers-reduced-motion: reduce) { .vx-stories-bars span.on i { animation: none; width: 100%; } }
 </style>
 <script>
 (function () {
-  function carousel(trackSel, dotsClass) {
-    var track = document.querySelector(trackSel);
-    if (!track || track.getAttribute('data-vx-car')) return;
-    track.setAttribute('data-vx-car', '1');
-    var slides = Array.prototype.slice.call(track.children);
-    var dots = document.createElement('div');
-    dots.className = 'vx-car-dots ' + dotsClass;
-    slides.forEach(function (s, i) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.setAttribute('aria-label', 'Ir a ' + (i + 1));
-      b.addEventListener('click', function () { track.scrollTo({ left: s.offsetLeft - track.offsetLeft - 0, behavior: 'smooth' }); });
-      dots.appendChild(b);
-    });
-    track.parentNode.insertBefore(dots, track.nextSibling);
-    function upd() {
-      var w = slides[0].offsetWidth + 12;
-      var i = Math.min(slides.length - 1, Math.max(0, Math.round(track.scrollLeft / w)));
-      Array.prototype.forEach.call(dots.children, function (d, k) { d.classList.toggle('on', k === i); });
-    }
-    track.addEventListener('scroll', upd, { passive: true });
-    upd();
-  }
-  window.vxCarousel = window.vxCarousel || carousel;
-})();
+  /* Historias: el día de Sergio, hora a hora. Una tarjeta, barras de progreso, avance automático y swipe. Solo <=700px. */
+  function init() {
+    var grid = document.querySelector('.vx-dolor__grid');
+    if (!grid || grid.getAttribute('data-vx-stories')) return;
+    grid.setAttribute('data-vx-stories', '1');
+    var items = Array.prototype.slice.call(grid.children), n = items.length;
+    var mq = window.matchMedia('(max-width: 700px)');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var track = document.createElement('div'); track.className = 'vx-stories__track';
+    var bars = document.createElement('div'); bars.className = 'vx-stories-bars';
+    var fills = items.map(function () { var sp = document.createElement('span'); sp.innerHTML = '<i></i>'; bars.appendChild(sp); return sp; });
+    var idx = 0, on = false, visible = false, drag = false, locked = false, sx = 0, sy = 0, dx = 0, lastX = 0, lastT = 0, vel = 0, moved = false, W = 0;
 
-document.addEventListener('DOMContentLoaded', function () { window.vxCarousel('.vx-dolor__grid', 'vx-car-dots--dolor'); });
+    function paintBars() {
+      fills.forEach(function (sp, k) { sp.classList.toggle('done', k < idx); sp.classList.toggle('on', k === idx); });
+      items.forEach(function (it, k) { it.classList.toggle('is-active', k === idx); });
+    }
+    function go(i, instant) {
+      idx = ((i % n) + n) % n;
+      track.classList.toggle('is-drag', !!instant);
+      track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+      // reiniciar animación de la barra activa
+      fills.forEach(function (sp) { sp.classList.remove('on'); });
+      void bars.offsetWidth;
+      paintBars();
+      bars.classList.toggle('is-paused', !visible || drag);
+    }
+    function pause(v) { bars.classList.toggle('is-paused', v || !visible); }
+    fills.forEach(function (sp, k) {
+      sp.addEventListener('animationend', function () { if (on && k === idx) go(idx + 1); });
+    });
+
+    function down(e) { if (!on) return; drag = true; locked = false; moved = false; sx = lastX = e.clientX; sy = e.clientY; dx = 0; vel = 0; lastT = performance.now(); W = grid.clientWidth; pause(true); }
+    function move(e) {
+      if (!drag) return;
+      var mx = e.clientX - sx, my = e.clientY - sy;
+      if (!locked) { if (Math.abs(mx) > 8 && Math.abs(mx) > Math.abs(my)) { locked = true; moved = true; track.classList.add('is-drag'); try { grid.setPointerCapture(e.pointerId); } catch (_) {} } else return; }
+      dx = mx;
+      var now = performance.now(); vel = (e.clientX - lastX) / Math.max(1, now - lastT); lastX = e.clientX; lastT = now;
+      track.style.transform = 'translateX(calc(' + (-idx * 100) + '% + ' + dx + 'px))';
+    }
+    function up(e) {
+      if (!drag) return; drag = false;
+      track.classList.remove('is-drag');
+      if (locked) {
+        if (dx < -W * 0.2 || vel < -0.5) go(idx + 1); else if (dx > W * 0.2 || vel > 0.5) go(idx - 1); else go(idx);
+      } else if (e && e.type === 'pointerup') {
+        var r = grid.getBoundingClientRect();
+        if (e.clientX - r.left < r.width * 0.3) go(idx - 1); else go(idx + 1);
+      }
+      pause(false);
+    }
+    grid.addEventListener('pointerdown', down);
+    grid.addEventListener('pointermove', move);
+    grid.addEventListener('pointerup', up);
+    grid.addEventListener('pointercancel', up);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (on) pause(drag); }, { threshold: 0.55 }).observe(grid);
+    } else { visible = true; }
+
+    function enable() {
+      if (mq.matches === on) return;
+      on = mq.matches;
+      if (on) {
+        grid.parentNode.insertBefore(bars, grid);
+        items.forEach(function (it) { track.appendChild(it); });
+        grid.appendChild(track);
+        grid.classList.add('is-stories');
+        go(0, true);
+        if (reduce) bars.classList.add('is-paused');
+      } else {
+        grid.classList.remove('is-stories');
+        items.forEach(function (it) { it.classList.remove('is-active'); grid.appendChild(it); });
+        if (track.parentNode) track.parentNode.removeChild(track);
+        if (bars.parentNode) bars.parentNode.removeChild(bars);
+      }
+    }
+    window.addEventListener('resize', enable);
+    enable();
+  }
+  document.addEventListener('DOMContentLoaded', init);
+})();
 </script>
 {% schema %}
 { "name": "El Problema", "settings": [] }
