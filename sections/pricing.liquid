@@ -92,18 +92,55 @@
         <div class="vx-bullet"><span class="vx-bcheck">✓</span> Sabor limón-lima, sin azúcar</div>
       </div>
 
-      <div class="vx-subscription-slot">
-        {% content_for 'blocks' %}
-      </div>
-
       {% if vx_product %}
-        {% comment %} <span class='appstle_stand_alone_selector' data-product-handle='{{ vx_product.handle }}' style="display:none;"></span> {% endcomment %}
-        {% form 'product', vx_product %}
-          <input type="hidden" name="id" value="{{ vx_product.selected_or_first_available_variant.id }}">
-          <div class="ab-volume-discount-custom-placement-selector" data-product-id="{{vx_product.id}}" data-product-handle="{{vx_product.handle}}" data-variant-id="{{vx_product.variants[0].id}}" data-product-data=""></div>
+        {% assign vx_variant = vx_product.selected_or_first_available_variant %}
+        {% form 'product', vx_product, id: 'vx-buy-form' %}
+          <input type="hidden" name="id" value="{{ vx_variant.id }}">
+          <input type="hidden" name="quantity" value="2" data-vx-qty>
+          <input type="hidden" name="selling_plan" value="" data-vx-plan disabled>
+
+          <div class="vx-pack" data-vx-pack>
+            <div class="vx-sel__title">1 · Elige tu pack</div>
+            <div class="vx-pack__grid" role="radiogroup" aria-label="Número de botes">
+              {% for n in (1..3) %}
+                <label class="vx-pack__opt" data-vx-pack-opt="{{ n }}">
+                  <input type="radio" name="vx_pack" value="{{ n }}"{% if n == 2 %} checked{% endif %}>
+                  {% if n == 3 %}<span class="vx-pack__flag">Mejor precio por bote</span>{% endif %}
+                  <span class="vx-pack__n">{{ n }} {% if n == 1 %}bote{% else %}botes{% endif %}</span>
+                  <span class="vx-pack__d">{{ n | times: 30 }} días</span>
+                  <span class="vx-pack__u" data-vx-unit="{{ n }}"></span>
+                  <span class="vx-pack__save" data-vx-save="{{ n }}"></span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="vx-mode" data-vx-mode-wrap>
+            <div class="vx-sel__title">2 · Cómo quieres recibirlo</div>
+            <label class="vx-mode__opt is-on" data-vx-mode-opt="sub">
+              <input type="radio" name="vx_mode" value="sub" checked>
+              <span class="vx-mode__head">
+                <span class="vx-mode__name">Suscríbete y ahorra <em>Recomendado</em></span>
+                <span class="vx-mode__price"><s data-vx-sub-compare></s> <b data-vx-sub-price></b></span>
+              </span>
+              <span class="vx-mode__detail">
+                <span>✓ Entrega automática <b data-vx-freq></b></span>
+                <span>✓ Pausa, salta o cancela cuando quieras</span>
+                <span>✓ Envío gratis</span>
+              </span>
+            </label>
+            <label class="vx-mode__opt" data-vx-mode-opt="once">
+              <input type="radio" name="vx_mode" value="once">
+              <span class="vx-mode__head">
+                <span class="vx-mode__name">Compra única</span>
+                <span class="vx-mode__price"><s data-vx-once-compare></s> <b data-vx-once-price></b></span>
+              </span>
+            </label>
+          </div>
+
           <button type="submit" class="vx-btn-add" data-vx-buy-btn {% unless vx_product.available %}disabled{% endunless %}>
             {% if vx_product.available %}
-              <span data-vx-btn-label>Empezar con Voltrix</span> —
+              <span data-vx-btn-label>Suscribirme a Voltrix</span> —
               <span data-vx-btn-compare class="vx-btn-add__compare" style="display:none;"></span>
               <span data-vx-btn-price>{{ vx_product.price | money }}</span> →
             {% else %}
@@ -244,6 +281,48 @@
   .vx-sub-detail p { font-size: 12.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-top: 10px; padding-left: 25px; }
   .vx-sub-detail p strong { color: var(--color-white); }
 
+  /* ── Selector de packs + modo de compra ── */
+  .vx-sel__title { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 10px; }
+  .vx-pack { margin-bottom: 20px; }
+  .vx-pack__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .vx-pack__opt, .vx-mode__opt { position: relative; cursor: pointer; display: block; }
+  .vx-pack__opt input, .vx-mode__opt input { position: absolute; opacity: 0; pointer-events: none; }
+  .vx-pack__opt {
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px;
+    padding: 20px 6px 12px; border-radius: 12px; border: 1px solid #28284A; background: rgba(255,255,255,.03);
+    transition: border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+  .vx-pack__opt:hover { border-color: rgba(200,241,53,.4); }
+  .vx-pack__opt.is-on { border-color: var(--color-volt); background: rgba(200,241,53,.08); box-shadow: 0 0 0 1px var(--color-volt) inset; }
+  .vx-pack__opt:has(input:focus-visible), .vx-mode__opt:has(input:focus-visible) { outline: 2px solid var(--color-volt); outline-offset: 2px; }
+  .vx-pack__flag { position: absolute; top: -9px; left: 50%; transform: translateX(-50%); white-space: nowrap; background: var(--color-volt); color: var(--color-ink); font-size: 9px; font-weight: 900; letter-spacing: .3px; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; }
+  .vx-pack__n { font-size: 15px; font-weight: 800; color: var(--color-white); }
+  .vx-pack__d { font-size: 11px; color: rgba(255,255,255,.4); }
+  .vx-pack__u { font-size: 13px; font-weight: 800; color: var(--color-volt); margin-top: 6px; }
+  .vx-pack__save { font-size: 10px; white-space: nowrap; font-weight: 800; color: var(--color-ink); background: rgba(200,241,53,.9); border-radius: 99px; padding: 2px 7px; margin-top: 4px; min-height: 17px; }
+  .vx-pack__save:empty { visibility: hidden; }
+  .vx-mode { margin-bottom: 18px; }
+  .vx-mode__opt { border: 1px solid #28284A; border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; background: rgba(255,255,255,.03); transition: border-color .2s ease, background .2s ease; }
+  .vx-mode__opt.is-on { border-color: var(--color-volt); background: rgba(200,241,53,.06); }
+  .vx-mode__opt.is-off { opacity: .45; cursor: not-allowed; }
+  .vx-mode__head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .vx-mode__name { font-size: 14.5px; font-weight: 800; color: var(--color-white); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .vx-mode__name::before { content: ''; width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.3); flex-shrink: 0; transition: all .2s ease; }
+  .vx-mode__opt.is-on .vx-mode__name::before { border-color: var(--color-volt); background: radial-gradient(circle, var(--color-volt) 45%, transparent 50%); }
+  .vx-mode__name em { font-style: normal; font-size: 10px; font-weight: 900; background: var(--color-white); color: var(--color-ink); border-radius: 99px; padding: 2px 8px; }
+  .vx-mode__price { font-size: 17px; color: var(--color-white); }
+  .vx-mode__price s { font-size: 12px; color: rgba(255,255,255,.35); margin-right: 4px; }
+  .vx-mode__price b { font-weight: 900; }
+  .vx-mode__opt.is-on[data-vx-mode-opt="sub"] .vx-mode__price b { color: var(--color-volt); }
+  .vx-mode__detail { display: none; flex-direction: column; gap: 5px; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,.08); font-size: 12.5px; color: rgba(255,255,255,.55); }
+  .vx-mode__opt.is-on[data-vx-mode-opt="sub"] .vx-mode__detail { display: flex; animation: vxFade .3s ease; }
+  .vx-mode__detail b { color: var(--color-white); }
+  @keyframes vxFade { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  .vx-bump { animation: vxBump .35s ease; }
+  @keyframes vxBump { 50% { transform: scale(1.06); } }
+  @media (prefers-reduced-motion: reduce) { .vx-bump, .vx-mode__opt.is-on[data-vx-mode-opt="sub"] .vx-mode__detail { animation: none; } }
+  @media (max-width: 420px) { .vx-pack__n { font-size: 14px; } .vx-pack__opt { padding: 20px 4px 12px; } }
+
   /* ── Reskin del widget de suscripción de Appstle ──
      Especificidad alta a propósito: Appstle inyecta su propio <style>
      con selectores encadenados (.wrapper.compact .option) que ganan
@@ -327,88 +406,98 @@
 })();
 </script>
 {% if vx_product %}
+{% assign vx_v = vx_product.selected_or_first_available_variant %}
 <script>
 (function () {
-  var btn = document.querySelector('[data-vx-buy-btn]');
-  if (!btn) return;
+  var form = document.getElementById('vx-buy-form');
+  if (!form) return;
+  var BASE = {{ vx_v.price }};
+  var ONCE_DISCOUNT = { 1: 0, 2: 0.10, 3: 0.15 }; // Debe coincidir con las promos automáticas de Shopify
+  var ALLOC = [
+    {% for a in vx_v.selling_plan_allocations %}{ id: {{ a.selling_plan.id }}, price: {{ a.price }}, key: {{ a.selling_plan.options.first.value | json }}, name: {{ a.selling_plan.name | json }} }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+  var plans = {};
+  ALLOC.forEach(function (a) {
+    var m = /^(\d+)MONTH/.exec(a.key || '') || /(\d+)\s*mes/i.exec(a.name || '');
+    var n = m ? parseInt(m[1], 10) : (/mensual/i.test(a.name || '') ? 1 : 0);
+    if (n >= 1 && n <= 3 && !plans[n]) plans[n] = a;
+  });
 
-  var labelEl = btn.querySelector('[data-vx-btn-label]');
-  var priceEl = btn.querySelector('[data-vx-btn-price]');
-  var compareEl = btn.querySelector('[data-vx-btn-compare]');
-  var form = btn.closest('form');
-  var productHandle = {{ vx_product.handle | json }};
-  var productData = null;
+  var qtyEl = form.querySelector('[data-vx-qty]');
+  var planEl = form.querySelector('[data-vx-plan]');
+  var btn = form.querySelector('[data-vx-buy-btn]');
+  var labelEl = form.querySelector('[data-vx-btn-label]');
+  var priceEl = form.querySelector('[data-vx-btn-price]');
+  var compareEl = form.querySelector('[data-vx-btn-compare]');
+  var state = { n: 2, mode: 'sub' };
 
-  function formatMoney(cents) {
-    return (cents / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' });
-  }
+  function fmt(c) { return (c / 100).toLocaleString('es-ES', { style: 'currency', currency: '{{ cart.currency.iso_code }}' }); }
+  function onceTotal(n) { return Math.round(BASE * n * (1 - ONCE_DISCOUNT[n])); }
+  function subTotal(n) { return plans[n] ? plans[n].price * n : null; }
+  function q(sel) { return form.querySelector(sel); }
+  function bump(el) { if (!el) return; el.classList.remove('vx-bump'); void el.offsetWidth; el.classList.add('vx-bump'); }
 
-  function updateButton(sellingPlanId) {
-    if (!productData) return;
+  function render(animate) {
+    var n = state.n;
+    if (!plans[n] && state.mode === 'sub') state.mode = 'once';
 
-    if (!sellingPlanId) {
-      var variant = productData.variants[0];
-      labelEl.textContent = 'Empezar con Voltrix';
-      priceEl.textContent = formatMoney(variant.price);
-      if (variant.compare_at_price && variant.compare_at_price > variant.price) {
-        compareEl.textContent = formatMoney(variant.compare_at_price);
-        compareEl.style.display = '';
-      } else {
-        compareEl.style.display = 'none';
-      }
-      return;
-    }
-
-    var plan = null;
-    (productData.selling_plan_groups || []).forEach(function (group) {
-      group.selling_plans.forEach(function (p) {
-        if (String(p.id) === String(sellingPlanId)) plan = p;
-      });
+    // Tarjetas de pack
+    [1, 2, 3].forEach(function (k) {
+      var total = state.mode === 'sub' && plans[k] ? subTotal(k) : onceTotal(k);
+      var full = BASE * k;
+      q('[data-vx-unit="' + k + '"]').textContent = fmt(total / k) + '/bote';
+      var pct = Math.round((1 - total / full) * 100);
+      q('[data-vx-save="' + k + '"]').textContent = pct > 0 ? 'Ahorras ' + pct + '%' : '';
+      var opt = q('[data-vx-pack-opt="' + k + '"]');
+      opt.classList.toggle('is-on', k === n);
+      opt.querySelector('input').checked = (k === n);
     });
 
-    if (plan) {
-      var variant = productData.variants[0];
-      var allocation = (variant.selling_plan_allocations || []).find(function (a) {
-        return String(a.selling_plan_id) === String(sellingPlanId);
-      });
+    // Modo suscripción
+    var sT = subTotal(n), oT = onceTotal(n), full = BASE * n;
+    var subOpt = q('[data-vx-mode-opt="sub"]');
+    subOpt.classList.toggle('is-off', !plans[n]);
+    subOpt.querySelector('input').disabled = !plans[n];
+    if (plans[n]) {
+      q('[data-vx-sub-price]').textContent = fmt(sT);
+      q('[data-vx-sub-compare]').textContent = fmt(full);
+      q('[data-vx-freq]').textContent = n === 1 ? 'cada mes' : 'cada ' + n + ' meses';
+    } else {
+      q('[data-vx-sub-price]').textContent = 'No disponible';
+      q('[data-vx-sub-compare]').textContent = '';
+    }
+    q('[data-vx-once-price]').textContent = fmt(oT);
+    q('[data-vx-once-compare]').textContent = oT < full ? fmt(full) : '';
+    subOpt.classList.toggle('is-on', state.mode === 'sub');
+    subOpt.querySelector('input').checked = (state.mode === 'sub');
+    var onceOpt = q('[data-vx-mode-opt="once"]');
+    onceOpt.classList.toggle('is-on', state.mode === 'once');
+    onceOpt.querySelector('input').checked = (state.mode === 'once');
+
+    // Campos del formulario + botón
+    qtyEl.value = n;
+    if (state.mode === 'sub' && plans[n]) {
+      planEl.value = plans[n].id; planEl.disabled = false;
       labelEl.textContent = 'Suscribirme a Voltrix';
-      if (allocation) {
-        priceEl.textContent = formatMoney(allocation.price);
-        if (allocation.compare_at_price && allocation.compare_at_price > allocation.price) {
-          compareEl.textContent = formatMoney(allocation.compare_at_price);
-          compareEl.style.display = '';
-        } else {
-          compareEl.style.display = 'none';
-        }
-      }
+      priceEl.textContent = fmt(sT);
+      compareEl.textContent = fmt(full); compareEl.style.display = '';
+    } else {
+      planEl.value = ''; planEl.disabled = true;
+      labelEl.textContent = n === 1 ? 'Empezar con Voltrix' : 'Pedir ' + n + ' botes';
+      priceEl.textContent = fmt(oT);
+      if (oT < full) { compareEl.textContent = fmt(full); compareEl.style.display = ''; } else { compareEl.style.display = 'none'; }
     }
+    if (animate) bump(priceEl);
   }
 
-  fetch('/products/' + productHandle + '.js')
-    .then(function (res) { return res.json(); })
-    .then(function (data) {
-      productData = data;
-    })
-    .catch(function () {});
-
-  function syncFormSellingPlan(sellingPlanId) {
-    if (!form) return;
-    var hidden = form.querySelector('input[name="selling_plan"]');
-    if (!hidden) {
-      hidden = document.createElement('input');
-      hidden.type = 'hidden';
-      hidden.name = 'selling_plan';
-      form.appendChild(hidden);
-    }
-    hidden.value = sellingPlanId || '';
-  }
-
-  document.addEventListener('change', function (e) {
-    var target = e.target;
-    if (!target || target.name !== 'selling_plan') return;
-    syncFormSellingPlan(target.value);
-    updateButton(target.value);
+  form.addEventListener('change', function (e) {
+    var t = e.target;
+    if (!t) return;
+    if (t.name === 'vx_pack') { state.n = parseInt(t.value, 10); render(true); }
+    if (t.name === 'vx_mode') { state.mode = t.value; render(true); }
   });
+  render(false);
 })();
 </script>
 {% endif %}
