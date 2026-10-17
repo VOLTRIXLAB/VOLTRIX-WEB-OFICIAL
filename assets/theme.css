@@ -119,14 +119,28 @@ img { max-width: 100%; display: block; }
 .vx-spark-pulse { animation: vx-spark-pulse 2.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .vx-spark-pulse { animation: none; } }
 
-/* ── Portal "Mi suscripción" (Appstle): márgenes, título y sin recortes ── */
+/* ── Portal "Mi suscripción" (Appstle): fondo oscuro de marca, texto legible, sin recortes ── */
+body.vx-portal { background: var(--color-ink); }
 .vx-portal #MainContent {
   max-width: 1100px; margin: 0 auto; padding: 56px 24px 96px; min-height: 60vh;
-  box-sizing: border-box; overflow-x: hidden;
+  box-sizing: border-box; overflow-x: hidden; background: var(--color-ink); color: #fff;
 }
 .vx-portal #MainContent::before {
   content: 'Mi suscripción'; display: block; margin-bottom: 28px;
-  font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); line-height: 1.1; color: var(--color-ink);
+  font-family: var(--font-display); font-size: clamp(28px, 4vw, 40px); line-height: 1.1; color: #fff;
 }
 .vx-portal #MainContent > * { max-width: 100%; box-sizing: border-box; }
+/* Todo el texto del portal en claro (Appstle lo pinta con colores propios) */
+.vx-portal #MainContent :is(h1,h2,h3,h4,h5,h6,p,span,label,li,td,th,dt,dd,div,strong,small,b,i,em) { color: rgba(255,255,255,.88) !important; }
+.vx-portal #MainContent :is(h1,h2,h3,h4,h5,h6,strong,b) { color: #fff !important; }
+.vx-portal #MainContent a { color: var(--color-volt); }
+/* Botones lima con texto oscuro (también su contenido interior) */
+.vx-portal #MainContent :is(button, .btn, [role="button"], a[class*="btn" i], a[class*="button" i]),
+.vx-portal #MainContent :is(button, .btn, [role="button"], a[class*="btn" i], a[class*="button" i]) * { color: var(--color-ink) !important; }
+/* Campos de formulario: fondo blanco y texto oscuro */
+.vx-portal #MainContent :is(input, select, textarea) { background: #fff !important; color: var(--color-ink) !important; }
+/* Tarjetas: fondo oscuro suave con borde de marca */
+.vx-portal #MainContent :is([class*="card" i], [class*="Card"], [class*="panel" i]):not([class*="modal" i]) {
+  background: rgba(255,255,255,.04) !important; border: 1px solid #1E1E38 !important; border-radius: 16px;
+}
 @media (max-width: 749px) { .vx-portal #MainContent { padding: 36px 16px 72px; } }
