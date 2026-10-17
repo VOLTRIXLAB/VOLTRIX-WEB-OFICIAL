@@ -72,7 +72,7 @@
 
   <link rel="icon" type="image/png" href="{{ 'favicon-voltrix.png' | asset_url }}">
 </head>
-<body>
+<body{% if request.path contains '/apps/subscriptions' %} class="vx-portal"{% endif %}>
   {% sections 'header-group' %}
   <main id="MainContent" role="main">
     {{ content_for_layout }}
