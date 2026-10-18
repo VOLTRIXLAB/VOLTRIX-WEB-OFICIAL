@@ -2,7 +2,7 @@
 <header class="vx-header section--dark">
 <div class="page-width vx-header__inner">
 <a href="{{ routes.root_url }}" class="vx-header__logo">
-<img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="eager" class="vx-header__logo-img">
+<img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="eager" decoding="async" width="67" height="26" class="vx-header__logo-img">
 </a>
 <nav class="vx-header__nav">
 <a href="{{ routes.root_url }}#metodo-voltrix">Método Voltrix</a>
@@ -291,10 +291,10 @@ left: 16px; bottom: 16px; width: calc(100% - 32px); max-width: 420px;
 background: #0F0F24; border: 1px solid #1E1E38; border-radius: 18px;
 padding: 18px 20px;
 box-shadow: 0 20px 60px rgba(0,0,0,.55);
-transform: translateY(24px); opacity: 0; visibility: hidden;
-transition: transform .3s ease, opacity .3s ease, visibility .3s;
+transform: translateY(24px); opacity: 0; pointer-events: none;
+transition: transform .3s ease, opacity .3s ease;
 }
-.vx-cookies.is-visible { transform: translateY(0); opacity: 1; visibility: visible; }
+.vx-cookies.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
 .vx-cookies__title { font-family: var(--font-display, 'DM Serif Display', serif); font-weight: 400; font-size: 20px; color: #FFFFFF; margin: 0 0 8px; line-height: 1.25; }
 .vx-cookies__text { font-size: 12.5px; line-height: 1.55; color: rgba(255,255,255,.6); margin: 0 0 14px; }
 .vx-cookies__link { color: #C8F135; text-decoration: underline; text-underline-offset: 2px; white-space: nowrap; }
@@ -308,7 +308,9 @@ font-family: var(--font-body, 'Inter', sans-serif); font-size: 13.5px; font-weig
 .vx-cookies__btn:hover { opacity: .9; }
 .vx-cookies__btn:focus-visible { outline: 2px solid #C8F135; outline-offset: 2px; }
 @media (max-width: 749px) {
-.vx-cookies { left: 0; bottom: 0; width: 100%; max-width: none; border-radius: 18px 18px 0 0; border-left: none; border-right: none; border-bottom: none; padding: 16px 18px calc(14px + env(safe-area-inset-bottom)); }
+.vx-cookies { left: 0; bottom: 0; width: 100%; max-width: none; border-radius: 18px 18px 0 0; border-left: none; border-right: none; border-bottom: none; padding: 14px 16px calc(12px + env(safe-area-inset-bottom)); }
+.vx-cookies__title { font-size: 17px; margin-bottom: 4px; }
+.vx-cookies__text { font-size: 12px; margin-bottom: 10px; }
 }
 </style>
 
@@ -441,9 +443,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (e.clientY <= 0) openPopup();
   }
 
+  var scrollTick = false;
   function onScroll() {
-    var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    if (scrollPct > 0.5) openPopup();
+    if (scrollTick) return; scrollTick = true;
+    requestAnimationFrame(function () {
+      scrollTick = false;
+      var scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+      if (scrollPct > 0.5) openPopup();
+    });
   }
 
   if (window.matchMedia('(min-width: 750px)').matches) {
@@ -573,16 +580,18 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   window.vxOpenCookies = function () { open(); };
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function boot() {
     var stored = readStored();
     if (stored) {
       // Ya decidió: nos aseguramos de que Shopify tiene la misma decisión
       applyToShopify(stored);
       return;
     }
-    // Pequeño retardo para que no compita con la carga inicial
-    setTimeout(open, 800);
-  });
+    // Se muestra tras la carga completa: así el banner no compite con el título (LCP)
+    setTimeout(open, 2500);
+  }
+  if (document.readyState === 'complete') boot();
+  else window.addEventListener('load', boot);
 })();
 </script>
 

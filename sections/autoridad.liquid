@@ -162,29 +162,32 @@
   .vx-aut__closing-desc { font-size: 13.5px; color: rgba(255,255,255,.5); line-height: 1.65; }
 
 
-  .vx-car-dots { display: none; justify-content: center; gap: 8px; margin-top: 16px; }
-  .vx-car-dots button { width: 7px; height: 7px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.2); cursor: pointer; transition: width .3s ease, background .3s ease; }
-  .vx-car-dots button.on { width: 22px; background: var(--color-volt); }
+  .vx-car-dots { display: none; justify-content: center; gap: 0; margin-top: 10px; }
+  .vx-car-dots button { position: relative; width: 24px; height: 24px; border: 0; padding: 0; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .vx-car-dots button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 22px; height: 7px; margin: -3.5px 0 0 -11px; border-radius: 99px; background: rgba(255,255,255,.2); transform: scaleX(.32); transition: transform .3s ease, background .3s ease; }
+  .vx-car-dots button.on::after { transform: scaleX(1); background: var(--color-volt); }
 
-  .vx-metodo-item__marker { animation: vxPulse 3.2s ease-in-out infinite; }
-  @keyframes vxPulse { 0%,100% { box-shadow: 0 0 14px rgba(200,241,53,.12); } 50% { box-shadow: 0 0 28px rgba(200,241,53,.34); } }
+  .vx-metodo-item__marker { position: relative; }
+  .vx-metodo-item__marker::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 28px rgba(200,241,53,.34); opacity: .35; pointer-events: none; animation: vxPulse 3.2s ease-in-out infinite; will-change: opacity; }
+  @keyframes vxPulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
   .vx-aut__item::before { transform: scaleX(0); transition: transform 1s ease .3s; }
   .vx-aut__item.vx-reveal--in::before { transform: scaleX(1); }
   @media (hover: hover) { .vx-aut__item { transition: opacity .7s ease, transform .35s ease, border-color .3s ease; } .vx-aut__item:hover { transform: translateY(-4px); border-color: rgba(200,241,53,.35); } }
-  @media (prefers-reduced-motion: reduce) { .vx-metodo-item__marker { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .vx-metodo-item__marker::after { animation: none; } }
   @media (max-width: 900px) {
+    .vx-aut__grid {
+      display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden; touch-action: pan-x pan-y; scroll-snap-type: x mandatory; scrollbar-width: none;
+      margin: 0 -24px 0; padding: 6px 24px; scroll-padding-left: 24px; overscroll-behavior-x: contain;
+    }
+    .vx-aut__grid::-webkit-scrollbar { display: none; }
+    .vx-aut__item { flex: 0 0 80%; scroll-snap-align: start; }
     .vx-ing-section .vx-car-dots { display: flex; margin-bottom: 8px; }
-    /* Volteo: una tarjeta cada vez que se da la vuelta como una carta (lo posiciona el JS) */
-    .vx-aut__grid.is-flip { display: block; position: relative; margin: 0 0 12px; perspective: 1200px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
-    .vx-aut__grid.is-flip .vx-aut__item { position: absolute; left: 0; right: 0; top: 0; background: #10102A; backface-visibility: hidden; -webkit-backface-visibility: hidden; will-change: transform; opacity: 1 !important; transition: none !important; cursor: grab; }
-    .vx-aut__grid.is-flip .vx-aut__item::before { transform: scaleX(1); }
   }
   @media (max-width: 600px) {
-    /* Rueda 3D: las tarjetas giran en círculo (lo posiciona el JS) */
-    .vx-metodo-list { position: relative; margin: 0 -24px; padding: 0; max-width: none; overflow: hidden; perspective: 1000px; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab; }
-    .vx-metodo-list.is-drag { cursor: grabbing; }
-    .vx-metodo-item { display: block; position: absolute; top: 0; left: 50%; width: 78%; margin: 0 0 0 -39%; padding: 22px 20px; background: #10102A; border: 1px solid #1E1E38; border-radius: 18px; will-change: transform, opacity; backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: none; }
-    .vx-metodo-list:not(.is-ring) .vx-metodo-item { position: relative; left: auto; width: auto; margin: 0 24px 12px; opacity: 1; transform: none; }
+    /* Volteo: una tarjeta cada vez que se da la vuelta como una carta (lo posiciona el JS) */
+    .vx-metodo-list.is-flip { position: relative; max-width: none; margin: 0; perspective: 1200px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .vx-metodo-list.is-flip .vx-metodo-item { display: block; position: absolute; top: 0; left: 0; right: 0; width: auto; margin: 0; padding: 22px 20px; background: #10102A; border: 1px solid #1E1E38; border-radius: 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; will-change: transform; opacity: 1 !important; transition: none !important; cursor: grab; }
+    .vx-metodo-list:not(.is-flip) .vx-metodo-item { display: block; position: relative; margin: 0 0 12px; padding: 22px 20px; background: #10102A; border: 1px solid #1E1E38; border-radius: 18px; }
     .vx-metodo-item__connector { display: none; }
     .vx-metodo-item__marker { width: 44px; height: 44px; margin-bottom: 14px; }
     .vx-metodo-item__title { font-size: 21px; }
@@ -199,106 +202,13 @@
 </style>
 <script>
 (function () {
-  /* Rueda 3D: tarjetas que giran en círculo. Solo móvil (<=600px). Swipe horizontal, puntos y vuelta infinita. */
-  function vxRing(sel, dotsClass) {
-    var list = document.querySelector(sel);
-    if (!list || list.getAttribute('data-vx-ring')) return;
-    list.setAttribute('data-vx-ring', '1');
-    var items = Array.prototype.slice.call(list.children);
-    var n = items.length, STEP = 52 * Math.PI / 180;
-    var mq = window.matchMedia('(max-width: 600px)');
-    var pos = 0, W = 0, R = 0, raf = 0, on = false;
-    var dots = document.createElement('div');
-    dots.className = 'vx-car-dots ' + dotsClass;
-    items.forEach(function (it, i) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.setAttribute('aria-label', 'Ir a ' + (i + 1));
-      b.addEventListener('click', function () {
-        var d = i - pos; d = ((d + n / 2) % n + n) % n - n / 2; animTo(pos + d);
-      });
-      dots.appendChild(b);
-    });
-    list.parentNode.insertBefore(dots, list.nextSibling);
-
-    function wrap(d) { return ((d + n / 2) % n + n) % n - n / 2; }
-    function render() {
-      items.forEach(function (it, i) {
-        var d = wrap(i - pos), t = d * STEP;
-        var x = Math.sin(t) * R, z = (Math.cos(t) - 1) * R * 0.9;
-        it.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,' + z.toFixed(1) + 'px) rotateY(' + (t * 180 / Math.PI).toFixed(1) + 'deg)';
-        var ad = Math.abs(d);
-        it.style.opacity = (ad <= 1 ? 1 - ad * 0.4 : Math.max(0, (1.5 - ad) / 0.5 * 0.6)).toFixed(2);
-        it.style.visibility = ad >= 1.5 ? 'hidden' : 'visible';
-        it.style.zIndex = Math.round(100 - Math.abs(d) * 10);
-        it.style.pointerEvents = Math.abs(d) > 1.5 ? 'none' : '';
-      });
-      var idx = ((Math.round(pos) % n) + n) % n;
-      Array.prototype.forEach.call(dots.children, function (b, k) { b.classList.toggle('on', k === idx); });
-    }
-    function measure() {
-      W = list.clientWidth; R = W * 0.62;
-      var h = 0;
-      items.forEach(function (it) { it.style.height = 'auto'; h = Math.max(h, it.offsetHeight); });
-      items.forEach(function (it) { it.style.height = h + 'px'; });
-      list.style.height = (h + 4) + 'px';
-      render();
-    }
-    function animTo(target) {
-      cancelAnimationFrame(raf);
-      var from = pos, t0 = null, dur = 420;
-      function step(t) {
-        if (!t0) t0 = t;
-        var k = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - k, 3);
-        pos = from + (target - from) * e; render();
-        if (k < 1) raf = requestAnimationFrame(step); else { pos = ((target % n) + n) % n; render(); }
-      }
-      raf = requestAnimationFrame(step);
-    }
-    var sx = 0, sy = 0, spos = 0, drag = false, lastX = 0, lastT = 0, vel = 0, locked = false;
-    function down(e) {
-      if (!on) return;
-      cancelAnimationFrame(raf); drag = true; locked = false; sx = lastX = e.clientX; sy = e.clientY; spos = pos; lastT = performance.now(); vel = 0;
-    }
-    function move(e) {
-      if (!drag) return;
-      var dx = e.clientX - sx, dy = e.clientY - sy;
-      if (!locked) { if (Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dy)) { locked = true; list.classList.add('is-drag'); try { list.setPointerCapture(e.pointerId); } catch (_) {} } else return; }
-      var now = performance.now();
-      vel = (lastX - e.clientX) / (W * 0.55) / Math.max(1, now - lastT) * 1000; lastX = e.clientX; lastT = now;
-      pos = spos - dx / (W * 0.55); render();
-    }
-    function up() {
-      if (!drag) return; drag = false; list.classList.remove('is-drag');
-      animTo(Math.round(pos + Math.max(-1.2, Math.min(1.2, vel * 0.18))));
-    }
-    list.addEventListener('pointerdown', down);
-    list.addEventListener('pointermove', move);
-    list.addEventListener('pointerup', up);
-    list.addEventListener('pointercancel', up);
-    function enable() {
-      if (mq.matches === on) { if (on) measure(); return; }
-      on = mq.matches;
-      list.classList.toggle('is-ring', on);
-      dots.style.display = on ? '' : 'none';
-      if (on) { measure(); }
-      else { items.forEach(function (it) { it.style.cssText = ''; }); list.style.height = ''; }
-    }
-    window.addEventListener('resize', enable);
-    window.addEventListener('load', function () { if (on) measure(); });
-    enable();
-  }
-  window.vxRing = vxRing;
-})();
-</script>
-<script>
-(function () {
-  /* Volteo: las tarjetas se dan la vuelta como cartas al deslizar (infinito). Solo <=900px. */
-  function vxFlip(sel, dotsClass) {
+  /* Volteo: las tarjetas se dan la vuelta como cartas al deslizar (infinito). Solo móvil. */
+  function vxFlip(sel, dotsClass, maxW) {
     var grid = document.querySelector(sel);
     if (!grid || grid.getAttribute('data-vx-flip')) return;
     grid.setAttribute('data-vx-flip', '1');
     var items = Array.prototype.slice.call(grid.children), n = items.length;
-    var mq = window.matchMedia('(max-width: 900px)');
+    var mq = window.matchMedia('(max-width: ' + maxW + 'px)');
     var pos = 0, W = 0, raf = 0, on = false, drag = false, locked = false, sx = 0, sy = 0, spos = 0, lastX = 0, lastT = 0, vel = 0;
     var dots = document.createElement('div');
     dots.className = 'vx-car-dots ' + dotsClass;
@@ -402,8 +312,8 @@
 })();
 
 document.addEventListener('DOMContentLoaded', function () {
-  window.vxRing('.vx-metodo-list', 'vx-car-dots--metodo');
-  window.vxFlip('.vx-aut__grid', 'vx-car-dots--ing');
+  window.vxFlip('.vx-metodo-list', 'vx-car-dots--metodo', 600);
+  window.vxCarousel('.vx-aut__grid', 'vx-car-dots--ing');
   var els = document.querySelectorAll('[data-vx-count]');
   if (!els.length || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var io = new IntersectionObserver(function (es) {

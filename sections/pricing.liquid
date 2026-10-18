@@ -29,11 +29,14 @@
 
             {% for image in vx_product.images %}
               <img
-                src="{{ image | image_url: width: 1400 }}"
+                src="{{ image | image_url: width: 800 }}"
+                srcset="{{ image | image_url: width: 480 }} 480w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1100 }} 1100w"
+                sizes="(max-width: 700px) 92vw, 520px"
+                width="{{ image.width }}" height="{{ image.height }}"
                 alt="{{ image.alt | default: vx_product.title }}"
                 class="vx-gallery__img{% if forloop.first %} is-active{% endif %}"
                 data-vx-slide="{{ forloop.index0 }}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                loading="lazy" decoding="async"
               >
             {% endfor %}
 
@@ -53,7 +56,7 @@
                   data-vx-thumb="{{ forloop.index0 }}"
                   aria-label="Ver foto {{ forloop.index }}"
                 >
-                  <img src="{{ image | image_url: width: 240 }}" alt="{{ image.alt | default: vx_product.title }}" loading="lazy">
+                  <img src="{{ image | image_url: width: 160 }}" srcset="{{ image | image_url: width: 160 }} 1x, {{ image | image_url: width: 240 }} 2x" alt="{{ image.alt | default: vx_product.title }}" loading="lazy" decoding="async">
                 </button>
               {% endfor %}
             </div>
@@ -256,13 +259,12 @@
   .vx-subscription-slot:not(:empty) { margin-bottom: 20px; }
   .vx-bullet { display: flex; align-items: center; gap: 11px; font-size: 14px; color: rgba(255,255,255,.55); font-weight: 500; }
   .vx-bcheck { width: 19px; height: 19px; border-radius: 5px; background: rgba(200,241,53,.08); border: 1px solid rgba(200,241,53,.2); color: var(--color-volt); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-  .vx-btn-add { display: block; text-align: center; width: 100%; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; position: relative; animation: vx-btn-pulse 2.6s ease-in-out infinite; }
-  .vx-btn-add:disabled { opacity: .5; cursor: not-allowed; animation: none; }
-  @keyframes vx-btn-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(200,241,53,.45); }
-    50% { box-shadow: 0 0 0 10px rgba(200,241,53,0); }
-  }
-  @media (prefers-reduced-motion: reduce) { .vx-btn-add { animation: none; } }
+  .vx-btn-add { display: block; text-align: center; width: 100%; padding: 16px; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 900; border-radius: 12px; margin-bottom: 11px; border: none; cursor: pointer; position: relative; }
+  .vx-btn-add::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid rgba(200,241,53,.6); pointer-events: none; animation: vx-btn-pulse 2.6s ease-out infinite; will-change: transform, opacity; }
+  .vx-btn-add:disabled { opacity: .5; cursor: not-allowed; }
+  .vx-btn-add:disabled::after { animation: none; display: none; }
+  @keyframes vx-btn-pulse { 0% { transform: scale(1); opacity: .55; } 70%,100% { transform: scale(1.08, 1.35); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .vx-btn-add::after { animation: none; display: none; } }
   .vx-btn-add__compare { text-decoration: line-through; opacity: .55; font-weight: 700; margin-right: 4px; }
 
   .vx-trust { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
