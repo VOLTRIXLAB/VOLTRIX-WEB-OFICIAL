@@ -66,11 +66,10 @@
   {{ content_for_header }}
 
   <!-- Fuentes de marca: Inter (body) + DM Serif Display (titulares) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
-  {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {% render 'vx-theme-css' %}
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
 
   <noscript><style>.vx-reveal{opacity:1!important;transform:none!important}</style></noscript>
