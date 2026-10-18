@@ -12,9 +12,6 @@
     "hvco": {
       "type": "hvco"
     },
-    "complexes": {
-      "type": "ingredient-complexes"
-    },
     "guia": {
       "type": "guia"
     },
@@ -42,7 +39,6 @@
     "proof",
     "dolor",
     "hvco",
-    "complexes",
     "guia",
     "autoridad",
     "why",
