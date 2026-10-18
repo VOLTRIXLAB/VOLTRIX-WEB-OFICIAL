@@ -23,7 +23,7 @@
       },
       "6159598353363395418": {
         "type": "shopify://apps/google-youtube/blocks/store_widget/14ec7bd0-ac77-49a9-9417-90752398bdff",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "widget_position": "LEFT_BOTTOM",
           "side_margin": 36,
@@ -34,7 +34,7 @@
       },
       "10508887350528622030": {
         "type": "shopify://apps/appstle-bundles/blocks/appstle-bundle/8909921b-2d24-4d68-9b12-9d045d3dcb0a",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "scope_rules": true
         }
