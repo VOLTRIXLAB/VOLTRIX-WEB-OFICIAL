@@ -20,7 +20,7 @@
   --color-blue-mid:    #1D4ED8;
   --font-body: 'Inter', sans-serif;
   --font-display: 'DM Serif Display', serif;
-  --page-width: {{ settings.page_width | default: 1200 }}px;
+  --page-width: none; /* sin tope: las secciones oscuras (section--dark page-width) llevan el fondo en el propio elemento */
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 24px;
@@ -103,10 +103,10 @@ img { max-width: 100%; display: block; }
 .vx-rise-line span {
   display: inline-block;
   transform: translateY(110%);
-  animation: vx-rise 0.85s cubic-bezier(.16,.84,.44,1) forwards;
+  animation: vx-rise 0.6s cubic-bezier(.16,.84,.44,1) forwards;
 }
-.vx-rise-line:nth-child(1) span { animation-delay: 0.15s; }
-.vx-rise-line:nth-child(2) span { animation-delay: 0.32s; }
+.vx-rise-line:nth-child(1) span { animation-delay: 0s; }
+.vx-rise-line:nth-child(2) span { animation-delay: 0.08s; }
 @keyframes vx-rise { to { transform: translateY(0); } }
 @media (prefers-reduced-motion: reduce) {
   .vx-rise-line span { animation: none; transform: none; }
