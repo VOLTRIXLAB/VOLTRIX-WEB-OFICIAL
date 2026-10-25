@@ -20,12 +20,36 @@
 <section class="vx-cierre section--dark">
   <div class="vx-cierre__box">
     <p class="vx-eyebrow text-volt">Si no cambias nada</p>
-    <h2 class="font-display vx-reveal">{{ t }}</h2>
-    <p class="vx-cierre__p vx-reveal" data-vx-delay="1">{{ b }}</p>
+    <h2 class="font-display vx-reveal" id="vx-cierre-t">{{ t }}</h2>
+    <p class="vx-cierre__p vx-reveal" data-vx-delay="1" id="vx-cierre-b">{{ b }}</p>
     <p class="vx-cierre__mono vx-reveal" data-vx-delay="2">«Mañana lo hago mejor» lleva meses en tu cabeza. Esta vez, que sea hoy.</p>
     <a href="#producto" class="vx-cierre__cta vx-reveal" data-vx-delay="3">Elegir mi mes →</a>
   </div>
 </section>
+{%- if section.settings.angle == 'general' -%}
+<script>
+(function () {
+  // Mismo ángulo que el hero: getvoltrix.es/?a=cafe
+  var C = {
+    cafe: ['Mañana también habrá un café a las 9.', 'Y un bajón a las 3, y otro café a las 4. Si no cambias nada, tu semana que viene se parece a esta. Si pruebas Voltrix: 30 tomas, una sola rutina y un mes para decidir si el café de las 9 vuelve a mandar.'],
+    gym: ['Dentro de un mes, ¿los mismos pesos?', 'Si no cambias nada, la barra seguirá donde está. Si pruebas Voltrix: 30 tomas, 3 g de creatina cada día y un mes de datos tuyos para decidir.'],
+    sed: ['Dentro de un mes, ¿qué botella vas a tener en la mano?', 'Si no cambias nada, la misma botella, la misma sed a las 4 y otra bebida que dejarás a medias. Si pruebas Voltrix: 30 tomas, una sola rutina y un mes para ver si te encaja.'],
+    botes: ['Dentro de un mes, ¿cuántos botes más en el armario?', 'Si no cambias nada, otro bote a medias, otra rutina que no sostienes y la misma duda cada mañana. Si pruebas Voltrix: un solo bote, una sola toma y un mes para decidir si te encaja.'],
+    estres: ['El lunes llegará igual que este.', 'Con la misma cabeza el domingo por la noche y el mismo cansancio acumulado. Voltrix no te quita la semana, pero te da una rutina fija: 30 tomas, una cada día, y un mes para comprobar si te encaja.'],
+    deposito: ['A las 7 de la tarde, ¿con algo en el depósito?', 'Si no cambias nada, llegarás igual de vacío y dejarás el entreno para mañana. Si pruebas Voltrix: 30 tomas, una cada día, y un mes para comprobar si cambia tu tarde.'],
+    sueno: ['Dentro de un mes, ¿otra noche dándole vueltas?', 'Si no cambias nada, la misma cabeza a las 11 y el mismo cansancio al despertar. Voltrix no es un somnífero, es una rutina diaria: 30 tomas y un mes para ver si te encaja.'],
+    foco: ['Dentro de un mes, ¿el mismo foco a las 4 de la tarde?', 'Si no cambias nada, la misma lista a medias y el mismo café de más. Si pruebas Voltrix: 30 tomas, cafeína con L-teanina en una sola rutina y un mes para decidir.'],
+    antihype: ['Dentro de un mes, ¿otro bote lleno de promesas?', 'Si no cambias nada, seguirás leyendo etiquetas que no dicen nada. Voltrix pone cada dosis en la etiqueta: 30 tomas y un mes para comprobar si te encaja.'],
+    precio: ['Dentro de un mes, ¿cuánto habrás gastado en cafés?', 'Si no cambias nada, el café de las 9 de cada día sigue sumando. Si pruebas Voltrix: 30 tomas a 1,67 € al día y un mes para decidir si compensa.']
+  };
+  var k = new URLSearchParams(location.search).get('a');
+  if (!k || !Object.prototype.hasOwnProperty.call(C, k)) return;
+  var t = document.getElementById('vx-cierre-t'), b = document.getElementById('vx-cierre-b');
+  if (t) t.textContent = C[k][0];
+  if (b) b.textContent = C[k][1];
+})();
+</script>
+{%- endif -%}
 <style>
   .vx-cierre { padding: 72px 24px 96px; }
   .vx-cierre__box { max-width: 720px; margin: 0 auto; padding: 44px 32px; text-align: center; border: 1px solid #1E1E38; border-radius: 22px; background: #10102A; }
