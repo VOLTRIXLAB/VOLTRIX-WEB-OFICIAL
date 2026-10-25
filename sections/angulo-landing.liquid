@@ -11,7 +11,11 @@
       assign why_title = 'La cafeína sola es solo una parte'
       assign why_text = 'Por eso Voltrix combina 100 mg de cafeína natural con 200 mg de L-teanina pura, en ratio 2:1. Una toma, a la hora de tu café, y sin azúcar.'
       assign ings = 'Cafeína natural::100 mg::Ayuda a aumentar el estado de alerta y a mejorar la concentración.|L-teanina (100 % pura)::200 mg::Va junto a la cafeína en ratio 2:1, para que no vaya sola.' | split: '|'
-      assign foot = 'Declaración de propiedades saludables autorizada en la UE (Reg. 432/2012) para la cafeína, con al menos 75 mg por porción. Contiene cafeína (100 mg por toma): no recomendado para menores de 18 años, embarazo ni lactancia.'
+      assign agit1 = 'Primero fue un café. Luego dos. Ahora el café de las 9 ya no marca la diferencia y a las 3 estás buscando otro.'
+      assign agit2 = 'El problema no es que necesites más cafeína. Es cómo la tomas: sola, con prisa y sin nada que la acompañe.'
+      assign sol_title = 'Cafeína, pero no sola'
+      assign sol_text = 'Voltrix lleva el Focus & Energy Complex: 100 mg de cafeína natural y 200 mg de L-teanina pura en ratio 2:1, una combinación pensada para acompañar a la cafeína. Es tu café de las 9, con una fórmula detrás y sin azúcar.'
+      assign active = 'focus'
     when 'estres'
       assign eyebrow = 'Estrés y recuperación'
       assign h1_a = 'Terminas el día agotado'
@@ -21,7 +25,11 @@
       assign why_title = 'No se arregla con fuerza de voluntad'
       assign why_text = 'El estrés se acumula y se nota en el entreno, en el sueño y en la cabeza. Lo que sí controlas es la rutina: una toma al día, a la misma hora, con ingredientes en dosis definida.'
       assign ings = 'KSM-66® Ashwagandha::300 mg::Extracto estandarizado de raíz de ashwagandha.|Magnesio bisglicinato::100 mg::Contribuye a reducir el cansancio y la fatiga, y al funcionamiento psicológico normal.' | split: '|'
-      assign foot = 'Declaración de propiedades saludables autorizada en la UE (Reg. 432/2012) para el magnesio. Ashwagandha: no recomendado en embarazo, lactancia ni menores de 18 años. Consulta a tu médico si tomas medicación o tienes alguna patología tiroidea.'
+      assign agit1 = 'Trabajas 10 horas, entrenas cuatro veces por semana y duermes lo que puedes. Haces todo bien y aun así llegas al final del día sin ganas de nada.'
+      assign agit2 = 'No es pereza ni falta de disciplina. Es acumulación. Y la acumulación no se arregla con una semana buena.'
+      assign sol_title = 'Una rutina fija que sostiene lo demás'
+      assign sol_text = 'Voltrix lleva el Stress & Recovery Complex: 300 mg de KSM-66®, un extracto estandarizado de raíz de ashwagandha. Y dentro del Hydra Performance Complex, 100 mg de magnesio bisglicinato, que contribuye a reducir el cansancio y la fatiga. No es un atajo: es una toma diaria con hidratación, foco y rendimiento incluidos.'
+      assign active = 'stress'
     when 'rendimiento'
       assign eyebrow = 'Rendimiento'
       assign h1_a = 'Llevas semanas con los mismos pesos.'
@@ -31,7 +39,11 @@
       assign why_title = 'La dosis importa. La constancia, más.'
       assign why_text = 'La creatina funciona cuando la tomas todos los días, no solo los días que entrenas. Por eso una dosis útil de 3 g va en la misma toma de siempre, con el resto de la fórmula.'
       assign ings = 'Creatina monohidrato::3 g::Aumenta el rendimiento físico en series sucesivas de ejercicios de corta duración y alta intensidad (3 g al día, adultos).|Taurina::500 mg::Aminoácido que completa la fórmula de rendimiento.' | split: '|'
-      assign foot = 'Declaración de propiedades saludables autorizada en la UE (Reg. 432/2012) para la creatina, con 3 g diarios. Producto para adultos.'
+      assign agit1 = 'Mismo plan, mismas series, mismos pesos. Entrenas bien y la barra sigue en el mismo sitio.'
+      assign agit2 = 'La creatina es una de las más estudiadas, y aun así mucha gente la toma a ratos, en dosis a medias o solo los días de gimnasio.'
+      assign sol_title = 'La dosis útil, todos los días'
+      assign sol_text = 'Voltrix lleva el Performance Complex: 3 g de creatina monohidrato y 500 mg de taurina en cada toma. Va en el bote para que la dosis no dependa de que te acuerdes de medirla: una cucharada y listo.'
+      assign active = 'perf'
     else
       assign a = 'hidratacion'
       assign eyebrow = 'Hidratación'
@@ -42,7 +54,11 @@
       assign why_title = 'El agua sola no hace todo el trabajo'
       assign why_text = 'Cuando sudas pierdes agua y sales minerales, y reponer solo el agua se queda a medias. Aquí no hay dosis simbólicas: cada toma lleva 600 mg de sodio, 300 mg de potasio y 100 mg de magnesio bisglicinato.'
       assign ings = 'Sodio (citrato sódico)::600 mg::El electrolito principal que pierdes con el sudor.|Potasio (citrato potásico)::300 mg::Contribuye al funcionamiento normal de los músculos y del sistema nervioso.|Magnesio bisglicinato::100 mg::Contribuye al equilibrio electrolítico y a reducir el cansancio y la fatiga.' | split: '|'
-      assign foot = 'Declaraciones de propiedades saludables autorizadas en la UE (Reg. 432/2012) para el potasio y el magnesio.'
+      assign agit1 = 'Te acuerdas de beber cuando llevas horas sin hacerlo, rellenas la botella tres veces y aun así llegas a la tarde con la boca seca.'
+      assign agit2 = 'Entrenas, sudas y repones solo agua. Los minerales que pierdes con el sudor se quedan sin reponer, y muchas bebidas deportivas llevan azúcar y poco más.'
+      assign sol_title = 'Lo que el agua sola no repone'
+      assign sol_text = 'Voltrix lleva el Hydra Performance Complex: sodio, potasio y magnesio bisglicinato en dosis que no son simbólicas, y sin azúcar. La idea no es beber más; es que lo que bebes venga acompañado de lo que tu cuerpo usa.'
+      assign active = 'hydra'
   endcase
 -%}
 
@@ -68,6 +84,8 @@
           <li class="vx-reveal" data-vx-delay="{{ forloop.index }}">{{ p }}</li>
         {%- endfor -%}
       </ul>
+      <p class="vx-ang__why vx-reveal">{{ agit1 }}</p>
+      <p class="vx-ang__why vx-reveal">{{ agit2 }}</p>
       <p class="vx-ang__mono vx-reveal">Y por la noche, la misma frase: <em>«mañana lo hago mejor».</em></p>
     </div>
   </div>
@@ -87,14 +105,80 @@
           </div>
         {%- endfor -%}
       </div>
-      <p class="vx-ang__foot">{{ foot }}</p>
     </div>
   </div>
 
   <div class="vx-ang__block">
     <div class="vx-ang__wrap">
-      <p class="vx-eyebrow text-volt">Todo en una sola toma</p>
-      <p class="vx-ang__why vx-reveal">Voltrix reúne hidratación, energía y foco, rendimiento y recuperación en un solo bote. Esta es la parte de la fórmula que más tiene que ver con lo que acabas de leer; el resto va incluido.</p>
+      <p class="vx-eyebrow text-volt">La solución</p>
+      <h2 class="font-display vx-reveal">{{ sol_title }}</h2>
+      <p class="vx-ang__why vx-reveal" data-vx-delay="1">{{ sol_text }}</p>
+      <ol class="vx-ang__steps">
+        <li class="vx-reveal" data-vx-delay="1"><b>Una cucharada.</b> El bote lleva su medidor: 8,5 g en 200 ml de agua. Sabor limón/lima y sin azúcar.</li>
+        <li class="vx-reveal" data-vx-delay="2"><b>A la misma hora cada día.</b> La clave es la constancia. Por la mañana, a la hora de tu café, es lo más fácil de mantener. Contiene 100 mg de cafeína.</li>
+        <li class="vx-reveal" data-vx-delay="3"><b>Un mes para juzgarlo.</b> Un bote son 30 tomas. Sin prisas ni promesas de 48 horas: lo pruebas con tu rutina y decides tú.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="vx-ang__block vx-ang__block--alt">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">La fórmula completa</p>
+      <h2 class="font-display vx-reveal">Todo lo que lleva cada toma</h2>
+      <p class="vx-ang__why vx-reveal" data-vx-delay="1">Cuatro complejos en una sola cucharada. Marcado, el que más tiene que ver con esta página; el resto va incluido.</p>
+      <div class="vx-ang__table">
+        <div class="vx-ang__cx{% if active == 'hydra' %} is-on{% endif %}"><h3>Hydra Performance Complex</h3><p>Sodio 600 mg · Potasio 300 mg · Magnesio bisglicinato 100 mg</p></div>
+        <div class="vx-ang__cx{% if active == 'focus' %} is-on{% endif %}"><h3>Focus &amp; Energy Complex</h3><p>L-teanina 200 mg · Cafeína natural 100 mg</p></div>
+        <div class="vx-ang__cx{% if active == 'perf' %} is-on{% endif %}"><h3>Performance Complex</h3><p>Creatina monohidrato 3.000 mg · Taurina 500 mg</p></div>
+        <div class="vx-ang__cx{% if active == 'stress' %} is-on{% endif %}"><h3>Stress &amp; Recovery Complex</h3><p>KSM-66® Ashwagandha 300 mg</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vx-ang__block">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">Es para ti si…</p>
+      <div class="vx-ang__fit">
+        <div class="vx-ang__fit-col vx-reveal">
+          <h3>Sí es para ti</h3>
+          <ul>
+            <li>Haces las cosas bien (comes, duermes, entrenas) y sientes que podrías rendir más.</li>
+            <li>Lees etiquetas y prefieres dosis reales a eslóganes.</li>
+            <li>Quieres una sola toma al día en vez de cuatro botes.</li>
+          </ul>
+        </div>
+        <div class="vx-ang__fit-col vx-reveal" data-vx-delay="1">
+          <h3>No es para ti</h3>
+          <ul>
+            <li>Si buscas resultados en 48 horas.</li>
+            <li>Si no te vas a tomar una cucharada al día.</li>
+            <li>Si eres menor de 18 años o competidor federado sujeto a control antidopaje.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+  <div class="vx-ang__block vx-ang__block--alt">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">Lo que dicen quienes lo toman</p>
+      <div class="vx-ang__quotes">
+        {%- for block in section.blocks -%}
+          <figure class="vx-ang__quote" {{ block.shopify_attributes }}>
+            <blockquote>«{{ block.settings.quote }}»</blockquote>
+            <figcaption><b>{{ block.settings.name }}</b>{% if block.settings.detail != blank %} · {{ block.settings.detail }}{% endif %}</figcaption>
+          </figure>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  {%- endif -%}
+
+  <div class="vx-ang__block">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">Voltrix, en una sola toma</p>
+      <p class="vx-ang__why vx-reveal">Hidratación, energía y foco, rendimiento y recuperación en un solo bote, por 1,67 € al día. Mira las otras formas de entrar en Voltrix:</p>
       <div class="vx-ang__chips">
         <a href="{{ routes.root_url }}pages/hidratacion" class="vx-ang__chip{% if a == 'hidratacion' %} is-on{% endif %}">Hidratación</a>
         <a href="{{ routes.root_url }}pages/energia-foco" class="vx-ang__chip{% if a == 'energia' %} is-on{% endif %}">Energía y foco</a>
@@ -132,6 +216,28 @@
   .vx-ang__chips { display: flex; flex-wrap: wrap; gap: 10px; }
   .vx-ang__chip { padding: 11px 18px; border: 1px solid #2A2A4A; border-radius: 999px; font-size: 13.5px; font-weight: 700; color: rgba(255,255,255,.8); }
   .vx-ang__chip.is-on { background: rgba(200,241,53,.1); border-color: rgba(200,241,53,.45); color: var(--color-volt); }
+  .vx-ang__steps { list-style: none; counter-reset: s; display: grid; gap: 12px; margin-top: 8px; }
+  .vx-ang__steps li { counter-increment: s; position: relative; padding: 18px 20px 18px 62px; background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 14px; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.78); }
+  .vx-ang__steps li::before { content: counter(s); position: absolute; left: 18px; top: 16px; width: 30px; height: 30px; border-radius: 50%; background: rgba(200,241,53,.1); border: 1px solid rgba(200,241,53,.4); color: var(--color-volt); font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .vx-ang__steps b { color: var(--color-white); }
+  .vx-ang__table { display: grid; gap: 12px; margin-top: 8px; }
+  .vx-ang__cx { padding: 18px 20px; background: #10102A; border: 1px solid #1E1E38; border-radius: 14px; }
+  .vx-ang__cx h3 { font-family: var(--font-body); font-size: 14px; font-weight: 800; color: var(--color-white); margin-bottom: 6px; }
+  .vx-ang__cx p { font-size: 13.5px; color: rgba(255,255,255,.7); line-height: 1.55; }
+  .vx-ang__cx.is-on { border-color: rgba(200,241,53,.55); background: rgba(200,241,53,.06); }
+  .vx-ang__cx.is-on h3 { color: var(--color-volt); }
+  .vx-ang__fit { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+  .vx-ang__fit-col { padding: 22px 20px; background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 16px; }
+  .vx-ang__fit-col h3 { font-family: var(--font-body); font-size: 14px; font-weight: 800; color: var(--color-volt); margin-bottom: 12px; }
+  .vx-ang__fit-col ul { list-style: none; display: grid; gap: 10px; }
+  .vx-ang__fit-col li { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.55; }
+  .vx-ang__quotes { display: grid; gap: 14px; margin-top: 8px; }
+  .vx-ang__quote { padding: 22px 20px; background: #10102A; border: 1px solid #1E1E38; border-radius: 16px; }
+  .vx-ang__quote blockquote { font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.88); margin-bottom: 12px; }
+  .vx-ang__quote figcaption { font-size: 13px; color: rgba(255,255,255,.6); }
+  .vx-ang__quote b { color: var(--color-white); }
+  .vx-ang__why + .vx-ang__why { margin-top: -12px; }
+  @media (max-width: 700px) { .vx-ang__fit { grid-template-columns: 1fr; } }
   @media (max-width: 700px) {
     .vx-ang__hero { padding: 56px 0 48px; }
     .vx-ang__block { padding: 52px 0; }
@@ -153,6 +259,17 @@
         { "value": "energia", "label": "Energía y foco" },
         { "value": "estres", "label": "Estrés y recuperación" },
         { "value": "rendimiento", "label": "Rendimiento" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonio",
+      "name": "Testimonio real",
+      "settings": [
+        { "type": "textarea", "id": "quote", "label": "Opinión (solo de clientes reales, con su permiso)" },
+        { "type": "text", "id": "name", "label": "Nombre" },
+        { "type": "text", "id": "detail", "label": "Detalle (ciudad, edad, deporte…)" }
       ]
     }
   ],
