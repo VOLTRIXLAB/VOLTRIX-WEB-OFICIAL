@@ -1,0 +1,54 @@
+{%- liquid
+  case section.settings.angle
+    when 'energia'
+      assign t = 'Mañana también habrá un café a las 9.'
+      assign b = 'Y un bajón a las 3, y otro café a las 4. Si no cambias nada, tu semana que viene se parece a esta. Si pruebas Voltrix: 30 tomas, una sola rutina, y un mes para decidir si el café de las 9 vuelve a mandar.'
+    when 'estres'
+      assign t = 'El lunes llegará igual que este.'
+      assign b = 'Con la misma cabeza el domingo por la noche y el mismo cansancio acumulado. Voltrix no te quita la semana, pero te da una rutina fija: 30 tomas, una cada día, y un mes para comprobar si te encaja.'
+    when 'rendimiento'
+      assign t = 'Dentro de un mes, ¿los mismos pesos?'
+      assign b = 'Si no cambias nada, la barra seguirá donde está. Si pruebas Voltrix: 30 tomas, 3 g de creatina cada día y un mes de datos tuyos para decidir.'
+    else
+      assign t = 'Dentro de un mes, ¿qué botella vas a tener en la mano?'
+      assign b = 'Si no cambias nada, la misma botella, la misma sed a las 4 y otra bebida que dejarás a medias. Si pruebas Voltrix: 30 tomas, una sola rutina y un mes para ver si te encaja.'
+  endcase
+-%}
+<section class="vx-cierre section--dark">
+  <div class="vx-cierre__box">
+    <p class="vx-eyebrow text-volt">Si no cambias nada</p>
+    <h2 class="font-display vx-reveal">{{ t }}</h2>
+    <p class="vx-cierre__p vx-reveal" data-vx-delay="1">{{ b }}</p>
+    <p class="vx-cierre__mono vx-reveal" data-vx-delay="2">«Mañana lo hago mejor» lleva meses en tu cabeza. Esta vez, que sea hoy.</p>
+    <a href="#producto" class="vx-cierre__cta vx-reveal" data-vx-delay="3">Elegir mi mes →</a>
+  </div>
+</section>
+<style>
+  .vx-cierre { padding: 72px 24px 96px; }
+  .vx-cierre__box { max-width: 720px; margin: 0 auto; padding: 44px 32px; text-align: center; border: 1px solid #1E1E38; border-radius: 22px; background: #10102A; }
+  .vx-cierre h2 { font-size: clamp(26px, 3.8vw, 40px); line-height: 1.12; margin-bottom: 16px; color: var(--color-white); }
+  .vx-cierre__p { font-size: 16px; line-height: 1.72; color: rgba(255,255,255,.75); margin-bottom: 18px; }
+  .vx-cierre__mono { font-size: 14.5px; color: var(--color-volt); font-style: italic; margin-bottom: 26px; }
+  .vx-cierre__cta { display: inline-flex; background: var(--color-volt); color: var(--color-ink); font-weight: 800; font-size: 15px; padding: 16px 32px; border-radius: 12px; }
+  @media (max-width: 700px) { .vx-cierre { padding: 48px 16px 72px; } .vx-cierre__box { padding: 32px 20px; } }
+</style>
+{% schema %}
+{
+  "name": "Cierre de ángulo",
+  "settings": [
+    {
+      "type": "select",
+      "id": "angle",
+      "label": "Ángulo",
+      "default": "hidratacion",
+      "options": [
+        { "value": "hidratacion", "label": "Hidratación" },
+        { "value": "energia", "label": "Energía y foco" },
+        { "value": "estres", "label": "Estrés y recuperación" },
+        { "value": "rendimiento", "label": "Rendimiento" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Cierre de ángulo" }]
+}
+{% endschema %}

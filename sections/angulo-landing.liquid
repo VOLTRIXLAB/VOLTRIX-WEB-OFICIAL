@@ -1,0 +1,161 @@
+{%- liquid
+  assign a = section.settings.angle
+
+  case a
+    when 'energia'
+      assign eyebrow = 'Energía y foco'
+      assign h1_a = 'El café de las 9 ya no'
+      assign h1_b = 'te despierta igual.'
+      assign sub = 'Cafeína de 100 mg con L-teanina de 200 mg en ratio 2:1, en una sola toma. Pensada para que la cafeína no vaya sola.'
+      assign problemas = 'Te tomas el café a las 9 y a las 11 ya necesitas otro.|Llegas a la reunión de las 4 con la cabeza a medias.|Cada vez más café y cada vez menos efecto.' | split: '|'
+      assign why_title = 'La cafeína sola es solo una parte'
+      assign why_text = 'Por eso Voltrix combina 100 mg de cafeína natural con 200 mg de L-teanina pura, en ratio 2:1. Una toma, a la hora de tu café, y sin azúcar.'
+      assign ings = 'Cafeína natural::100 mg::Ayuda a aumentar el estado de alerta y a mejorar la concentración.|L-teanina (100 % pura)::200 mg::Va junto a la cafeína en ratio 2:1, para que no vaya sola.' | split: '|'
+      assign foot = 'Declaración de propiedades saludables autorizada en la UE (Reg. 432/2012) para la cafeína, con al menos 75 mg por porción. Contiene cafeína (100 mg por toma): no recomendado para menores de 18 años, embarazo ni lactancia.'
+    when 'estres'
+      assign eyebrow = 'Estrés y recuperación'
+      assign h1_a = 'Terminas el día agotado'
+      assign h1_b = 'y aun así no desconectas.'
+      assign sub = 'Jornadas de 10 horas, estrés acumulado y entrenos que no terminas de recuperar. Voltrix suma KSM-66® (300 mg) y magnesio bisglicinato a tu rutina diaria.'
+      assign problemas = 'Sales del trabajo y la cabeza sigue en el trabajo.|Entrenas 4 veces por semana y notas que no te recuperas entre sesiones.|El domingo por la noche ya estás pensando en el lunes.' | split: '|'
+      assign why_title = 'No se arregla con fuerza de voluntad'
+      assign why_text = 'El estrés se acumula y se nota en el entreno, en el sueño y en la cabeza. Lo que sí controlas es la rutina: una toma al día, a la misma hora, con ingredientes en dosis definida.'
+      assign ings = 'KSM-66® Ashwagandha::300 mg::Extracto estandarizado de raíz de ashwagandha.|Magnesio bisglicinato::100 mg::Contribuye a reducir el cansancio y la fatiga, y al funcionamiento psicológico normal.' | split: '|'
+      assign foot = 'Declaración de propiedades saludables autorizada en la UE (Reg. 432/2012) para el magnesio. Ashwagandha: no recomendado en embarazo, lactancia ni menores de 18 años. Consulta a tu médico si tomas medicación o tienes alguna patología tiroidea.'
+    when 'rendimiento'
+      assign eyebrow = 'Rendimiento'
+      assign h1_a = 'Llevas semanas con los mismos pesos.'
+      assign h1_b = 'No es la rutina.'
+      assign sub = '3 g de creatina monohidrato al día, la dosis habitual de los estudios, y 500 mg de taurina, en una sola toma.'
+      assign problemas = 'Mismos kilos en la barra desde hace semanas.|Última serie con la sensación de que podías más.|Cumples el plan al 100 % y la barra no se mueve.' | split: '|'
+      assign why_title = 'La dosis importa. La constancia, más.'
+      assign why_text = 'La creatina funciona cuando la tomas todos los días, no solo los días que entrenas. Por eso una dosis útil de 3 g va en la misma toma de siempre, con el resto de la fórmula.'
+      assign ings = 'Creatina monohidrato::3 g::Aumenta el rendimiento físico en series sucesivas de ejercicios de corta duración y alta intensidad (3 g al día, adultos).|Taurina::500 mg::Aminoácido que completa la fórmula de rendimiento.' | split: '|'
+      assign foot = 'Declaración de propiedades saludables autorizada en la UE (Reg. 432/2012) para la creatina, con 3 g diarios. Producto para adultos.'
+    else
+      assign a = 'hidratacion'
+      assign eyebrow = 'Hidratación'
+      assign h1_a = 'Bebes 2 litros al día'
+      assign h1_b = 'y sigues con sed.'
+      assign sub = 'No es falta de agua. Es falta de electrolitos en dosis útil. Sodio, potasio y magnesio bisglicinato, en una sola toma.'
+      assign problemas = 'A media tarde ya llevas la botella vacía y la boca seca.|Entrenas, sudas y terminas la sesión con la sensación de ir vacío.|Cambias de bebida cada mes y ninguna se queda en tu rutina.' | split: '|'
+      assign why_title = 'El agua sola no hace todo el trabajo'
+      assign why_text = 'Cuando sudas pierdes agua y sales minerales, y reponer solo el agua se queda a medias. Aquí no hay dosis simbólicas: cada toma lleva 600 mg de sodio, 300 mg de potasio y 100 mg de magnesio bisglicinato.'
+      assign ings = 'Sodio (citrato sódico)::600 mg::El electrolito principal que pierdes con el sudor.|Potasio (citrato potásico)::300 mg::Contribuye al funcionamiento normal de los músculos y del sistema nervioso.|Magnesio bisglicinato::100 mg::Contribuye al equilibrio electrolítico y a reducir el cansancio y la fatiga.' | split: '|'
+      assign foot = 'Declaraciones de propiedades saludables autorizadas en la UE (Reg. 432/2012) para el potasio y el magnesio.'
+  endcase
+-%}
+
+<section class="vx-ang section--dark" data-vx-angulo="{{ a }}">
+  <div class="vx-ang__hero">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">{{ eyebrow }}</p>
+      <h1 class="font-display">
+        <span class="vx-rise-line"><span>{{ h1_a }}</span></span>
+        <span class="vx-rise-line"><span><em>{{ h1_b }}</em></span></span>
+      </h1>
+      <p class="vx-ang__sub">{{ sub }}</p>
+      <a href="#producto" class="vx-ang__cta">Ver Voltrix · 49,99 € →</a>
+      <p class="vx-ang__meta">255 g · 30 tomas · 1,67 € al día · Sin azúcar · Limón/lima</p>
+    </div>
+  </div>
+
+  <div class="vx-ang__block">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">¿Te suena?</p>
+      <ul class="vx-ang__list">
+        {%- for p in problemas -%}
+          <li class="vx-reveal" data-vx-delay="{{ forloop.index }}">{{ p }}</li>
+        {%- endfor -%}
+      </ul>
+      <p class="vx-ang__mono vx-reveal">Y por la noche, la misma frase: <em>«mañana lo hago mejor».</em></p>
+    </div>
+  </div>
+
+  <div class="vx-ang__block vx-ang__block--alt">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">Por qué pasa</p>
+      <h2 class="font-display vx-reveal">{{ why_title }}</h2>
+      <p class="vx-ang__why vx-reveal" data-vx-delay="1">{{ why_text }}</p>
+      <div class="vx-ang__ings">
+        {%- for i in ings -%}
+          {%- assign parts = i | split: '::' -%}
+          <div class="vx-ang__ing vx-reveal" data-vx-delay="{{ forloop.index }}">
+            <div class="vx-ang__dose">{{ parts[1] }}</div>
+            <div class="vx-ang__ing-name">{{ parts[0] }}</div>
+            <div class="vx-ang__ing-desc">{{ parts[2] }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+      <p class="vx-ang__foot">{{ foot }}</p>
+    </div>
+  </div>
+
+  <div class="vx-ang__block">
+    <div class="vx-ang__wrap">
+      <p class="vx-eyebrow text-volt">Todo en una sola toma</p>
+      <p class="vx-ang__why vx-reveal">Voltrix reúne hidratación, energía y foco, rendimiento y recuperación en un solo bote. Esta es la parte de la fórmula que más tiene que ver con lo que acabas de leer; el resto va incluido.</p>
+      <div class="vx-ang__chips">
+        <a href="{{ routes.root_url }}pages/hidratacion" class="vx-ang__chip{% if a == 'hidratacion' %} is-on{% endif %}">Hidratación</a>
+        <a href="{{ routes.root_url }}pages/energia-foco" class="vx-ang__chip{% if a == 'energia' %} is-on{% endif %}">Energía y foco</a>
+        <a href="{{ routes.root_url }}pages/estres-recuperacion" class="vx-ang__chip{% if a == 'estres' %} is-on{% endif %}">Estrés y recuperación</a>
+        <a href="{{ routes.root_url }}pages/rendimiento" class="vx-ang__chip{% if a == 'rendimiento' %} is-on{% endif %}">Rendimiento</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vx-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .vx-ang { color: var(--color-white); }
+  .vx-ang__wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .vx-ang__hero { padding: 80px 0 64px; text-align: center; }
+  .vx-ang__hero h1 { font-size: clamp(32px, 5.5vw, 54px); line-height: 1.15; color: var(--color-white); margin-bottom: 22px; }
+  .vx-ang__hero h1 em { font-style: italic; color: var(--color-volt); }
+  .vx-ang__sub { font-size: 17px; color: rgba(255,255,255,.75); line-height: 1.6; max-width: 600px; margin: 0 auto 28px; }
+  .vx-ang__cta { display: inline-flex; align-items: center; justify-content: center; background: var(--color-volt); color: var(--color-ink); font-family: var(--font-body); font-size: 15px; font-weight: 800; padding: 16px 32px; border-radius: 12px; }
+  .vx-ang__meta { font-size: 13px; color: rgba(255,255,255,.62); margin-top: 16px; }
+  .vx-ang__block { padding: 72px 0; border-top: 1px solid #1E1E38; }
+  .vx-ang__block--alt { background: rgba(255,255,255,.02); }
+  .vx-ang__list { list-style: none; display: grid; gap: 12px; margin: 14px 0 24px; }
+  .vx-ang__list li { padding: 18px 20px; background: rgba(255,255,255,.03); border: 1px solid #1E1E38; border-radius: 14px; font-size: 16px; line-height: 1.55; color: rgba(255,255,255,.85); }
+  .vx-ang__mono { font-size: 15px; color: rgba(255,255,255,.65); }
+  .vx-ang__mono em { color: var(--color-volt); font-style: italic; }
+  .vx-ang h2 { font-size: clamp(26px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -.3px; margin-bottom: 14px; }
+  .vx-ang__why { font-size: 16px; color: rgba(255,255,255,.72); line-height: 1.72; max-width: 640px; margin-bottom: 32px; }
+  .vx-ang__ings { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+  .vx-ang__ing { padding: 22px 20px; background: #10102A; border: 1px solid #1E1E38; border-radius: 16px; }
+  .vx-ang__dose { font-family: var(--font-display); font-size: 34px; color: var(--color-volt); line-height: 1.1; margin-bottom: 6px; }
+  .vx-ang__ing-name { font-size: 14px; font-weight: 800; color: var(--color-white); margin-bottom: 8px; }
+  .vx-ang__ing-desc { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.6; }
+  .vx-ang__foot { font-size: 11.5px; color: rgba(255,255,255,.5); line-height: 1.6; margin-top: 20px; max-width: 640px; }
+  .vx-ang__chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .vx-ang__chip { padding: 11px 18px; border: 1px solid #2A2A4A; border-radius: 999px; font-size: 13.5px; font-weight: 700; color: rgba(255,255,255,.8); }
+  .vx-ang__chip.is-on { background: rgba(200,241,53,.1); border-color: rgba(200,241,53,.45); color: var(--color-volt); }
+  @media (max-width: 700px) {
+    .vx-ang__hero { padding: 56px 0 48px; }
+    .vx-ang__block { padding: 52px 0; }
+    .vx-ang__wrap { padding: 0 20px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Landing de ángulo",
+  "settings": [
+    {
+      "type": "select",
+      "id": "angle",
+      "label": "Ángulo",
+      "default": "hidratacion",
+      "options": [
+        { "value": "hidratacion", "label": "Hidratación" },
+        { "value": "energia", "label": "Energía y foco" },
+        { "value": "estres", "label": "Estrés y recuperación" },
+        { "value": "rendimiento", "label": "Rendimiento" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Landing de ángulo" }]
+}
+{% endschema %}
