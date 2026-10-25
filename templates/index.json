@@ -32,6 +32,12 @@
     },
     "faq": {
       "type": "faq"
+    },
+    "cierre": {
+      "type": "angulo-cierre",
+      "settings": {
+        "angle": "general"
+      }
     }
   },
   "order": [
@@ -45,6 +51,7 @@
     "testimonials",
     "comparativa",
     "pricing",
-    "faq"
+    "faq",
+    "cierre"
   ]
 }

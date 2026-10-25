@@ -3,6 +3,9 @@
     when 'energia'
       assign t = 'Mañana también habrá un café a las 9.'
       assign b = 'Y un bajón a las 3, y otro café a las 4. Si no cambias nada, tu semana que viene se parece a esta. Si pruebas Voltrix: 30 tomas, una sola rutina, y un mes para decidir si el café de las 9 vuelve a mandar.'
+    when 'general'
+      assign t = 'Dentro de un mes, ¿qué habrá cambiado?'
+      assign b = 'Si no cambias nada: el mismo café a las 9, el mismo bajón a las 3 y otro bote en el armario que dejaste a medias. Si pruebas Voltrix: 30 tomas, una sola rutina en vez de cuatro botes, y un mes de datos tuyos para decidir si te encaja.'
     when 'estres'
       assign t = 'El lunes llegará igual que este.'
       assign b = 'Con la misma cabeza el domingo por la noche y el mismo cansancio acumulado. Voltrix no te quita la semana, pero te da una rutina fija: 30 tomas, una cada día, y un mes para comprobar si te encaja.'
@@ -42,6 +45,7 @@
       "label": "Ángulo",
       "default": "hidratacion",
       "options": [
+        { "value": "general", "label": "General (home)" },
         { "value": "hidratacion", "label": "Hidratación" },
         { "value": "energia", "label": "Energía y foco" },
         { "value": "estres", "label": "Estrés y recuperación" },
