@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "angulo": { "type": "angulo-landing", "settings": { "angle": "hidratacion" } },
+    "pricing": { "type": "pricing" },
+    "faq": { "type": "faq" },
+    "cierre": { "type": "angulo-cierre", "settings": { "angle": "hidratacion" } }
+  },
+  "order": ["angulo", "pricing", "faq", "cierre"]
+}
