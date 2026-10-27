@@ -1,0 +1,41 @@
+<section class="vx-eo section--dark page-width" id="oferta">
+  <p class="vx-eyebrow text-volt">Qué recibes al apuntarte</p>
+  <h2 class="font-display vx-reveal">Dos regalos hoy.<br><em>Y el primer puesto el día del lanzamiento.</em></h2>
+  <div class="vx-eo__grid">
+    <div class="vx-eo__item vx-reveal" data-vx-delay="1">
+      <p class="vx-eo__big">−25 %</p>
+      <h3>Descuento de lanzamiento</h3>
+      <p>En tu primer pedido, solo para quienes estáis en la lista. De 49,99 € a 37,49 €. Te avisamos por email en cuanto se pueda comprar.</p>
+    </div>
+    <div class="vx-eo__item vx-reveal" data-vx-delay="2">
+      <p class="vx-eo__big">8 cap.</p>
+      <h3>Guía de Rendimiento Diario</h3>
+      <p>Por qué llegas al mediodía sin energía aunque hagas todo bien, los errores más comunes de hidratación, energía y recuperación, y cómo corregirlos desde hoy. Te llega al apuntarte.</p>
+    </div>
+    <div class="vx-eo__item vx-reveal" data-vx-delay="3">
+      <p class="vx-eo__big">1.º</p>
+      <h3>Acceso antes que nadie</h3>
+      <p>El primer lote es de pocas unidades. La lista de espera entra antes que el público general.</p>
+    </div>
+  </div>
+  <div class="vx-eo__form vx-reveal">
+    <h3 class="font-display">Apúntate en 10 segundos</h3>
+    {% render 'vx-espera-form', id: 'oferta', btn: 'Unirme a la lista →' %}
+  </div>
+</section>
+<style>
+  .vx-eo { padding: 72px 24px; }
+  .vx-eo h2 { font-size: clamp(26px, 3.6vw, 42px); line-height: 1.12; margin-bottom: 32px; color: var(--color-white); }
+  .vx-eo h2 em { font-style: italic; color: var(--color-volt); }
+  .vx-eo__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .vx-eo__item { background: #141430; border: 1px solid #28284A; border-radius: 18px; padding: 24px; }
+  .vx-eo__big { font-family: var(--font-display, inherit); font-size: 34px; color: var(--color-volt); line-height: 1; margin-bottom: 10px; }
+  .vx-eo__item h3 { font-size: 15px; font-weight: 800; color: var(--color-white); margin-bottom: 8px; }
+  .vx-eo__item p:last-child { font-size: 13px; line-height: 1.65; color: rgba(255,255,255,.65); }
+  .vx-eo__form { max-width: 560px; margin: 32px auto 0; background: #10102A; border: 1px solid #28284A; border-radius: 20px; padding: 28px; }
+  .vx-eo__form h3 { font-size: 22px; color: var(--color-white); text-align: center; margin-bottom: 16px; }
+  @media (max-width: 700px) { .vx-eo { padding: 52px 16px; } .vx-eo__grid { grid-template-columns: 1fr; } .vx-eo__form { padding: 22px 18px; } }
+</style>
+{% schema %}
+{ "name": "Espera · Oferta", "settings": [] }
+{% endschema %}

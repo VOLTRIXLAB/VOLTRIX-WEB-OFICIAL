@@ -1,0 +1,21 @@
+<section class="vx-ec section--dark">
+  <div class="vx-ec__box">
+    <p class="vx-eyebrow text-volt">Si no cambias nada</p>
+    <h2 class="font-display vx-reveal">Mañana también habrá un café a las 9.</h2>
+    <p class="vx-ec__p vx-reveal" data-vx-delay="1">Y un bajón a las 3, y otro bote a medias en el armario. Si te apuntas hoy: una guía para empezar a corregirlo ya y un 25 % para cuando Voltrix esté listo. Si no, todo sigue igual.</p>
+    <p class="vx-ec__mono vx-reveal" data-vx-delay="2">«Mañana lo hago mejor» lleva meses en tu cabeza. Esta vez, que sea hoy.</p>
+    <div class="vx-ec__form vx-reveal" data-vx-delay="3">{% render 'vx-espera-form', id: 'cierre' %}</div>
+  </div>
+</section>
+<style>
+  .vx-ec { padding: 64px 24px 96px; }
+  .vx-ec__box { max-width: 720px; margin: 0 auto; padding: 44px 32px; text-align: center; border: 1px solid #1E1E38; border-radius: 22px; background: #10102A; }
+  .vx-ec h2 { font-size: clamp(26px, 3.8vw, 40px); line-height: 1.12; margin-bottom: 16px; color: var(--color-white); }
+  .vx-ec__p { font-size: 16px; line-height: 1.72; color: rgba(255,255,255,.75); margin-bottom: 18px; }
+  .vx-ec__mono { font-size: 14.5px; color: var(--color-volt); font-style: italic; margin-bottom: 26px; }
+  .vx-ec__form { max-width: 520px; margin: 0 auto; text-align: left; }
+  @media (max-width: 700px) { .vx-ec { padding: 44px 16px 72px; } .vx-ec__box { padding: 30px 18px; } }
+</style>
+{% schema %}
+{ "name": "Espera · Cierre", "settings": [] }
+{% endschema %}

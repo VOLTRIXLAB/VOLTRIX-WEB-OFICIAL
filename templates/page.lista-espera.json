@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "hero": {
+      "type": "espera-hero"
+    },
+    "proof": {
+      "type": "proof-bar"
+    },
+    "dolor": {
+      "type": "el-problema"
+    },
+    "solucion": {
+      "type": "espera-solucion"
+    },
+    "why": {
+      "type": "why-voltrix"
+    },
+    "oferta": {
+      "type": "espera-oferta"
+    },
+    "faq": {
+      "type": "espera-faq"
+    },
+    "cierre": {
+      "type": "espera-cierre"
+    }
+  },
+  "order": [
+    "hero",
+    "proof",
+    "dolor",
+    "solucion",
+    "why",
+    "oferta",
+    "faq",
+    "cierre"
+  ]
+}
