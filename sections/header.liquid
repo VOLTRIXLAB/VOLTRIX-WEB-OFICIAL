@@ -1,4 +1,3 @@
-{% assign vx_wl = false %}{% if page.template_suffix == 'lista-espera' %}{% assign vx_wl = true %}{% endif %}
 {% assign vx_sticky_product = all_products['voltrix-daily-performance-formula-30-porciones'] %}
 <header class="vx-header section--dark">
 <div class="page-width vx-header__inner">
@@ -6,22 +5,13 @@
 <img src="{{ 'logo-voltrix.png' | asset_url }}" alt="Voltrix" loading="eager" decoding="async" width="67" height="26" class="vx-header__logo-img">
 </a>
 <nav class="vx-header__nav">
-{% if vx_wl %}
-<a href="#solucion">La solución</a>
-<a href="#oferta">Qué recibes</a>
-<a href="#preguntas">Preguntas</a>
-{% else %}
 <a href="{{ routes.root_url }}#metodo-voltrix">Método Voltrix</a>
 <a href="{{ routes.root_url }}#porqué">Por qué Voltrix</a>
 <a href="{{ routes.root_url }}#producto">El producto</a>
 <a href="{{ routes.root_url }}#faq">Preguntas</a>
 <a href="/apps/subscriptions">Mi suscripción</a>
-{% endif %}
 </nav>
 <div class="vx-header__actions">
-{% if vx_wl %}
-<a href="#unirme" class="vx-header__cta">Unirme · −25 %</a>
-{% else %}
 <a
 href="{% if cart.item_count > 0 %}{{ routes.cart_url }}{% else %}{{ routes.root_url }}#producto{% endif %}"
 class="vx-header__cta"
@@ -39,7 +29,6 @@ Comprar — 49,99€
 <span class="vx-header__cart-badge" data-vx-cart-badge {% if cart.item_count == 0 %}style="display:none;"{% endif %}>{{ cart.item_count }}</span>
 </a>
 
-{% endif %}
 <button type="button" class="vx-header__burger" aria-label="Abrir menú" aria-expanded="false" data-vx-menu-toggle>
 <span></span><span></span><span></span>
 </button>
@@ -47,19 +36,12 @@ Comprar — 49,99€
 </div>
 
 <div class="vx-header__mobile" data-vx-mobile-menu>
-{% if vx_wl %}
-<a href="#solucion" data-vx-menu-link>La solución</a>
-<a href="#oferta" data-vx-menu-link>Qué recibes</a>
-<a href="#preguntas" data-vx-menu-link>Preguntas</a>
-<a href="#unirme" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Unirme · −25 %</a>
-{% else %}
 <a href="{{ routes.root_url }}#metodo-voltrix" data-vx-menu-link>Método Voltrix</a>
 <a href="{{ routes.root_url }}#porqué" data-vx-menu-link>Por qué Voltrix</a>
 <a href="{{ routes.root_url }}#producto" data-vx-menu-link>El producto</a>
 <a href="{{ routes.root_url }}#faq" data-vx-menu-link>Preguntas</a>
 <a href="/apps/subscriptions" data-vx-menu-link>Mi suscripción</a>
 <a href="{{ routes.root_url }}#producto" class="vx-header__cta vx-header__cta--mobile" data-vx-menu-link>Comprar — 49,99€</a>
-{% endif %}
 </div>
 </header>
 
